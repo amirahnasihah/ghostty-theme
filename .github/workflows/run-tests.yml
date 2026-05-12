@@ -1,0 +1,88 @@
+name: Run Tests
+on:
+  pull_request:
+    types: [review_requested, synchronize, labeled]
+  push:
+    branches:
+      - "main"
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  run-tests:
+    if: |
+      (github.event.action == 'review_requested' ||
+      (github.event.action == 'labeled' && github.event.label.name == 'ci-testing') ||
+      (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'ci-testing'))) ||
+      (github.event_name == 'push')
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - uses: actions/github-script@v6
+        name: Set 'ci-testing' label
+        if: github.event.action == 'review_requested'
+        with:
+          script: |
+            github.rest.issues.addLabels({
+              issue_number: context.payload.pull_request.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ["ci-testing"]
+            })
+      
+      - name: Build and run tests
+        run: |
+          echo "Build and run tests here"
+
+  codeql-analysis:
+    name: CodeQL Analysis
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    continue-on-error: true  # Don't fail workflow if CodeQL fails
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Check for code files
+        id: check_code
+        run: |
+          # Check if repository has code files
+          if find . -type f \( -name "*.js" -o -name "*.ts" -o -name "*.py" -o -name "*.java" -o -name "*.go" -o -name "*.rb" -o -name "*.cpp" -o -name "*.c" \) ! -path "./.git/*" ! -path "./node_modules/*" | head -1 | grep -q .; then
+            echo "HAS_CODE=true" >> $GITHUB_ENV
+          else
+            echo "HAS_CODE=false" >> $GITHUB_ENV
+          fi
+      
+      - name: Initialize CodeQL
+        if: env.HAS_CODE == 'true'
+        uses: github/codeql-action/init@v2
+        with:
+          languages: auto
+        continue-on-error: true
+      
+      - name: Autobuild
+        if: env.HAS_CODE == 'true'
+        uses: github/codeql-action/autobuild@v2
+        continue-on-error: true
+      
+      - name: Perform CodeQL Analysis
+        if: env.HAS_CODE == 'true'
+        uses: github/codeql-action/analyze@v2
+        continue-on-error: true
+      
+      - name: Skip CodeQL (no code files)
+        if: env.HAS_CODE == 'false'
+        run: |
+          echo "No code files detected. Skipping CodeQL analysis."

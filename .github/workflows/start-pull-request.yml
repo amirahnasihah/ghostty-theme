@@ -1,0 +1,253 @@
+name: Start Pull Request
+on:
+  issues:
+    types:
+      - assigned
+
+jobs:
+  start-pull-request:
+    runs-on: ubuntu-latest
+    env:
+      REPO: ${{ github.repository }}
+      ISSUE_NUM: ${{ github.event.issue.number }}
+      ISSUE_TITLE: ${{ github.event.issue.title }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      id-token: write
+      issues: write
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Get open linked PR
+        id: get_open_linked_pr
+        run: |
+          open_linked_pr_length=$(\
+            gh pr list \
+              --repo $REPO \
+              --state open \
+              --search "\"Closes \#$ISSUE_NUM\" in:body" \
+              --json number | jq '. | length'\
+          )
+          echo "OPEN_LINKED_PR_LENGTH=$open_linked_pr_length" >> $GITHUB_ENV
+      
+      - name: Check open linked pr length
+        if: env.OPEN_LINKED_PR_LENGTH != 0
+        run: |
+          echo "Unclosed pull request is existing."
+          exit 1
+    
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+    
+      - name: Get issue labels
+        id: get_labels
+        run: |
+          labels=$(gh api /repos/$REPO/issues/$ISSUE_NUM --jq '.labels[].name' | tr '\n' ',' | sed 's/,$//')
+          echo "LABELS=$labels" >> $GITHUB_ENV
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          ISSUE_NUM: ${{ github.event.issue.number }}
+    
+      # Terminate if the issue has "idea" or "epic" label
+      - name: Check issue type
+        run: |
+          if echo "${{ env.LABELS }}" | grep -q "idea\|epic\|agenda"; then
+            echo "Issue type is either 'idea' or 'epic' or 'agenda'. Exiting..."
+            exit 1
+          else
+            echo "Issue type is valid for pull request creation."
+          fi
+
+      - name: Get issue assignees
+        id: get_assignees
+        run: |
+          assignees=$(gh api /repos/$REPO/issues/$ISSUE_NUM --jq '.assignees[].login' | tr '\n' ',' | sed 's/,$//')
+          echo "ASSIGNEES=$assignees" >> $GITHUB_ENV
+        env:
+          REPO: ${{ github.repository }}
+          ISSUE_NUM: ${{ github.event.issue.number }}
+
+      - name: Define new branch name
+        id: define_new_branch_name
+        run: |
+          # Extract the first relevant label (addition, modification, refactoring, fix)
+          # Case-insensitive matching
+          label_type=$(echo "${{ env.LABELS }}" | tr ',' '\n' | grep -iE "^(addition|modification|refactoring|fix)$" | head -1 | tr '[:upper:]' '[:lower:]')
+          
+          # Format branch name with date and time
+          date_time=$(TZ=Asia/Kuala_Lumpur date '+%Y%m%d-%H%M')
+          base_name="i${ISSUE_NUM}-${date_time}"
+          
+          # If label exists, prefix with label, otherwise just use base name
+          if [ -n "$label_type" ]; then
+            new_branch_name="${label_type}/${base_name}"
+          else
+            new_branch_name="${base_name}"
+          fi
+          
+          echo "NEW_BRANCH_NAME=$new_branch_name" >> $GITHUB_ENV
+          echo "Branch name: $new_branch_name"
+
+      - name: Check if branch exists
+        id: check_branch
+        run: |
+          if gh api "/repos/$REPO/git/refs/heads/${{ env.NEW_BRANCH_NAME }}" > /dev/null 2>&1; then
+            echo "BRANCH_EXISTS=true" >> $GITHUB_ENV
+            echo "Branch already exists in remote"
+          else
+            echo "BRANCH_EXISTS=false" >> $GITHUB_ENV
+            echo "Branch does not exist, will create new branch"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+
+      - name: Create PR
+        run: |
+          body=$(cat << EOS
+          ## 1. Target
+
+          * Closes #${ISSUE_NUM}
+
+          ## 2. Specification / Test Plan
+
+          (Text here)
+
+          ## 3. Additional Instructions / Notes for Shipping (optional)
+
+          N/A
+
+          ## 4. Check before Review Request
+
+          * [ ] Self Review : I reviewed changes by myself and approved them.
+            * Ensure there is no sensitive information, typos, unrelated changes, or debugging code.
+          * [ ] Evidence : I attached evidences to prove the changes.
+            * Record and attach a demo video. For minor changes, attaching an image is also acceptable.
+            * Evidences should be updated to the latest version when further changes are made.
+
+          ## 5. Evidence
+
+          (Attach here before request review)
+          EOS
+          )
+          
+          git config user.name  "GitHub Actions"
+          git config user.email "action@github.com"
+          
+          # Check if branch exists
+          if [ "${{ env.BRANCH_EXISTS }}" = "true" ]; then
+            echo "Branch exists, checking out existing branch..."
+            git fetch origin "${{ env.NEW_BRANCH_NAME }}"
+            git checkout "${{ env.NEW_BRANCH_NAME }}"
+          else
+            echo "Creating new branch..."
+            git checkout -b "${{ env.NEW_BRANCH_NAME }}"
+            git commit --allow-empty -m "Initial commit for the issue #${ISSUE_NUM}"
+            git push origin "${{ env.NEW_BRANCH_NAME }}"
+          fi
+          
+          # Write body to temp file (more reliable than process substitution)
+          echo "$body" > /tmp/pr_body.txt
+          
+          # Verify PR body contains Closes statement
+          if ! grep -q "Closes #${ISSUE_NUM}" /tmp/pr_body.txt; then
+            echo "✗ ERROR: PR body does NOT contain 'Closes #${ISSUE_NUM}'"
+            exit 1
+          fi
+          
+          # Build PR command with required parameters
+          PR_CMD="gh pr create \
+            --head \"${{ env.NEW_BRANCH_NAME }}\" \
+            --base \"${{ github.event.repository.default_branch }}\" \
+            --title \"$ISSUE_TITLE\" \
+            --body-file /tmp/pr_body.txt"
+          
+          # Add label if exists (split comma-separated labels)
+          if [ -n "${{ env.LABELS }}" ] && [ "${{ env.LABELS }}" != "" ]; then
+            IFS=',' read -ra LABEL_ARRAY <<< "${{ env.LABELS }}"
+            for label in "${LABEL_ARRAY[@]}"; do
+              label=$(echo "$label" | xargs)
+              if [ -n "$label" ]; then
+                PR_CMD="$PR_CMD --label \"$label\""
+              fi
+            done
+          fi
+          
+          # Add assignee if exists (support multiple)
+          if [ -n "${{ env.ASSIGNEES }}" ] && [ "${{ env.ASSIGNEES }}" != "" ]; then
+            IFS=',' read -ra ASSIGNEE_ARRAY <<< "${{ env.ASSIGNEES }}"
+            for assignee in "${ASSIGNEE_ARRAY[@]}"; do
+              assignee=$(echo "$assignee" | xargs)
+              if [ -n "$assignee" ]; then
+                PR_CMD="$PR_CMD --assignee \"$assignee\""
+              fi
+            done
+          fi
+          
+          # Execute PR creation
+          set +e
+          PR_OUTPUT=$(eval $PR_CMD 2>&1)
+          PR_EXIT_CODE=$?
+          set -e
+          
+          if [ $PR_EXIT_CODE -eq 0 ]; then
+            echo "$PR_OUTPUT"
+            PR_NUMBER=$(echo "$PR_OUTPUT" | grep -oP 'pull/\K[0-9]+' || echo "")
+            if [ -n "$PR_NUMBER" ]; then
+              echo "✓ Pull request #$PR_NUMBER created successfully"
+            fi
+          else
+            echo "PR creation failed: $PR_OUTPUT"
+            echo "Attempting to create PR without labels/assignees..."
+            
+            # Try creating PR without labels/assignees
+            SIMPLE_CMD="gh pr create \
+              --head \"${{ env.NEW_BRANCH_NAME }}\" \
+              --base \"${{ github.event.repository.default_branch }}\" \
+              --title \"$ISSUE_TITLE\" \
+              --body-file /tmp/pr_body.txt"
+            
+            SIMPLE_OUTPUT=$(eval $SIMPLE_CMD 2>&1)
+            SIMPLE_EXIT_CODE=$?
+            
+            if [ $SIMPLE_EXIT_CODE -eq 0 ]; then
+              echo "$SIMPLE_OUTPUT"
+              PR_NUMBER=$(echo "$SIMPLE_OUTPUT" | grep -oP 'pull/\K[0-9]+' || echo "")
+              if [ -n "$PR_NUMBER" ]; then
+                echo "✓ Pull request #$PR_NUMBER created (without labels/assignees)"
+                
+                # Add labels separately
+                if [ -n "${{ env.LABELS }}" ] && [ "${{ env.LABELS }}" != "" ]; then
+                  IFS=',' read -ra LABEL_ARRAY <<< "${{ env.LABELS }}"
+                  for label in "${LABEL_ARRAY[@]}"; do
+                    label=$(echo "$label" | xargs)
+                    if [ -n "$label" ]; then
+                      gh pr edit $PR_NUMBER --add-label "$label" || echo "Failed to add label: $label"
+                    fi
+                  done
+                fi
+                
+                # Add assignees separately
+                if [ -n "${{ env.ASSIGNEES }}" ] && [ "${{ env.ASSIGNEES }}" != "" ]; then
+                  IFS=',' read -ra ASSIGNEE_ARRAY <<< "${{ env.ASSIGNEES }}"
+                  for assignee in "${ASSIGNEE_ARRAY[@]}"; do
+                    assignee=$(echo "$assignee" | xargs)
+                    if [ -n "$assignee" ]; then
+                      gh pr edit $PR_NUMBER --add-assignee "$assignee" || echo "Failed to add assignee: $assignee"
+                    fi
+                  done
+                fi
+              fi
+            else
+              echo "✗ Simple PR creation also failed: $SIMPLE_OUTPUT"
+              exit 1
+            fi
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          ISSUE_NUM: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
