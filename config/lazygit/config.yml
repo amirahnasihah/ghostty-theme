@@ -1,0 +1,6 @@
+customCommands:
+  - key: "<c-a>"
+    command: 'git diff --cached | claude -p "Generate a concise git commit message for these changes following conventional commits format (e.g. feat:, fix:, chore:). Output only the commit message, nothing else."'
+    context: "files"
+    subprocess: true
+    description: "AI commit message (Claude)"
