@@ -1,0 +1,41 @@
+[core]
+    pager = delta
+    editor = nvim
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    side-by-side = true
+    line-numbers = true
+    syntax-theme = base16
+    file-style = bold "#b4fa72"
+    file-decoration-style = none
+    hunk-header-decoration-style = "#007972" box ul
+    hunk-header-style = file line-number syntax
+    plus-style = syntax "#0d3320"
+    minus-style = syntax "#3d0d0d"
+    line-numbers-plus-style = "#b4fa72"
+    line-numbers-minus-style = "#ff8272"
+    line-numbers-zero-style = "#616161"
+
+[merge]
+    conflictstyle = zdiff3
+
+[pull]
+    rebase = true
+
+[push]
+    autoSetupRemote = true
+
+[rerere]
+    enabled = true
+
+[branch]
+    sort = -committerdate
+
+[alias]
+    lg = log --oneline --graph --decorate --all
+    undo = reset --soft HEAD~1
+    wip = !git add -A && git commit -m 'wip'
