@@ -16,7 +16,7 @@ echo "→ Installing brew packages..."
 brew bundle --file="$DOTFILES/Brewfile"
 
 # Create symlinks for ~/.config/* entries
-CONFIGS=(nvim ghostty fish lazygit zellij btop fastfetch)
+CONFIGS=(nvim ghostty lazygit zellij btop fastfetch git)
 
 mkdir -p ~/.config
 
@@ -36,6 +36,10 @@ done
 # starship.toml
 ln -sf "$DOTFILES/config/starship.toml" ~/.config/starship.toml
 echo "  ✓ ~/.config/starship.toml"
+
+# .zshrc
+ln -sf "$DOTFILES/config/zsh/.zshrc" ~/.zshrc
+echo "  ✓ ~/.zshrc"
 
 echo ""
 echo "Done! Restart your terminal."
