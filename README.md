@@ -15,3 +15,5 @@ A template repository for creating standardized repositories over organization.
 5. Edit this README.md file to fit the new repository.
 
 Create handbook if needed.
+
+<img width="500" height="199" alt="Screenshot 2026-05-19 at 4 25 34 PM" src="https://github.com/user-attachments/assets/611991bb-ca0d-4e2e-8010-6a0169a5d047" />
