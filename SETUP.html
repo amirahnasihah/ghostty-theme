@@ -148,14 +148,15 @@
     background: #000d12; border: 1px solid var(--bg3); border-radius: 6px;
     padding: 14px 16px; margin-bottom: 24px; overflow-x: auto;
   }
-  .pl-bar { display: flex; align-items: stretch; height: 28px; font-size: 13px; white-space: nowrap; }
-  .pl-grad { display: flex; align-items: center; padding: 0 2px 0 0; color: #007972; letter-spacing: -1px; font-size: 14px; }
-  .pl-seg { display: flex; align-items: center; padding: 0 11px; white-space: nowrap; }
-  /* explicit arrow span: bg = next segment color, inner border triangle = current segment color */
-  .pl-arr { display: flex; align-items: center; flex-shrink: 0; }
-  .pl-arr i { display: block; width: 0; height: 0;
-    border-top: 14px solid transparent;
-    border-bottom: 14px solid transparent; }
+  /* U+E0B4 rounded Powerline — pill-shaped segments with gaps */
+  .pl-bar { display: flex; align-items: center; gap: 5px; font-size: 13px; white-space: nowrap; flex-wrap: nowrap; }
+  .pl-grad { color: #007972; letter-spacing: -1px; font-size: 14px; padding-right: 2px; }
+  .pl-seg {
+    display: inline-flex; align-items: center;
+    padding: 3px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
   .pl-char { margin-top: 7px; font-size: 16px; font-weight: bold; }
 
   /* code block */
@@ -346,16 +347,25 @@
     <div class="tbl-wrap"><table>
       <thead><tr><th>Alias</th><th>Command</th><th>Purpose</th></tr></thead>
       <tbody>
+        <tr><td colspan="3" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Claude</td></tr>
+        <tr><td><code>cld</code></td><td><code>claude</code></td><td>Claude Code CLI</td></tr>
+        <tr><td><code>cdp</code></td><td><code>claude --dangerously-skip-permissions</code></td><td>Claude — skip all permission prompts</td></tr>
+        <tr><td><code>cr</code></td><td><code>claude --resume</code></td><td>Resume last Claude session</td></tr>
+        <tr colspan="3" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;"><td colspan="3" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Shell</td></tr>
+        <tr><td><code>zrc</code></td><td><code>source ~/.zshrc</code></td><td>Reload shell config</td></tr>
+        <tr><td colspan="3" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Editor & Apps</td></tr>
         <tr><td><code>v</code></td><td><code>nvim</code></td><td>Open Neovim</td></tr>
         <tr><td><code>ff</code></td><td><code>fastfetch</code></td><td>Show system info</td></tr>
-        <tr><td><code>zj</code></td><td><code>zellij</code></td><td>Open multiplexer</td></tr>
+        <tr><td><code>zj</code></td><td><code>zellij</code></td><td>Open Zellij multiplexer</td></tr>
+        <tr><td colspan="3" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">File listing — eza</td></tr>
         <tr><td><code>ls</code></td><td><code>eza --icons</code></td><td>List with icons</td></tr>
         <tr><td><code>ll</code></td><td><code>eza -lh --icons --git</code></td><td>Long list + git status</td></tr>
-        <tr><td><code>la</code></td><td><code>eza -lah --icons --git</code></td><td>Include hidden files</td></tr>
+        <tr><td><code>la</code></td><td><code>eza -lah --icons --git</code></td><td>Long list including hidden</td></tr>
         <tr><td><code>lt</code></td><td><code>eza --tree --icons</code></td><td>Tree view</td></tr>
-        <tr><td><code>y</code></td><td>yazi wrapper</td><td>File manager, cd on quit</td></tr>
-        <tr><td><code>cld</code></td><td><code>wormhole cld</code></td><td>Wormhole file send</td></tr>
-        <tr><td><code>pvdeploy</code></td><td><code>vercel deploy --prod ...</code></td><td>Deploy to production Vercel</td></tr>
+        <tr><td colspan="3" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Navigation</td></tr>
+        <tr><td><code>y</code></td><td>yazi wrapper function</td><td>Open yazi, cd into selected dir on quit</td></tr>
+        <tr><td colspan="3" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Deploy</td></tr>
+        <tr><td><code>pvdeploy</code></td><td><code>vercel deploy --prod --scope ...</code></td><td>Deploy to production Vercel team</td></tr>
       </tbody>
     </table></div>
 
@@ -375,52 +385,43 @@
   <!-- ═══ STARSHIP ═══ -->
   <section class="section" id="section-starship">
     <div class="section-title">🚀 Starship</div>
-    <p class="desc-block">Based on the <strong style="color:var(--blue)">Tokyo Night preset</strong> from starship.rs — same Powerline segment structure, all colors swapped to the Cyber Wave palette. Time format extended to include date + AM/PM. <code>$bun</code> module removed.</p>
+    <p class="desc-block"><strong style="color:#769ff0">Tokyo Night preset</strong> — rounded pill segments using <code>U+E0B4</code> Powerline caps. Time format customized to <code>%d %b %I:%M %p</code>.</p>
 
     <h3>Prompt Preview</h3>
     <div class="sp-preview">
-      <div class="pl-bar">
-        <!-- ░▒▓ gradient intro -->
-        <span class="pl-grad">░▒▓</span>
-        <!-- seg 1: icon  bg:#007972 fg:#001a22 -->
-        <span class="pl-seg" style="background:#007972;color:#001a22;">  </span>
-        <!-- arrow: out of #007972 into #005c57 -->
-        <span class="pl-arr" style="background:#005c57;"><i style="border-left:11px solid #007972;"></i></span>
-        <!-- seg 2: directory  bg:#005c57 fg:#e3e5e5 -->
-        <span class="pl-seg" style="background:#005c57;color:#e3e5e5;"> ~/term-config </span>
-        <!-- arrow: out of #005c57 into #003540 -->
-        <span class="pl-arr" style="background:#003540;"><i style="border-left:11px solid #005c57;"></i></span>
-        <!-- seg 3: git branch+status  bg:#003540 fg:#b4fa72 -->
-        <span class="pl-seg" style="background:#003540;color:#b4fa72;">  main ✓ </span>
-        <!-- arrow: out of #003540 into #001f28 -->
-        <span class="pl-arr" style="background:#001f28;"><i style="border-left:11px solid #003540;"></i></span>
-        <!-- seg 4: node version  bg:#001f28 fg:#a5d5fe -->
-        <span class="pl-seg" style="background:#001f28;color:#a5d5fe;">  22.11 </span>
-        <!-- arrow: out of #001f28 into #001a22 (same as preview bg — fades out) -->
-        <span class="pl-arr" style="background:#000d12;"><i style="border-left:11px solid #001f28;"></i></span>
-        <!-- seg 5: time  bg:#001a22 fg:#007972 -->
-        <span class="pl-seg" style="background:#000d12;color:#007972;">  19 May 11:42 AM </span>
-      </div>
-      <div class="pl-char" style="color:#007972;">❯</div>
+      <img src="images/starship.png" alt="Starship prompt screenshot" style="max-width:100%;border-radius:4px;display:block;">
     </div>
 
     <h3>Segments</h3>
     <div class="tbl-wrap"><table>
-      <thead><tr><th>Segment</th><th>Background</th><th>Text color</th><th>Shows</th></tr></thead>
+      <thead><tr><th>Segment</th><th>Background</th><th>Text</th><th>Shows</th></tr></thead>
       <tbody>
-        <tr><td><code>░▒▓</code> gradient</td><td>terminal default</td><td><code>#007972</code></td><td>Powerline intro — colored gradient chars, no bg fill</td></tr>
-        <tr><td>Icon</td><td><code>#007972</code></td><td><code>#001a22</code></td><td>Nerd font icon + space</td></tr>
-        <tr><td>Directory</td><td><code>#005c57</code></td><td><code>#e3e5e5</code></td><td>Current path, 3 levels deep, <code>…/</code> truncation</td></tr>
-        <tr><td>Git branch</td><td><code>#003540</code></td><td><code>#b4fa72</code></td><td>Branch name with  symbol</td></tr>
-        <tr><td>Git status</td><td><code>#003540</code></td><td><code>#b4fa72</code></td><td><code>$all_status$ahead_behind</code> — dirty/ahead/behind indicators</td></tr>
-        <tr><td>Node.js</td><td><code>#001f28</code></td><td><code>#a5d5fe</code></td><td> + version, shown in JS/TS projects</td></tr>
-        <tr><td>Rust</td><td><code>#001f28</code></td><td><code>#a5d5fe</code></td><td> + version, shown in Rust projects</td></tr>
-        <tr><td>Go</td><td><code>#001f28</code></td><td><code>#a5d5fe</code></td><td> + version, shown in Go projects</td></tr>
-        <tr><td>PHP</td><td><code>#001f28</code></td><td><code>#a5d5fe</code></td><td> + version, shown in PHP projects</td></tr>
-        <tr><td>Time</td><td><code>#001a22</code></td><td><code>#007972</code></td><td> + date/time — format <code>%d %b %I:%M %p</code> e.g. <code>19 May 11:42 AM</code></td></tr>
-        <tr><td>Character <code>❯</code></td><td>—</td><td><code>#007972</code> / <code>#ff8272</code></td><td>Teal on success, red on error</td></tr>
+        <tr><td><code>░▒▓</code> gradient</td><td>terminal bg</td><td><code>#a3aed2</code></td><td>Powerline fade-in, no background</td></tr>
+        <tr><td>Icon</td><td><code>#a3aed2</code></td><td><code>#090c0c</code></td><td>U+E711 nerd font icon</td></tr>
+        <tr><td>Directory</td><td><code>#769ff0</code></td><td><code>#e3e5e5</code></td><td>Path, 3 levels, <code>…/</code> truncation</td></tr>
+        <tr><td>Git branch</td><td><code>#394260</code></td><td><code>#769ff0</code></td><td>Branch name</td></tr>
+        <tr><td>Git status</td><td><code>#394260</code></td><td><code>#769ff0</code></td><td>Ahead/behind + dirty indicators</td></tr>
+        <tr><td>Node.js</td><td><code>#212736</code></td><td><code>#769ff0</code></td><td>Version in JS/TS projects</td></tr>
+        <tr><td>Bun</td><td><code>#212736</code></td><td><code>#769ff0</code></td><td>Version in Bun projects</td></tr>
+        <tr><td>Rust</td><td><code>#212736</code></td><td><code>#769ff0</code></td><td>Version in Rust projects</td></tr>
+        <tr><td>Go</td><td><code>#212736</code></td><td><code>#769ff0</code></td><td>Version in Go projects</td></tr>
+        <tr><td>PHP</td><td><code>#212736</code></td><td><code>#769ff0</code></td><td>Version in PHP projects</td></tr>
+        <tr><td>Time</td><td><code>#1d2230</code></td><td><code>#a0a9cb</code></td><td>Format: <code>%d %b %I:%M %p</code> → <code>19 May 11:42 AM</code></td></tr>
+        <tr><td>Separator</td><td>—</td><td>—</td><td><code>U+E0B4</code> rounded cap — makes the pill shape</td></tr>
+        <tr><td>Character <code>❯</code></td><td>—</td><td><code>#769ff0</code> / red</td><td>Success / error</td></tr>
       </tbody>
     </table></div>
+
+    <h3>Color Palette</h3>
+    <div class="palette">
+      <div class="swatch"><div class="swatch-box" style="background:#a3aed2"></div><div class="swatch-label">#a3aed2</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#769ff0"></div><div class="swatch-label">#769ff0</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#394260"></div><div class="swatch-label">#394260</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#212736"></div><div class="swatch-label">#212736</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#1d2230"></div><div class="swatch-label">#1d2230</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#a0a9cb"></div><div class="swatch-label">#a0a9cb</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#e3e5e5"></div><div class="swatch-label">#e3e5e5</div></div>
+    </div>
 
     <h3>Timeouts</h3>
     <div class="tbl-wrap"><table>
