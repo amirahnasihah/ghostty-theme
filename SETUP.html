@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Terminal Setup — amirah</title>
 <style>
+  @font-face {
+    font-family: 'Hack Nerd Font';
+    src: url('https://cdn.jsdelivr.net/gh/ryanoasis/nerd-fonts@v3.2.1/patched-fonts/Hack/Regular/HackNerdFont-Regular.ttf') format('truetype');
+    font-display: swap;
+  }
+
   :root {
     --bg:      #001a22;
     --bg2:     #001f28;
@@ -150,7 +156,7 @@
   }
   .sp-preview img { max-width: 100%; border-radius: 4px; display: block; margin-bottom: 16px; }
   .sp-divider { border: none; border-top: 1px solid #2a2b3d; margin: 14px 0; }
-  .pl-bar { display: flex; align-items: center; gap: 5px; font-size: 13px; white-space: nowrap; flex-wrap: nowrap; font-family: monospace; }
+  .pl-bar { display: flex; align-items: center; gap: 5px; font-size: 13px; white-space: nowrap; flex-wrap: nowrap; font-family: 'Hack Nerd Font', 'Hack', monospace; }
   .pl-seg {
     display: inline-flex; align-items: center; gap: 5px;
     padding: 3px 12px;
@@ -393,11 +399,12 @@
       <img src="images/starship.png" alt="Starship prompt screenshot">
       <hr class="sp-divider">
       <div class="pl-bar">
-        <span class="pl-seg" style="background:#a3aed2;color:#15161e;font-weight:600;">🍎</span>
-        <span class="pl-seg" style="background:#769ff0;color:#15161e;font-weight:500;">📁 …/go-lang</span>
-        <span class="pl-seg" style="background:#394260;color:#769ff0;">⎇ i2-20260507-1311 $?</span>
-        <span class="pl-seg" style="background:#212736;color:#769ff0;">🍞 v1.26.3</span>
-        <span class="pl-seg" style="background:#1d2230;color:#a0a9cb;">🕐 19 May 04:25 PM</span>
+        <span style="color:#a3aed2;letter-spacing:-1px;padding-right:3px;">░▒▓</span>
+        <span class="pl-seg" style="background:#a3aed2;color:#090c0c;font-weight:600;">&#xE711;</span>
+        <span class="pl-seg" style="background:#769ff0;color:#e3e5e5;"> …/go-lang </span>
+        <span class="pl-seg" style="background:#394260;color:#769ff0;">&#xF418; i2-20260507-1311 $? </span>
+        <span class="pl-seg" style="background:#212736;color:#769ff0;">&#xE627; v1.26.3 </span>
+        <span class="pl-seg" style="background:#1d2230;color:#a0a9cb;">&#xF43A; 19 May 04:25 PM </span>
       </div>
       <div class="pl-char" style="color:#9ece6a;">❯</div>
     </div>
