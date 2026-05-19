@@ -156,13 +156,16 @@
   }
   .sp-preview img { max-width: 100%; border-radius: 4px; display: block; margin-bottom: 16px; }
   .sp-divider { border: none; border-top: 1px solid #2a2b3d; margin: 14px 0; }
-  .pl-bar { display: flex; align-items: center; gap: 5px; font-size: 13px; white-space: nowrap; flex-wrap: nowrap; font-family: 'Hack Nerd Font', 'Hack', monospace; }
+  .pl-bar { display: flex; align-items: stretch; gap: 0; white-space: nowrap; flex-wrap: nowrap; font-family: 'Hack Nerd Font', 'Hack', monospace; line-height: 1; }
   .pl-seg {
     display: inline-flex; align-items: center; gap: 5px;
-    padding: 3px 12px;
-    border-radius: 999px;
+    padding: 5px 10px;
     white-space: nowrap;
-    font-size: 12.5px;
+    font-size: 13px;
+  }
+  .pl-arrow {
+    display: inline-flex; align-items: center;
+    font-size: 19px; line-height: 1; padding: 0;
   }
   .pl-char { margin-top: 8px; font-size: 15px; font-weight: bold; padding-left: 1px; }
 
@@ -399,12 +402,17 @@
       <img src="images/starship.png" alt="Starship prompt screenshot">
       <hr class="sp-divider">
       <div class="pl-bar">
-        <span style="color:#a3aed2;letter-spacing:-1px;padding-right:3px;">░▒▓</span>
+        <span style="display:inline-flex;align-items:center;color:#a3aed2;letter-spacing:-1px;padding-right:2px;font-family:'Hack Nerd Font',monospace;">░▒▓</span>
         <span class="pl-seg" style="background:#a3aed2;color:#090c0c;font-weight:600;">&#xE711;</span>
-        <span class="pl-seg" style="background:#769ff0;color:#e3e5e5;"> …/go-lang </span>
-        <span class="pl-seg" style="background:#394260;color:#769ff0;">&#xF418; i2-20260507-1311 $? </span>
-        <span class="pl-seg" style="background:#212736;color:#769ff0;">&#xE627; v1.26.3 </span>
-        <span class="pl-seg" style="background:#1d2230;color:#a0a9cb;">&#xF43A; 19 May 04:25 PM </span>
+        <span class="pl-arrow" style="color:#a3aed2;background:#769ff0;">&#xE0B4;</span>
+        <span class="pl-seg" style="background:#769ff0;color:#e3e5e5;">…/go-lang</span>
+        <span class="pl-arrow" style="color:#769ff0;background:#394260;">&#xE0B4;</span>
+        <span class="pl-seg" style="background:#394260;color:#769ff0;">&#xF418; i2-20260507-1311 $?</span>
+        <span class="pl-arrow" style="color:#394260;background:#212736;">&#xE0B4;</span>
+        <span class="pl-seg" style="background:#212736;color:#769ff0;">&#xE627; v1.26.3</span>
+        <span class="pl-arrow" style="color:#212736;background:#1d2230;">&#xE0B4;</span>
+        <span class="pl-seg" style="background:#1d2230;color:#a0a9cb;">&#xF43A; 19 May 04:25 PM</span>
+        <span class="pl-arrow" style="color:#1d2230;background:transparent;">&#xE0B4;</span>
       </div>
       <div class="pl-char" style="color:#9ece6a;">❯</div>
     </div>
