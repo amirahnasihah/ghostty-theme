@@ -145,19 +145,20 @@
 
   /* starship preview */
   .sp-preview {
-    background: #000d12; border: 1px solid var(--bg3); border-radius: 6px;
-    padding: 14px 16px; margin-bottom: 24px; overflow-x: auto;
+    background: #15161e; border: 1px solid var(--bg3); border-radius: 8px;
+    padding: 16px 18px; margin-bottom: 24px; overflow-x: auto;
   }
-  /* U+E0B4 rounded Powerline — pill-shaped segments with gaps */
-  .pl-bar { display: flex; align-items: center; gap: 5px; font-size: 13px; white-space: nowrap; flex-wrap: nowrap; }
-  .pl-grad { color: #007972; letter-spacing: -1px; font-size: 14px; padding-right: 2px; }
+  .sp-preview img { max-width: 100%; border-radius: 4px; display: block; margin-bottom: 16px; }
+  .sp-divider { border: none; border-top: 1px solid #2a2b3d; margin: 14px 0; }
+  .pl-bar { display: flex; align-items: center; gap: 5px; font-size: 13px; white-space: nowrap; flex-wrap: nowrap; font-family: monospace; }
   .pl-seg {
-    display: inline-flex; align-items: center;
-    padding: 3px 10px;
-    border-radius: 4px;
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 3px 12px;
+    border-radius: 999px;
     white-space: nowrap;
+    font-size: 12.5px;
   }
-  .pl-char { margin-top: 7px; font-size: 16px; font-weight: bold; }
+  .pl-char { margin-top: 8px; font-size: 15px; font-weight: bold; padding-left: 1px; }
 
   /* code block */
   .codeblock {
@@ -389,7 +390,16 @@
 
     <h3>Prompt Preview</h3>
     <div class="sp-preview">
-      <img src="images/starship.png" alt="Starship prompt screenshot" style="max-width:100%;border-radius:4px;display:block;">
+      <img src="images/starship.png" alt="Starship prompt screenshot">
+      <hr class="sp-divider">
+      <div class="pl-bar">
+        <span class="pl-seg" style="background:#a3aed2;color:#15161e;font-weight:600;">🍎</span>
+        <span class="pl-seg" style="background:#769ff0;color:#15161e;font-weight:500;">📁 …/go-lang</span>
+        <span class="pl-seg" style="background:#394260;color:#769ff0;">⎇ i2-20260507-1311 $?</span>
+        <span class="pl-seg" style="background:#212736;color:#769ff0;">🍞 v1.26.3</span>
+        <span class="pl-seg" style="background:#1d2230;color:#a0a9cb;">🕐 19 May 04:25 PM</span>
+      </div>
+      <div class="pl-char" style="color:#9ece6a;">❯</div>
     </div>
 
     <h3>Segments</h3>
