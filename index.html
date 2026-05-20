@@ -199,15 +199,56 @@
 
   .desc-block { color: var(--fg-dim); font-size: 12px; margin-bottom: 18px; line-height: 1.6; }
 
+  .hamburger {
+    display: none;
+    position: fixed; top: 12px; left: 12px; z-index: 200;
+    background: var(--bg2); border: 1px solid var(--teal); color: var(--teal);
+    border-radius: 5px; padding: 6px 10px; font-size: 16px; cursor: pointer; line-height: 1;
+    transition: background .12s;
+  }
+  .hamburger:hover { background: var(--bg3); }
+  .sidebar-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,.55); z-index: 150;
+  }
+  .sidebar-overlay.open { display: block; }
   @media (max-width: 680px) {
     .cfg-grid { grid-template-columns: 1fr; }
-    .sidebar { display: none; }
-    .main { padding: 16px; }
+    .main { padding: 52px 16px 16px; }
+    .sidebar {
+      display: block;
+      position: fixed; top: 0; left: 0; height: 100vh;
+      z-index: 160;
+      transform: translateX(-100%);
+      transition: transform .22s ease;
+    }
+    .sidebar.open { transform: translateX(0); }
+    .hamburger { display: block; }
   }
+
+  /* Zellij cheatsheet card */
+  .zj-sheet { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 24px; }
+  .zj-sheet-hd { background: #002419; padding: 11px 16px; font-size: 11px; font-weight: 700; color: var(--green); text-transform: uppercase; letter-spacing: .12em; border-bottom: 1px solid var(--border); }
+  .zj-group { padding: 12px 16px 6px; }
+  .zj-group + .zj-group { border-top: 1px solid var(--bg3); }
+  .zj-group-hd { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .zj-mode-lbl { font-size: 9px; color: var(--fg-dim); text-transform: uppercase; letter-spacing: .1em; }
+  .zj-pill { background: var(--bg3); border: 1px solid var(--teal); color: var(--green); border-radius: 4px; padding: 2px 8px; font-size: 10px; font-weight: 700; letter-spacing: .06em; }
+  .zj-row { display: flex; align-items: center; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid #ffffff08; font-size: 13px; }
+  .zj-row:last-child { border-bottom: none; }
+  .zj-lbl { color: var(--fg); }
+  .zj-keys { display: flex; align-items: center; gap: 4px; }
+  .zj-kbd { background: var(--bg3); border: 1px solid var(--teal); color: var(--green); border-radius: 4px; padding: 3px 9px; font-size: 11px; font-family: inherit; white-space: nowrap; }
+  .zj-kbd-cli { border-color: var(--bg4); color: var(--yellow); }
+  .zj-sep { color: var(--fg-dim); font-size: 11px; }
+  .zj-note { background: var(--bg2); border-top: 1px solid var(--bg3); padding: 10px 16px; font-size: 11px; color: var(--fg-dim); line-height: 1.6; }
 </style>
 </head>
 <body>
 <div class="shell">
+
+<button class="hamburger" onclick="toggleMenu()">☰</button>
+<div class="sidebar-overlay" onclick="toggleMenu()"></div>
 
 <!-- ── SIDEBAR ── -->
 <nav class="sidebar">
@@ -368,7 +409,10 @@
         <tr><td><code>v</code></td><td><code>nvim</code></td><td>Open Neovim</td></tr>
         <tr><td><code>ff</code></td><td><code>fastfetch</code></td><td>Show system info</td></tr>
         <tr><td><code>zj</code></td><td><code>zellij</code></td><td>Open Zellij multiplexer</td></tr>
+        <tr><td><code>zjs</code></td><td><code>zellij -s &lt;name&gt;</code></td><td>Create + attach with custom name</td></tr>
         <tr><td><code>zja</code></td><td><code>zellij attach</code></td><td>Attach to a Zellij session</td></tr>
+        <tr><td><code>zjac</code></td><td><code>zellij attach --create</code></td><td>Attach or create session</td></tr>
+        <tr><td><code>zjr</code></td><td><code>zellij action rename-session &lt;name&gt;</code></td><td>Rename a Zellij session</td></tr>
         <tr><td><code>zjd</code></td><td><code>zellij delete-session</code></td><td>Delete a Zellij session</td></tr>
         <tr><td><code>zjda</code></td><td><code>zellij delete-all-sessions</code></td><td>Delete all Zellij sessions</td></tr>
         <tr><td colspan="3" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">File listing — eza</td></tr>
@@ -841,102 +885,69 @@
     <div class="section-title">🪟 Zellij</div>
     <p class="desc-block">Rust-based terminal multiplexer. Faster and more modern than tmux. Custom keybinds with defaults cleared.</p>
 
-    <h3>Shell Aliases</h3>
-    <div class="tbl-wrap"><table>
-      <thead><tr><th>Alias</th><th>Command</th><th>Purpose</th></tr></thead>
-      <tbody>
-        <tr><td><code>zj</code></td><td><code>zellij</code></td><td>Launch Zellij</td></tr>
-        <tr><td><code>zja</code></td><td><code>zellij attach</code></td><td>Attach to an existing session</td></tr>
-        <tr><td><code>zjd</code></td><td><code>zellij delete-session</code></td><td>Delete a named session</td></tr>
-        <tr><td><code>zjda</code></td><td><code>zellij delete-all-sessions</code></td><td>Delete all sessions</td></tr>
-      </tbody>
-    </table></div>
+    <div class="cfg-grid" style="margin-bottom:20px">
+      <div class="cfg-card">
+        <h4>Config</h4>
+        <div class="kv"><span class="k">Default shell</span><span class="v">fish</span></div>
+        <div class="kv"><span class="k">Default layout</span><span class="v">compact</span></div>
+        <div class="kv"><span class="k">Pane frames</span><span class="v">disabled</span></div>
+        <div class="kv"><span class="k">Keybinds</span><span class="v">fully custom</span></div>
+      </div>
+      <div class="cfg-card">
+        <h4>Shell Aliases</h4>
+        <div class="kv"><span class="k" style="color:var(--blue)">zj</span><span class="v" style="color:var(--fg-dim)">zellij</span></div>
+        <div class="kv"><span class="k" style="color:var(--blue)">zjs</span><span class="v" style="color:var(--fg-dim)">zellij -s &lt;name&gt;</span></div>
+        <div class="kv"><span class="k" style="color:var(--blue)">zja</span><span class="v" style="color:var(--fg-dim)">zellij attach</span></div>
+        <div class="kv"><span class="k" style="color:var(--blue)">zjac</span><span class="v" style="color:var(--fg-dim)">zellij attach --create</span></div>
+        <div class="kv"><span class="k" style="color:var(--blue)">zjr</span><span class="v" style="color:var(--fg-dim)">zellij action rename-session &lt;name&gt;</span></div>
+        <div class="kv"><span class="k" style="color:var(--blue)">zjd</span><span class="v" style="color:var(--fg-dim)">zellij delete-session</span></div>
+        <div class="kv"><span class="k" style="color:var(--blue)">zjda</span><span class="v" style="color:var(--fg-dim)">zellij delete-all-sessions</span></div>
+      </div>
+    </div>
 
-    <h3>Core Settings</h3>
-    <div class="tbl-wrap"><table>
-      <thead><tr><th>Setting</th><th>Value</th></tr></thead>
-      <tbody>
-        <tr><td>Default shell</td><td><code>fish</code></td></tr>
-        <tr><td>Default layout</td><td><code>compact</code></td></tr>
-        <tr><td>Pane frames</td><td>disabled</td></tr>
-        <tr><td>Keybinds</td><td>defaults cleared, fully custom</td></tr>
-      </tbody>
-    </table></div>
+    <div class="zj-sheet">
+      <div class="zj-sheet-hd">● ZELLIJ — PANES &amp; TABS</div>
 
-    <h3>Entering Modes</h3>
-    <p class="desc-block" style="margin-bottom:10px">Zellij is modal. Press the mode key to enter it, then a command key to act. Press <code>Esc</code> or <code>Enter</code> to return to normal.</p>
-    <div class="tbl-wrap"><table>
-      <thead><tr><th>Key</th><th>Mode</th><th>What you can do</th></tr></thead>
-      <tbody>
-        <tr><td><code>Ctrl+p</code></td><td>Pane</td><td>Split, close, resize, rename, float panes</td></tr>
-        <tr><td><code>Ctrl+t</code></td><td>Tab</td><td>New tab, close, rename, switch tabs</td></tr>
-        <tr><td><code>Ctrl+n</code></td><td>Resize</td><td>Resize the focused pane</td></tr>
-        <tr><td><code>Ctrl+s</code></td><td>Scroll</td><td>Scroll through pane output, search</td></tr>
-        <tr><td><code>Ctrl+o</code></td><td>Session</td><td>Switch / detach sessions</td></tr>
-        <tr><td><code>Esc</code></td><td>—</td><td>Exit any mode, back to normal</td></tr>
-      </tbody>
-    </table></div>
+      <div class="zj-group">
+        <div class="zj-group-hd"><span class="zj-mode-lbl">PANE MODE →</span><span class="zj-pill">CTRL+P</span></div>
+        <div class="zj-row"><span class="zj-lbl">Split down</span><span class="zj-keys"><span class="zj-kbd">Ctrl p</span><span class="zj-sep">→</span><span class="zj-kbd">d</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Split right</span><span class="zj-keys"><span class="zj-kbd">Ctrl p</span><span class="zj-sep">→</span><span class="zj-kbd">r</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Move focus <span style="color:var(--fg-dim);font-size:11px">(no mode)</span></span><span class="zj-keys"><span class="zj-kbd">⌥ hjkl</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Close pane</span><span class="zj-keys"><span class="zj-kbd">Ctrl p</span><span class="zj-sep">→</span><span class="zj-kbd">x</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Rename pane</span><span class="zj-keys"><span class="zj-kbd">Ctrl p</span><span class="zj-sep">→</span><span class="zj-kbd">c</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Fullscreen</span><span class="zj-keys"><span class="zj-kbd">Ctrl p</span><span class="zj-sep">→</span><span class="zj-kbd">f</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Float / embed</span><span class="zj-keys"><span class="zj-kbd">Ctrl p</span><span class="zj-sep">→</span><span class="zj-kbd">w</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Toggle frames</span><span class="zj-keys"><span class="zj-kbd">Ctrl p</span><span class="zj-sep">→</span><span class="zj-kbd">z</span></span></div>
+      </div>
 
-    <h3>Panes</h3>
-    <div class="tbl-wrap"><table>
-      <thead><tr><th>Mode → Key</th><th>Action</th></tr></thead>
-      <tbody>
-        <tr><td colspan="2" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Split</td></tr>
-        <tr><td><code>Ctrl+p</code> → <code>r</code></td><td>Split right (new pane to the right)</td></tr>
-        <tr><td><code>Ctrl+p</code> → <code>d</code></td><td>Split down (new pane below)</td></tr>
-        <tr><td><code>Ctrl+p</code> → <code>n</code></td><td>New pane (auto direction)</td></tr>
-        <tr><td><code>Ctrl+p</code> → <code>s</code></td><td>New stacked pane</td></tr>
-        <tr><td colspan="2" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Navigate</td></tr>
-        <tr><td><code>Ctrl+p</code> → <code>h/j/k/l</code></td><td>Move focus left / down / up / right</td></tr>
-        <tr><td colspan="2" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Manage</td></tr>
-        <tr><td><code>Ctrl+p</code> → <code>x</code></td><td>Close focused pane</td></tr>
-        <tr><td><code>Ctrl+p</code> → <code>c</code></td><td>Rename pane</td></tr>
-        <tr><td><code>Ctrl+p</code> → <code>f</code></td><td>Toggle fullscreen</td></tr>
-        <tr><td><code>Ctrl+p</code> → <code>z</code></td><td>Toggle pane frames</td></tr>
-        <tr><td><code>Ctrl+p</code> → <code>w</code></td><td>Toggle floating panes</td></tr>
-        <tr><td><code>Ctrl+p</code> → <code>e</code></td><td>Embed / float current pane</td></tr>
-        <tr><td><code>Ctrl+p</code> → <code>i</code></td><td>Toggle pane pinned</td></tr>
-      </tbody>
-    </table></div>
+      <div class="zj-group">
+        <div class="zj-group-hd"><span class="zj-mode-lbl">TABS →</span><span class="zj-pill">CTRL+T</span></div>
+        <div class="zj-row"><span class="zj-lbl">New tab</span><span class="zj-keys"><span class="zj-kbd">Ctrl t</span><span class="zj-sep">→</span><span class="zj-kbd">n</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Next / Prev</span><span class="zj-keys"><span class="zj-kbd">Ctrl t</span><span class="zj-sep">→</span><span class="zj-kbd">l</span><span class="zj-sep">/</span><span class="zj-kbd">h</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Go to tab</span><span class="zj-keys"><span class="zj-kbd">Ctrl t</span><span class="zj-sep">→</span><span class="zj-kbd">1-9</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Rename</span><span class="zj-keys"><span class="zj-kbd">Ctrl t</span><span class="zj-sep">→</span><span class="zj-kbd">r</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Close</span><span class="zj-keys"><span class="zj-kbd">Ctrl t</span><span class="zj-sep">→</span><span class="zj-kbd">x</span></span></div>
+      </div>
 
-    <h3>Tabs</h3>
-    <div class="tbl-wrap"><table>
-      <thead><tr><th>Mode → Key</th><th>Action</th></tr></thead>
-      <tbody>
-        <tr><td colspan="2" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Create & Close</td></tr>
-        <tr><td><code>Ctrl+t</code> → <code>n</code></td><td>New tab</td></tr>
-        <tr><td><code>Ctrl+t</code> → <code>x</code></td><td>Close current tab</td></tr>
-        <tr><td><code>Ctrl+t</code> → <code>r</code></td><td>Rename current tab</td></tr>
-        <tr><td colspan="2" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Switch</td></tr>
-        <tr><td><code>Ctrl+t</code> → <code>1–9</code></td><td>Jump to tab N</td></tr>
-        <tr><td><code>Ctrl+t</code> → <code>← / →</code></td><td>Previous / next tab</td></tr>
-        <tr><td><code>Ctrl+t</code> → <code>h / l</code></td><td>Previous / next tab (vim keys)</td></tr>
-      </tbody>
-    </table></div>
+      <div class="zj-group">
+        <div class="zj-group-hd"><span class="zj-mode-lbl">SCROLL →</span><span class="zj-pill">CTRL+S</span></div>
+        <div class="zj-row"><span class="zj-lbl">Scroll up / down</span><span class="zj-keys"><span class="zj-kbd">Ctrl s</span><span class="zj-sep">→</span><span class="zj-kbd">k</span><span class="zj-sep">/</span><span class="zj-kbd">j</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Half page</span><span class="zj-keys"><span class="zj-kbd">Ctrl s</span><span class="zj-sep">→</span><span class="zj-kbd">u</span><span class="zj-sep">/</span><span class="zj-kbd">d</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Search</span><span class="zj-keys"><span class="zj-kbd">Ctrl s</span><span class="zj-sep">→</span><span class="zj-kbd">/</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Edit in $EDITOR</span><span class="zj-keys"><span class="zj-kbd">Ctrl s</span><span class="zj-sep">→</span><span class="zj-kbd">e</span></span></div>
+      </div>
 
-    <h3>Scroll &amp; Search</h3>
-    <div class="tbl-wrap"><table>
-      <thead><tr><th>Mode → Key</th><th>Action</th></tr></thead>
-      <tbody>
-        <tr><td><code>Ctrl+s</code> → <code>j / k</code></td><td>Scroll down / up one line</td></tr>
-        <tr><td><code>Ctrl+s</code> → <code>d / u</code></td><td>Scroll down / up half page</td></tr>
-        <tr><td><code>Ctrl+s</code> → <code>/</code></td><td>Search in pane output</td></tr>
-        <tr><td><code>Ctrl+s</code> → <code>n / p</code></td><td>Next / previous search match</td></tr>
-        <tr><td><code>Ctrl+s</code> → <code>e</code></td><td>Edit scrollback in <code>$EDITOR</code></td></tr>
-      </tbody>
-    </table></div>
+      <div class="zj-group">
+        <div class="zj-group-hd"><span class="zj-mode-lbl">SESSIONS →</span><span class="zj-pill">CTRL+O</span></div>
+        <div class="zj-row"><span class="zj-lbl">Detach</span><span class="zj-keys"><span class="zj-kbd">Ctrl o</span><span class="zj-sep">→</span><span class="zj-kbd">d</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Session picker</span><span class="zj-keys"><span class="zj-kbd">Ctrl o</span><span class="zj-sep">→</span><span class="zj-kbd">w</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">New named session <span style="color:var(--fg-dim);font-size:11px">(zjs)</span></span><span class="zj-keys"><span class="zj-kbd zj-kbd-cli">zellij -s &lt;name&gt;</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Attach or create <span style="color:var(--fg-dim);font-size:11px">(zjac)</span></span><span class="zj-keys"><span class="zj-kbd zj-kbd-cli">zellij attach --create</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Rename <span style="color:var(--fg-dim);font-size:11px">(zjr)</span></span><span class="zj-keys"><span class="zj-kbd zj-kbd-cli">zellij action rename-session &lt;name&gt;</span></span></div>
+      </div>
 
-    <h3>Sessions</h3>
-    <div class="tbl-wrap"><table>
-      <thead><tr><th>Mode → Key / Command</th><th>Action</th></tr></thead>
-      <tbody>
-        <tr><td><code>Ctrl+o</code> → <code>d</code></td><td>Detach from session (keep it running)</td></tr>
-        <tr><td><code>Ctrl+o</code> → <code>w</code></td><td>Open session manager picker</td></tr>
-        <tr><td><code>zja &lt;name&gt;</code></td><td>Attach to a named session</td></tr>
-        <tr><td><code>zjd &lt;name&gt;</code></td><td>Delete a named session</td></tr>
-        <tr><td><code>zjda</code></td><td>Delete all sessions</td></tr>
-      </tbody>
-    </table></div>
+      <div class="zj-note">⌥+hjkl to switch panes instantly (no mode needed). ⌥+arrows won't work in Ghostty — Ghostty intercepts those for word jump. Resize: Ctrl+n → hjkl, equalize: =</div>
+    </div>
   </section>
 
   <!-- ═══ BTOP ═══ -->
@@ -1167,11 +1178,18 @@
 </div>
 
 <script>
+  function toggleMenu() {
+    document.querySelector('.sidebar').classList.toggle('open');
+    document.querySelector('.sidebar-overlay').classList.toggle('open');
+  }
+
   function show(id, el) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     document.getElementById('section-' + id).classList.add('active');
     el.classList.add('active');
+    document.querySelector('.sidebar').classList.remove('open');
+    document.querySelector('.sidebar-overlay').classList.remove('open');
   }
 
   function filterPlugins(q) {
