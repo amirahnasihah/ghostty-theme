@@ -841,6 +841,17 @@
     <div class="section-title">🪟 Zellij</div>
     <p class="desc-block">Rust-based terminal multiplexer. Faster and more modern than tmux. Custom keybinds with defaults cleared.</p>
 
+    <h3>Shell Aliases</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Alias</th><th>Command</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>zj</code></td><td><code>zellij</code></td><td>Launch Zellij</td></tr>
+        <tr><td><code>zja</code></td><td><code>zellij attach</code></td><td>Attach to an existing session</td></tr>
+        <tr><td><code>zjd</code></td><td><code>zellij delete-session</code></td><td>Delete a named session</td></tr>
+        <tr><td><code>zjda</code></td><td><code>zellij delete-all-sessions</code></td><td>Delete all sessions</td></tr>
+      </tbody>
+    </table></div>
+
     <h3>Core Settings</h3>
     <div class="tbl-wrap"><table>
       <thead><tr><th>Setting</th><th>Value</th></tr></thead>
@@ -852,30 +863,78 @@
       </tbody>
     </table></div>
 
-    <h3>Key Bindings — Pane Mode</h3>
+    <h3>Entering Modes</h3>
+    <p class="desc-block" style="margin-bottom:10px">Zellij is modal. Press the mode key to enter it, then a command key to act. Press <code>Esc</code> or <code>Enter</code> to return to normal.</p>
     <div class="tbl-wrap"><table>
-      <thead><tr><th>Key</th><th>Action</th></tr></thead>
+      <thead><tr><th>Key</th><th>Mode</th><th>What you can do</th></tr></thead>
       <tbody>
-        <tr><td><code>h / j / k / l</code></td><td>Move focus left/down/up/right</td></tr>
-        <tr><td><code>r</code></td><td>New pane to the right</td></tr>
-        <tr><td><code>d</code></td><td>New pane below</td></tr>
-        <tr><td><code>n</code></td><td>New pane</td></tr>
-        <tr><td><code>f</code></td><td>Toggle fullscreen</td></tr>
-        <tr><td><code>w</code></td><td>Toggle floating panes</td></tr>
-        <tr><td><code>e</code></td><td>Embed or float current pane</td></tr>
-        <tr><td><code>z</code></td><td>Toggle pane frames</td></tr>
-        <tr><td><code>c</code></td><td>Rename pane</td></tr>
-        <tr><td><code>i</code></td><td>Toggle pane pinned</td></tr>
-        <tr><td><code>s</code></td><td>New stacked pane</td></tr>
+        <tr><td><code>Ctrl+p</code></td><td>Pane</td><td>Split, close, resize, rename, float panes</td></tr>
+        <tr><td><code>Ctrl+t</code></td><td>Tab</td><td>New tab, close, rename, switch tabs</td></tr>
+        <tr><td><code>Ctrl+n</code></td><td>Resize</td><td>Resize the focused pane</td></tr>
+        <tr><td><code>Ctrl+s</code></td><td>Scroll</td><td>Scroll through pane output, search</td></tr>
+        <tr><td><code>Ctrl+o</code></td><td>Session</td><td>Switch / detach sessions</td></tr>
+        <tr><td><code>Esc</code></td><td>—</td><td>Exit any mode, back to normal</td></tr>
       </tbody>
     </table></div>
 
-    <h3>Key Bindings — Tab Mode</h3>
+    <h3>Panes</h3>
     <div class="tbl-wrap"><table>
-      <thead><tr><th>Key</th><th>Action</th></tr></thead>
+      <thead><tr><th>Mode → Key</th><th>Action</th></tr></thead>
       <tbody>
-        <tr><td><code>1–9</code></td><td>Go to tab N</td></tr>
-        <tr><td><code>←/→</code></td><td>Previous/next tab</td></tr>
+        <tr><td colspan="2" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Split</td></tr>
+        <tr><td><code>Ctrl+p</code> → <code>r</code></td><td>Split right (new pane to the right)</td></tr>
+        <tr><td><code>Ctrl+p</code> → <code>d</code></td><td>Split down (new pane below)</td></tr>
+        <tr><td><code>Ctrl+p</code> → <code>n</code></td><td>New pane (auto direction)</td></tr>
+        <tr><td><code>Ctrl+p</code> → <code>s</code></td><td>New stacked pane</td></tr>
+        <tr><td colspan="2" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Navigate</td></tr>
+        <tr><td><code>Ctrl+p</code> → <code>h/j/k/l</code></td><td>Move focus left / down / up / right</td></tr>
+        <tr><td colspan="2" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Manage</td></tr>
+        <tr><td><code>Ctrl+p</code> → <code>x</code></td><td>Close focused pane</td></tr>
+        <tr><td><code>Ctrl+p</code> → <code>c</code></td><td>Rename pane</td></tr>
+        <tr><td><code>Ctrl+p</code> → <code>f</code></td><td>Toggle fullscreen</td></tr>
+        <tr><td><code>Ctrl+p</code> → <code>z</code></td><td>Toggle pane frames</td></tr>
+        <tr><td><code>Ctrl+p</code> → <code>w</code></td><td>Toggle floating panes</td></tr>
+        <tr><td><code>Ctrl+p</code> → <code>e</code></td><td>Embed / float current pane</td></tr>
+        <tr><td><code>Ctrl+p</code> → <code>i</code></td><td>Toggle pane pinned</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Tabs</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Mode → Key</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td colspan="2" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Create & Close</td></tr>
+        <tr><td><code>Ctrl+t</code> → <code>n</code></td><td>New tab</td></tr>
+        <tr><td><code>Ctrl+t</code> → <code>x</code></td><td>Close current tab</td></tr>
+        <tr><td><code>Ctrl+t</code> → <code>r</code></td><td>Rename current tab</td></tr>
+        <tr><td colspan="2" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Switch</td></tr>
+        <tr><td><code>Ctrl+t</code> → <code>1–9</code></td><td>Jump to tab N</td></tr>
+        <tr><td><code>Ctrl+t</code> → <code>← / →</code></td><td>Previous / next tab</td></tr>
+        <tr><td><code>Ctrl+t</code> → <code>h / l</code></td><td>Previous / next tab (vim keys)</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Scroll &amp; Search</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Mode → Key</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><code>Ctrl+s</code> → <code>j / k</code></td><td>Scroll down / up one line</td></tr>
+        <tr><td><code>Ctrl+s</code> → <code>d / u</code></td><td>Scroll down / up half page</td></tr>
+        <tr><td><code>Ctrl+s</code> → <code>/</code></td><td>Search in pane output</td></tr>
+        <tr><td><code>Ctrl+s</code> → <code>n / p</code></td><td>Next / previous search match</td></tr>
+        <tr><td><code>Ctrl+s</code> → <code>e</code></td><td>Edit scrollback in <code>$EDITOR</code></td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Sessions</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Mode → Key / Command</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><code>Ctrl+o</code> → <code>d</code></td><td>Detach from session (keep it running)</td></tr>
+        <tr><td><code>Ctrl+o</code> → <code>w</code></td><td>Open session manager picker</td></tr>
+        <tr><td><code>zja &lt;name&gt;</code></td><td>Attach to a named session</td></tr>
+        <tr><td><code>zjd &lt;name&gt;</code></td><td>Delete a named session</td></tr>
+        <tr><td><code>zjda</code></td><td>Delete all sessions</td></tr>
       </tbody>
     </table></div>
   </section>
