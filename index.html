@@ -1192,7 +1192,20 @@
     el.classList.add('active');
     document.querySelector('.sidebar').classList.remove('open');
     document.querySelector('.sidebar-overlay').classList.remove('open');
+    localStorage.setItem('tc-section', id);
   }
+
+  (function restoreSection() {
+    const saved = localStorage.getItem('tc-section');
+    if (!saved) return;
+    const sec = document.getElementById('section-' + saved);
+    const nav = document.querySelector(`.nav-item[onclick*="'${saved}'"]`);
+    if (!sec || !nav) return;
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    sec.classList.add('active');
+    nav.classList.add('active');
+  })();
 
   function filterPlugins(q) {
     q = q.toLowerCase();
