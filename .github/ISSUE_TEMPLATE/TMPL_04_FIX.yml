@@ -1,5 +1,4 @@
 name: Fix
-type: Fix
 labels: ["fix"]
 title: Fix ***
 description: A change made to correct an error, bug, or unintended behavior in existing code.
@@ -10,7 +9,8 @@ body:
         Write a concise and accurate title reflecting the purpose of this issue, and this doubles as the pull request title.
 
         -----------------------------------------------
-  ## Bug Report
+
+        ## Bug Report
   - type: textarea
     id: situation
     attributes:

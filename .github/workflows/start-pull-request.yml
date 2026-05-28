@@ -158,41 +158,39 @@ jobs:
             exit 1
           fi
           
-          # Build PR command with required parameters
-          PR_CMD="gh pr create \
-            --head \"${{ env.NEW_BRANCH_NAME }}\" \
-            --base \"${{ github.event.repository.default_branch }}\" \
-            --title \"$ISSUE_TITLE\" \
-            --body-file /tmp/pr_body.txt"
-          
-          # Add label if exists (split comma-separated labels)
+          # Build PR args as an array (avoid eval — breaks titles with spaces/quotes)
+          PR_ARGS=(
+            --head "${{ env.NEW_BRANCH_NAME }}"
+            --base "${{ github.event.repository.default_branch }}"
+            --title "$ISSUE_TITLE"
+            --body-file /tmp/pr_body.txt
+          )
+
           if [ -n "${{ env.LABELS }}" ] && [ "${{ env.LABELS }}" != "" ]; then
             IFS=',' read -ra LABEL_ARRAY <<< "${{ env.LABELS }}"
             for label in "${LABEL_ARRAY[@]}"; do
               label=$(echo "$label" | xargs)
               if [ -n "$label" ]; then
-                PR_CMD="$PR_CMD --label \"$label\""
+                PR_ARGS+=(--label "$label")
               fi
             done
           fi
-          
-          # Add assignee if exists (support multiple)
+
           if [ -n "${{ env.ASSIGNEES }}" ] && [ "${{ env.ASSIGNEES }}" != "" ]; then
             IFS=',' read -ra ASSIGNEE_ARRAY <<< "${{ env.ASSIGNEES }}"
             for assignee in "${ASSIGNEE_ARRAY[@]}"; do
               assignee=$(echo "$assignee" | xargs)
               if [ -n "$assignee" ]; then
-                PR_CMD="$PR_CMD --assignee \"$assignee\""
+                PR_ARGS+=(--assignee "$assignee")
               fi
             done
           fi
-          
-          # Execute PR creation
+
           set +e
-          PR_OUTPUT=$(eval $PR_CMD 2>&1)
+          PR_OUTPUT=$(gh pr create "${PR_ARGS[@]}" 2>&1)
           PR_EXIT_CODE=$?
           set -e
-          
+
           if [ $PR_EXIT_CODE -eq 0 ]; then
             echo "$PR_OUTPUT"
             PR_NUMBER=$(echo "$PR_OUTPUT" | grep -oP 'pull/\K[0-9]+' || echo "")
@@ -202,41 +200,38 @@ jobs:
           else
             echo "PR creation failed: $PR_OUTPUT"
             echo "Attempting to create PR without labels/assignees..."
-            
-            # Try creating PR without labels/assignees
-            SIMPLE_CMD="gh pr create \
-              --head \"${{ env.NEW_BRANCH_NAME }}\" \
-              --base \"${{ github.event.repository.default_branch }}\" \
-              --title \"$ISSUE_TITLE\" \
-              --body-file /tmp/pr_body.txt"
-            
-            SIMPLE_OUTPUT=$(eval $SIMPLE_CMD 2>&1)
+
+            set +e
+            SIMPLE_OUTPUT=$(gh pr create \
+              --head "${{ env.NEW_BRANCH_NAME }}" \
+              --base "${{ github.event.repository.default_branch }}" \
+              --title "$ISSUE_TITLE" \
+              --body-file /tmp/pr_body.txt 2>&1)
             SIMPLE_EXIT_CODE=$?
-            
+            set -e
+
             if [ $SIMPLE_EXIT_CODE -eq 0 ]; then
               echo "$SIMPLE_OUTPUT"
               PR_NUMBER=$(echo "$SIMPLE_OUTPUT" | grep -oP 'pull/\K[0-9]+' || echo "")
               if [ -n "$PR_NUMBER" ]; then
                 echo "✓ Pull request #$PR_NUMBER created (without labels/assignees)"
-                
-                # Add labels separately
+
                 if [ -n "${{ env.LABELS }}" ] && [ "${{ env.LABELS }}" != "" ]; then
                   IFS=',' read -ra LABEL_ARRAY <<< "${{ env.LABELS }}"
                   for label in "${LABEL_ARRAY[@]}"; do
                     label=$(echo "$label" | xargs)
                     if [ -n "$label" ]; then
-                      gh pr edit $PR_NUMBER --add-label "$label" || echo "Failed to add label: $label"
+                      gh pr edit "$PR_NUMBER" --add-label "$label" || echo "Failed to add label: $label"
                     fi
                   done
                 fi
-                
-                # Add assignees separately
+
                 if [ -n "${{ env.ASSIGNEES }}" ] && [ "${{ env.ASSIGNEES }}" != "" ]; then
                   IFS=',' read -ra ASSIGNEE_ARRAY <<< "${{ env.ASSIGNEES }}"
                   for assignee in "${ASSIGNEE_ARRAY[@]}"; do
                     assignee=$(echo "$assignee" | xargs)
                     if [ -n "$assignee" ]; then
-                      gh pr edit $PR_NUMBER --add-assignee "$assignee" || echo "Failed to add assignee: $assignee"
+                      gh pr edit "$PR_NUMBER" --add-assignee "$assignee" || echo "Failed to add assignee: $assignee"
                     fi
                   done
                 fi

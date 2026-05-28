@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <title>Terminal Setup — amirah</title>
 <style>
   @font-face {
@@ -65,7 +66,9 @@
     padding: 7px 16px; cursor: pointer;
     color: var(--fg-dim); font-size: 12px;
     transition: all .12s;
-    border-left: 2px solid transparent; user-select: none;
+    border-left: 2px solid transparent;
+    -webkit-user-select: none;
+    user-select: none;
   }
   .nav-item:hover { background: var(--bg3); color: var(--fg); border-left-color: var(--teal); }
   .nav-item.active { background: var(--bg3); color: var(--green); border-left-color: var(--green); }
@@ -277,6 +280,7 @@
   <div class="nav-group">System</div>
   <div class="nav-item" onclick="show('btop',this)"><span class="nav-icon">📊</span>btop</div>
   <div class="nav-item" onclick="show('fastfetch',this)"><span class="nav-icon">🌿</span>fastfetch</div>
+  <div class="nav-item" onclick="show('screenshot',this)"><span class="nav-icon">📸</span>Screenshot</div>
 
   <div class="nav-group">Packages</div>
   <div class="nav-item" onclick="show('brew-cli',this)"><span class="nav-icon">🍺</span>Brew CLI</div>
@@ -1037,6 +1041,123 @@
         <tr><td>localip</td><td>Local network IP</td></tr>
         <tr><td>locale</td><td>System locale</td></tr>
         <tr><td>colors</td><td>Terminal color block swatches</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ═══ SCREENSHOT ═══ -->
+  <section class="section" id="section-screenshot">
+    <div class="section-title">📸 Screenshot Beautifier</div>
+    <p class="desc-block">Custom shell scripts that post-process macOS screenshots — adding rounded corners, drop shadow, and a gradient background. Triggered via macOS Shortcuts app with a global keyboard shortcut. Output saved to <code>~/Documents/Screenshots/</code> and auto-copied to clipboard.</p>
+
+    <h3>Result</h3>
+    <div class="cfg-grid">
+      <div class="cfg-card">
+        <h4>What it does</h4>
+        <div class="kv"><span class="k">Rounded corners</span><span class="v">20px radius</span></div>
+        <div class="kv"><span class="k">Drop shadow</span><span class="v">60% opacity, 25px blur</span></div>
+        <div class="kv"><span class="k">Background</span><span class="v">Purple gradient</span></div>
+        <div class="kv"><span class="k">Padding</span><span class="v">80px around image</span></div>
+        <div class="kv"><span class="k">Output</span><span class="v">PNG to Documents/Screenshots</span></div>
+        <div class="kv"><span class="k">Clipboard</span><span class="v">Auto-copied after capture</span></div>
+      </div>
+      <div class="cfg-card">
+        <h4>Shortcuts</h4>
+        <div class="kv"><span class="k">Fullscreen</span><span class="v"><code>Cmd+Option+S</code></span></div>
+        <div class="kv"><span class="k">Region / Selection</span><span class="v"><code>Cmd+Option+A</code></span></div>
+        <div class="kv"><span class="k">Trigger via</span><span class="v">macOS Shortcuts app</span></div>
+        <div class="kv"><span class="k">Works from</span><span class="v">any app globally</span></div>
+      </div>
+    </div>
+
+    <div class="sp-preview">
+      <img src="images/ss-selection.png" alt="Beautified region screenshot with rounded corners, drop shadow, and purple gradient background">
+    </div>
+
+    <h3>Requirements</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Dependency</th><th>Install</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>imagemagick</code></td><td><code>brew install imagemagick</code></td><td>Image processing — rounded corners, shadow, composite</td></tr>
+        <tr><td>macOS Shortcuts app</td><td>Built-in (macOS 12+)</td><td>Global keyboard shortcut trigger</td></tr>
+        <tr><td>Screen Recording permission</td><td>System Settings → Privacy</td><td>Allow Shortcuts app to capture screen</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Setup — Step by Step</h3>
+    <div class="zj-sheet">
+      <div class="zj-sheet-hd">● STEP 1 — Install &amp; Create Scripts</div>
+      <div class="zj-group">
+        <div class="zj-row"><span class="zj-lbl">Install ImageMagick</span><span class="zj-keys"><span class="zj-kbd zj-kbd-cli">brew install imagemagick</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Create bin folder</span><span class="zj-keys"><span class="zj-kbd zj-kbd-cli">mkdir -p ~/.local/bin</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Fullscreen script</span><span class="zj-keys"><span class="zj-kbd" style="color:var(--blue)">~/.local/bin/screenshot-beautify.sh</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Region script</span><span class="zj-keys"><span class="zj-kbd" style="color:var(--blue)">~/.local/bin/screenshot-region-beautify.sh</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Make executable</span><span class="zj-keys"><span class="zj-kbd zj-kbd-cli">chmod +x ~/.local/bin/screenshot-*.sh</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Create output folder</span><span class="zj-keys"><span class="zj-kbd zj-kbd-cli">mkdir -p ~/Documents/Screenshots</span></span></div>
+      </div>
+    </div>
+
+    <div class="zj-sheet">
+      <div class="zj-sheet-hd">● STEP 2 — Shortcuts App (do twice — fullscreen + region)</div>
+      <div class="zj-group">
+        <div class="zj-row"><span class="zj-lbl">1. Open Shortcuts app</span><span class="zj-keys"><span class="zj-kbd">Cmd+Space</span><span class="zj-sep">→</span><span class="zj-kbd">Shortcuts</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">2. New shortcut</span><span class="zj-keys"><span class="zj-kbd">+</span><span class="zj-sep">top right</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">3. Add action</span><span class="zj-keys"><span class="zj-sep">search</span><span class="zj-kbd">Run Shell Script</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">4. Paste script path (fullscreen)</span><span class="zj-keys"><span class="zj-kbd zj-kbd-cli">$HOME/.local/bin/screenshot-beautify.sh</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">4b. Or region script</span><span class="zj-keys"><span class="zj-kbd zj-kbd-cli">$HOME/.local/bin/screenshot-region-beautify.sh</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">5. Set shell</span><span class="zj-keys"><span class="zj-kbd">zsh</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">6. Assign keyboard shortcut</span><span class="zj-keys"><span class="zj-kbd">⋮</span><span class="zj-sep">→</span><span class="zj-kbd">Add Keyboard Shortcut</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Fullscreen shortcut</span><span class="zj-keys"><span class="zj-kbd">Cmd+Option+S</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Region shortcut</span><span class="zj-keys"><span class="zj-kbd">Cmd+Option+A</span></span></div>
+      </div>
+    </div>
+
+    <div class="sp-preview">
+      <img src="images/ss-fullscreen.png" alt="macOS Shortcuts app with Screenshot Region Beautify and Screenshot Fullscreen Beautify shortcuts">
+    </div>
+
+    <div class="zj-sheet">
+      <div class="zj-sheet-hd">● STEP 3 — Permissions</div>
+      <div class="zj-group">
+        <div class="zj-row"><span class="zj-lbl">Grant Screen Recording</span><span class="zj-keys"><span class="zj-kbd">System Settings</span><span class="zj-sep">→</span><span class="zj-kbd">Privacy & Security</span><span class="zj-sep">→</span><span class="zj-kbd">Screen Recording</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Enable for</span><span class="zj-keys"><span class="zj-kbd">Shortcuts</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Grant Accessibility</span><span class="zj-keys"><span class="zj-kbd">System Settings</span><span class="zj-sep">→</span><span class="zj-kbd">Privacy</span><span class="zj-sep">→</span><span class="zj-kbd">Accessibility → Shortcuts ON</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Restart required</span><span class="zj-keys"><span class="zj-sep">yes — after granting both permissions</span></span></div>
+      </div>
+      <div class="zj-note">After restart, test with ▶ Play button in Shortcuts app first, then test keyboard shortcut from any app.</div>
+    </div>
+
+    <h3>Script Config</h3>
+    <p class="desc-block">Edit the <code># --- config ---</code> block at the top of either script to customize appearance. No need to redo Shortcuts after editing.</p>
+    <div class="codeblock"><span style="color:var(--fg-dim)"># --- config ---</span>
+<span style="color:var(--blue)">CORNER_RADIUS</span>=<span style="color:var(--green)">20</span>        <span style="color:var(--fg-dim)"># px, bigger = rounder corners</span>
+<span style="color:var(--blue)">SHADOW_OFFSET</span>=<span style="color:var(--green)">20</span>        <span style="color:var(--fg-dim)"># px, shadow shift down</span>
+<span style="color:var(--blue)">SHADOW_SIGMA</span>=<span style="color:var(--green)">25</span>         <span style="color:var(--fg-dim)"># blur radius</span>
+<span style="color:var(--blue)">SHADOW_OPACITY</span>=<span style="color:var(--green)">60</span>       <span style="color:var(--fg-dim)"># 0-100</span>
+<span style="color:var(--blue)">PADDING</span>=<span style="color:var(--green)">80</span>              <span style="color:var(--fg-dim)"># whitespace around image</span>
+<span style="color:var(--blue)">BG</span>=<span style="color:var(--green)">"gradient:#667eea-#764ba2"</span>  <span style="color:var(--fg-dim)"># background — solid or gradient</span>
+<span style="color:var(--fg-dim)"># --- config ---</span></div>
+
+    <h3>Background Examples</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>BG value</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td><code>"gradient:#667eea-#764ba2"</code></td><td>Purple gradient (default)</td></tr>
+        <tr><td><code>"gradient:#f8f9fa-#e9ecef"</code></td><td>Light gray gradient</td></tr>
+        <tr><td><code>"gradient:#0f0c29-#302b63"</code></td><td>Deep blue gradient</td></tr>
+        <tr><td><code>"gradient:#11998e-#38ef7d"</code></td><td>Teal to green</td></tr>
+        <tr><td><code>"#1e1e2e"</code></td><td>Solid dark (Catppuccin bg)</td></tr>
+        <tr><td><code>"#001a22"</code></td><td>Solid Cyber Wave bg</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Script Locations</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>File</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>~/.local/bin/screenshot-beautify.sh</code></td><td>Fullscreen capture + beautify</td></tr>
+        <tr><td><code>~/.local/bin/screenshot-region-beautify.sh</code></td><td>Interactive region select + beautify</td></tr>
+        <tr><td><code>~/Documents/Screenshots/</code></td><td>Output folder</td></tr>
       </tbody>
     </table></div>
   </section>

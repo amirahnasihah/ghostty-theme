@@ -1,4 +1,5 @@
 import subprocess
+from pathlib import Path
 
 body    = '\033[38;2;46;74;46m'      # dark green - godzilla body
 spine   = '\033[38;2;0;232;200m'     # radioactive cyan - spines W V
@@ -63,8 +64,9 @@ amirah_color = '\033[38;2;0;232;200m'  # same radioactive cyan as spines
 for line in amirah_raw.split('\n'):
     lines.append(f'{amirah_color}{line}{reset}')
 
-with open('/Users/amirah/.config/fastfetch/ascii.txt', 'w') as f:
-    f.write('\n'.join(lines) + '\n')
+ascii_path = Path.home() / '.config' / 'fastfetch' / 'ascii.txt'
+ascii_path.parent.mkdir(parents=True, exist_ok=True)
+ascii_path.write_text('\n'.join(lines) + '\n')
 
 raw = godzilla.split('\n')
 print(f'done — {len(raw)} lines, width: {max(len(l) for l in raw)}')
