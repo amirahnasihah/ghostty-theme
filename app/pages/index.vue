@@ -1,0 +1,1074 @@
+<script setup lang="ts">
+import { onMounted } from "vue"
+import { useTerminalGuide } from "~/composables/useTerminalGuide"
+
+const {
+  pluginQuery,
+  extQuery,
+  toggleMenu,
+  show,
+  onPluginInput,
+  onExtInput,
+  restoreSection,
+  setupNavA11y,
+} = useTerminalGuide()
+
+onMounted(() => {
+  setupNavA11y()
+  restoreSection()
+})
+</script>
+
+<template>
+<div class="shell">
+
+<button class="hamburger" @click="toggleMenu()">☰</button>
+<div class="sidebar-overlay" @click="toggleMenu()"></div>
+
+<!-- ── SIDEBAR ── -->
+<nav class="sidebar">
+  <div class="sidebar-title">~/term-config</div>
+
+  <div class="nav-group">Terminal</div>
+  <div class="nav-item active" data-section="ghostty" tabindex="0" role="button" @keydown.enter.prevent="show('ghostty', $event.currentTarget)" @keydown.space.prevent="show('ghostty', $event.currentTarget)" @click="show('ghostty', $event.currentTarget)"><span class="nav-icon">👻</span>Ghostty</div>
+
+  <div class="nav-group">Shell</div>
+  <div class="nav-item" data-section="zsh" @click="show('zsh', $event.currentTarget)"><span class="nav-icon">🐚</span>Zsh</div>
+  <div class="nav-item" data-section="starship" @click="show('starship', $event.currentTarget)"><span class="nav-icon">🚀</span>Starship</div>
+  <div class="nav-item" data-section="atuin" @click="show('atuin', $event.currentTarget)"><span class="nav-icon">🐢</span>Atuin</div>
+  <div class="nav-item" data-section="fish" @click="show('fish', $event.currentTarget)"><span class="nav-icon">🐟</span>Fish</div>
+
+  <div class="nav-group">Editor</div>
+  <div class="nav-item" data-section="nvim" @click="show('nvim', $event.currentTarget)"><span class="nav-icon">📝</span>Neovim</div>
+  <div class="nav-item" data-section="vscode" @click="show('vscode', $event.currentTarget)"><span class="nav-icon">💻</span>VS Code / Cursor</div>
+
+  <div class="nav-group">Git</div>
+  <div class="nav-item" data-section="git" @click="show('git', $event.currentTarget)"><span class="nav-icon">🌿</span>Git + Delta</div>
+  <div class="nav-item" data-section="lazygit" @click="show('lazygit', $event.currentTarget)"><span class="nav-icon">🦥</span>lazygit</div>
+
+  <div class="nav-group">Multiplexer</div>
+  <div class="nav-item" data-section="zellij" @click="show('zellij', $event.currentTarget)"><span class="nav-icon">🪟</span>Zellij</div>
+
+  <div class="nav-group">System</div>
+  <div class="nav-item" data-section="btop" @click="show('btop', $event.currentTarget)"><span class="nav-icon">📊</span>btop</div>
+  <div class="nav-item" data-section="fastfetch" @click="show('fastfetch', $event.currentTarget)"><span class="nav-icon">🌿</span>fastfetch</div>
+  <div class="nav-item" data-section="screenshot" @click="show('screenshot', $event.currentTarget)"><span class="nav-icon">📸</span>Screenshot</div>
+
+  <div class="nav-group">Packages</div>
+  <div class="nav-item" data-section="brew-cli" @click="show('brew-cli', $event.currentTarget)"><span class="nav-icon">🍺</span>Brew CLI</div>
+  <div class="nav-item" data-section="brew-cask" @click="show('brew-cask', $event.currentTarget)"><span class="nav-icon">📦</span>Brew Cask</div>
+  <div class="nav-item" data-section="fonts" @click="show('fonts', $event.currentTarget)"><span class="nav-icon">🔤</span>Fonts</div>
+</nav>
+
+<!-- ── MAIN ── -->
+<main class="main">
+
+  <!-- header -->
+  <div class="header">
+    <div class="prompt-line">
+      <span class="seg s-teal">  </span>
+      <span class="seg s-teal2"> ~/term-config </span>
+      <span class="seg s-git">  main </span>
+      <span class="seg s-lang">  node 22 </span>
+      <span class="seg s-time">  19 May 11:42 AM </span>
+    </div>
+    <h1>Terminal Setup</h1>
+    <p>amirah's full terminal environment — every tool, plugin, and config setting.</p>
+  </div>
+
+  <!-- ═══ GHOSTTY ═══ -->
+  <section class="section active" id="section-ghostty">
+    <div class="section-title">👻 Ghostty</div>
+    <p class="desc-block">Fast, native GPU-accelerated terminal for macOS. Configured with the Cyber Wave dark teal color scheme, custom GLSL cursor shaders, and a global F1 dropdown.</p>
+
+    <h3>Color Palette</h3>
+    <div class="palette">
+      <div class="swatch"><div class="swatch-box" style="background:#001a22"></div><div class="swatch-label">bg</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#007972"></div><div class="swatch-label">teal</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#b4fa72"></div><div class="swatch-label">green</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#a5d5fe"></div><div class="swatch-label">blue</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#ff8272"></div><div class="swatch-label">red</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#fefdc2"></div><div class="swatch-label">yellow</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#ff8ffd"></div><div class="swatch-label">purple</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#d0d1fe"></div><div class="swatch-label">lavender</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#f1f1f1"></div><div class="swatch-label">white</div></div>
+    </div>
+
+    <div class="cfg-grid">
+      <div class="cfg-card">
+        <h4>Appearance</h4>
+        <div class="kv"><span class="k">Theme</span><span class="v">Cyber Wave</span></div>
+        <div class="kv"><span class="k">Background</span><span class="v"><code>#001a22</code></span></div>
+        <div class="kv"><span class="k">Opacity</span><span class="v">85%</span></div>
+        <div class="kv"><span class="k">Blur</span><span class="v">8</span></div>
+        <div class="kv"><span class="k">Cursor</span><span class="v"><code>#007972</code></span></div>
+      </div>
+      <div class="cfg-card">
+        <h4>Font</h4>
+        <div class="kv"><span class="k">Family</span><span class="v">Hack Nerd Font</span></div>
+        <div class="kv"><span class="k">Size</span><span class="v">11</span></div>
+        <div class="kv"><span class="k">Thicken</span><span class="v">true</span></div>
+      </div>
+      <div class="cfg-card">
+        <h4>Window</h4>
+        <div class="kv"><span class="k">Titlebar</span><span class="v">macOS tabs</span></div>
+        <div class="kv"><span class="k">Padding</span><span class="v">10px / 8px</span></div>
+        <div class="kv"><span class="k">Scrollback</span><span class="v">10,000 lines</span></div>
+        <div class="kv"><span class="k">Copy on select</span><span class="v">clipboard</span></div>
+        <div class="kv"><span class="k">Link URLs</span><span class="v">true</span></div>
+        <div class="kv"><span class="k">Confirm close</span><span class="v">false</span></div>
+      </div>
+      <div class="cfg-card">
+        <h4>Splits</h4>
+        <div class="kv"><span class="k">Unfocused opacity</span><span class="v">60%</span></div>
+        <div class="kv"><span class="k">Divider color</span><span class="v"><code>#007972</code></span></div>
+        <div class="kv"><span class="k">New tab</span><span class="v"><code>Cmd+T</code></span></div>
+        <div class="kv"><span class="k">Option as Alt</span><span class="v">left</span></div>
+      </div>
+      <div class="cfg-card">
+        <h4>Quick Terminal</h4>
+        <div class="kv"><span class="k">Toggle</span><span class="v"><code>F1</code> global</span></div>
+        <div class="kv"><span class="k">Position</span><span class="v">Top</span></div>
+        <div class="kv"><span class="k">Screen</span><span class="v">Main</span></div>
+        <div class="kv"><span class="k">Animation</span><span class="v">0.2s</span></div>
+      </div>
+      <div class="cfg-card">
+        <h4>Shell Integration</h4>
+        <div class="kv"><span class="k">Mode</span><span class="v">Auto-detect</span></div>
+        <div class="kv"><span class="k">SSH env</span><span class="v">✓</span></div>
+        <div class="kv"><span class="k">SSH terminfo</span><span class="v">✓</span></div>
+        <div class="kv"><span class="k">sudo</span><span class="v">✓</span></div>
+      </div>
+    </div>
+
+    <h3>Cursor Shaders</h3>
+    <div class="shader-grid">
+      <div class="shader-card"><div class="sn"><span class="tag tag-active">active</span> cursor_warp_faded.glsl</div><div class="sd">Faded warp trail that follows the cursor</div></div>
+      <div class="shader-card"><div class="sn"><span class="tag tag-active">active</span> ripple_cursor_custom.glsl</div><div class="sd">Ripple rings emanating on cursor move</div></div>
+      <div class="shader-card"><div class="sn"><span class="tag tag-avail">avail</span> cursor_warp.glsl</div><div class="sd">Full warp effect variant</div></div>
+      <div class="shader-card"><div class="sn"><span class="tag tag-avail">avail</span> cursor_sweep.glsl</div><div class="sd">Sweep trail effect</div></div>
+      <div class="shader-card"><div class="sn"><span class="tag tag-avail">avail</span> cursor_tail.glsl</div><div class="sd">Following tail behind cursor</div></div>
+      <div class="shader-card"><div class="sn"><span class="tag tag-avail">avail</span> sonic_boom_cursor.glsl</div><div class="sd">Sonic boom shockwave on action</div></div>
+      <div class="shader-card"><div class="sn"><span class="tag tag-avail">avail</span> rectangle_boom_cursor.glsl</div><div class="sd">Rectangle explosion burst</div></div>
+      <div class="shader-card"><div class="sn"><span class="tag tag-avail">avail</span> ripple_cursor.glsl</div><div class="sd">Base ripple variant</div></div>
+      <div class="shader-card"><div class="sn"><span class="tag tag-avail">avail</span> ripple_rectangle_cursor.glsl</div><div class="sd">Ripple + rectangle combo</div></div>
+    </div>
+  </section>
+
+  <!-- ═══ ZSH ═══ -->
+  <section class="section" id="section-zsh">
+    <div class="section-title">🐚 Zsh</div>
+
+    <h3>Core Shell Tools</h3>
+    <div class="cards">
+      <div class="card"><div class="card-name"><span class="tag tag-shell">shell</span>Starship</div><div class="card-desc">Powerline prompt with git, language version, and time segments. Cyber Wave themed.</div></div>
+      <div class="card"><div class="card-name"><span class="tag tag-shell">shell</span>Atuin</div><div class="card-desc">Shell history sync & TUI search — replaces Ctrl+R. Curl install.</div></div>
+      <div class="card"><div class="card-name"><span class="tag tag-shell">shell</span>zoxide</div><div class="card-desc">Smart <code>cd</code> — jump to frecent directories with <code>z name</code>.</div></div>
+      <div class="card"><div class="card-name"><span class="tag tag-shell">shell</span>fzf</div><div class="card-desc">Fuzzy finder with bat previews. Multi-select, preview toggled with Ctrl+/.</div></div>
+      <div class="card"><div class="card-name"><span class="tag tag-shell">shell</span>zsh-autosuggestions</div><div class="card-desc">Fish-style inline ghost suggestions from history.</div></div>
+      <div class="card"><div class="card-name"><span class="tag tag-shell">shell</span>zsh-syntax-highlighting</div><div class="card-desc">Colors valid/invalid commands as you type.</div></div>
+      <div class="card"><div class="card-name"><span class="tag tag-shell">shell</span>direnv</div><div class="card-desc">Automatically loads .envrc env vars when entering directories.</div></div>
+    </div>
+
+    <h3>Aliases</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Alias</th><th>Command</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td colspan="3" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Claude</td></tr>
+        <tr><td><code>cld</code></td><td><code>claude</code></td><td>Claude Code CLI</td></tr>
+        <tr><td><code>cdp</code></td><td><code>claude --dangerously-skip-permissions</code></td><td>Claude — skip all permission prompts</td></tr>
+        <tr><td><code>cr</code></td><td><code>claude --resume</code></td><td>Resume last Claude session</td></tr>
+        <tr colspan="3" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;"><td colspan="3" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Shell</td></tr>
+        <tr><td><code>cl</code></td><td><code>clear</code></td><td>Clear terminal</td></tr>
+        <tr><td><code>zrc</code></td><td><code>source ~/.zshrc</code></td><td>Reload shell config</td></tr>
+        <tr><td colspan="3" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Editor & Apps</td></tr>
+        <tr><td><code>v</code></td><td><code>nvim</code></td><td>Open Neovim</td></tr>
+        <tr><td><code>ff</code></td><td><code>fastfetch</code></td><td>Show system info</td></tr>
+        <tr><td><code>zj</code></td><td><code>zellij</code></td><td>Open Zellij multiplexer</td></tr>
+        <tr><td><code>zjs</code></td><td><code>zellij -s &lt;name&gt;</code></td><td>Create + attach with custom name</td></tr>
+        <tr><td><code>zja</code></td><td><code>zellij attach</code></td><td>Attach to a Zellij session</td></tr>
+        <tr><td><code>zjac</code></td><td><code>zellij attach --create</code></td><td>Attach or create session</td></tr>
+        <tr><td><code>zjr</code></td><td><code>zellij action rename-session &lt;name&gt;</code></td><td>Rename a Zellij session</td></tr>
+        <tr><td><code>zjd</code></td><td><code>zellij delete-session</code></td><td>Delete a Zellij session</td></tr>
+        <tr><td><code>zjda</code></td><td><code>zellij delete-all-sessions</code></td><td>Delete all Zellij sessions</td></tr>
+        <tr><td colspan="3" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">File listing — eza</td></tr>
+        <tr><td><code>ls</code></td><td><code>eza --icons</code></td><td>List with icons</td></tr>
+        <tr><td><code>ll</code></td><td><code>eza -lh --icons --git</code></td><td>Long list + git status</td></tr>
+        <tr><td><code>la</code></td><td><code>eza -lah --icons --git</code></td><td>Long list including hidden</td></tr>
+        <tr><td><code>lt</code></td><td><code>eza --tree --icons</code></td><td>Tree view</td></tr>
+        <tr><td colspan="3" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Navigation</td></tr>
+        <tr><td><code>y</code></td><td>yazi wrapper function</td><td>Open yazi, cd into selected dir on quit</td></tr>
+        <tr><td colspan="3" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Deploy</td></tr>
+        <tr><td><code>pvdeploy</code></td><td><code>vercel deploy --prod --scope ...</code></td><td>Deploy to production Vercel team</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>fzf Config</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Setting</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Multi-select</td><td>enabled by default</td></tr>
+        <tr><td>Preview command</td><td><code>bat --color=always --style=numbers {}</code></td></tr>
+        <tr><td>Toggle preview</td><td><code>Ctrl+/</code></td></tr>
+        <tr><td>Preview window</td><td>right 55%, wrapped</td></tr>
+        <tr><td>Ctrl+T preview</td><td><code>bat --color=always --style=numbers {}</code></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ═══ STARSHIP ═══ -->
+  <section class="section" id="section-starship">
+    <div class="section-title">🚀 Starship</div>
+    <p class="desc-block"><strong style="color:#769ff0">Tokyo Night preset</strong> — rounded pill segments using <code>U+E0B4</code> Powerline caps. Time format customized to <code>%d %b %I:%M %p</code>.</p>
+
+    <h3>Prompt Preview</h3>
+    <div class="sp-preview">
+      <img src="/images/starship.png" alt="Starship prompt screenshot" />
+      <hr class="sp-divider" />
+      <div class="pl-bar">
+        <span style="display:inline-flex;align-items:center;color:#a3aed2;letter-spacing:-1px;padding-right:2px;font-family:'Hack Nerd Font',monospace;">░▒▓</span>
+        <span class="pl-seg" style="background:#a3aed2;color:#090c0c;font-weight:600;">&#xE711;</span>
+        <span class="pl-arrow" style="color:#a3aed2;background:#769ff0;">&#xE0B4;</span>
+        <span class="pl-seg" style="background:#769ff0;color:#e3e5e5;">…/go-lang</span>
+        <span class="pl-arrow" style="color:#769ff0;background:#394260;">&#xE0B4;</span>
+        <span class="pl-seg" style="background:#394260;color:#769ff0;">&#xF418; i2-20260507-1311 $?</span>
+        <span class="pl-arrow" style="color:#394260;background:#212736;">&#xE0B4;</span>
+        <span class="pl-seg" style="background:#212736;color:#769ff0;">&#xE627; v1.26.3</span>
+        <span class="pl-arrow" style="color:#212736;background:#1d2230;">&#xE0B4;</span>
+        <span class="pl-seg" style="background:#1d2230;color:#a0a9cb;">&#xF43A; 19 May 04:25 PM</span>
+        <span class="pl-arrow" style="color:#1d2230;background:transparent;">&#xE0B4;</span>
+      </div>
+      <div class="pl-char" style="color:#9ece6a;">❯</div>
+    </div>
+
+    <h3>Segments</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Segment</th><th>Background</th><th>Text</th><th>Shows</th></tr></thead>
+      <tbody>
+        <tr><td><code>░▒▓</code> gradient</td><td>terminal bg</td><td><code>#a3aed2</code></td><td>Powerline fade-in, no background</td></tr>
+        <tr><td>Icon</td><td><code>#a3aed2</code></td><td><code>#090c0c</code></td><td>U+E711 nerd font icon</td></tr>
+        <tr><td>Directory</td><td><code>#769ff0</code></td><td><code>#e3e5e5</code></td><td>Path, 3 levels, <code>…/</code> truncation</td></tr>
+        <tr><td>Git branch</td><td><code>#394260</code></td><td><code>#769ff0</code></td><td>Branch name</td></tr>
+        <tr><td>Git status</td><td><code>#394260</code></td><td><code>#769ff0</code></td><td>Ahead/behind + dirty indicators</td></tr>
+        <tr><td>Node.js</td><td><code>#212736</code></td><td><code>#769ff0</code></td><td>Version in JS/TS projects</td></tr>
+        <tr><td>Bun</td><td><code>#212736</code></td><td><code>#769ff0</code></td><td>Version in Bun projects</td></tr>
+        <tr><td>Rust</td><td><code>#212736</code></td><td><code>#769ff0</code></td><td>Version in Rust projects</td></tr>
+        <tr><td>Go</td><td><code>#212736</code></td><td><code>#769ff0</code></td><td>Version in Go projects</td></tr>
+        <tr><td>PHP</td><td><code>#212736</code></td><td><code>#769ff0</code></td><td>Version in PHP projects</td></tr>
+        <tr><td>Time</td><td><code>#1d2230</code></td><td><code>#a0a9cb</code></td><td>Format: <code>%d %b %I:%M %p</code> → <code>19 May 11:42 AM</code></td></tr>
+        <tr><td>Separator</td><td>—</td><td>—</td><td><code>U+E0B4</code> rounded cap — makes the pill shape</td></tr>
+        <tr><td>Character <code>❯</code></td><td>—</td><td><code>#769ff0</code> / red</td><td>Success / error</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Color Palette</h3>
+    <div class="palette">
+      <div class="swatch"><div class="swatch-box" style="background:#a3aed2"></div><div class="swatch-label">#a3aed2</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#769ff0"></div><div class="swatch-label">#769ff0</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#394260"></div><div class="swatch-label">#394260</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#212736"></div><div class="swatch-label">#212736</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#1d2230"></div><div class="swatch-label">#1d2230</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#a0a9cb"></div><div class="swatch-label">#a0a9cb</div></div>
+      <div class="swatch"><div class="swatch-box" style="background:#e3e5e5"></div><div class="swatch-label">#e3e5e5</div></div>
+    </div>
+
+    <h3>Timeouts</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Setting</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td><code>scan_timeout</code></td><td>1000ms</td></tr>
+        <tr><td><code>command_timeout</code></td><td>5000ms</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ═══ ATUIN ═══ -->
+  <section class="section" id="section-atuin">
+    <div class="section-title">🐢 Atuin</div>
+    <p class="desc-block">Shell history replacement. Replaces Ctrl+R with a full-screen fuzzy TUI. Syncs history encrypted across all your machines.</p>
+
+    <div class="cards">
+      <div class="card"><div class="card-name">Smart Search</div><div class="card-desc">Full-screen history TUI with filtering by host, directory, exit code, and time.</div></div>
+      <div class="card"><div class="card-name">Encrypted Sync</div><div class="card-desc">End-to-end encrypted history sync across machines via Atuin server.</div></div>
+      <div class="card"><div class="card-name">Stats</div><div class="card-desc">Run <code>atuin stats</code> to see most-used commands and usage patterns.</div></div>
+      <div class="card"><div class="card-name">Install Method</div><div class="card-desc">curl installer → <code>~/.atuin/bin/</code>. Also listed in Brewfile as fallback.</div></div>
+    </div>
+
+    <h3>Shell Init (<code>.zshrc</code>)</h3>
+    <div class="codeblock"><span style="color:var(--fg-dim)"># === atuin ===</span>
+<span style="color:var(--blue)">.</span> <span style="color:var(--green)">"$HOME/.atuin/bin/env"</span>
+<span style="color:var(--blue)">eval</span> <span style="color:var(--green)">"$(atuin init zsh)"</span></div>
+  </section>
+
+  <!-- ═══ FISH ═══ -->
+  <section class="section" id="section-fish">
+    <div class="section-title">🐟 Fish</div>
+    <p class="desc-block">Fish is Zellij's default shell (<code>default_shell "fish"</code>). Minimal config — just sources uv's Python env.</p>
+
+    <div class="cards">
+      <div class="card"><div class="card-name">Role</div><div class="card-desc">Default shell inside Zellij sessions. Interactive work stays in Zsh; Fish handles Zellij panes.</div></div>
+      <div class="card"><div class="card-name">uv env</div><div class="card-desc">Sources <code>~/.local/bin/env.fish</code> — makes uv-managed Python environments available.</div></div>
+    </div>
+
+    <h3>Config (<code>conf.d/uv.env.fish</code>)</h3>
+    <div class="codeblock"><span style="color:var(--blue)">source</span> <span style="color:var(--green)">"$HOME/.local/bin/env.fish"</span></div>
+  </section>
+
+  <!-- ═══ NVIM ═══ -->
+  <section class="section" id="section-nvim">
+    <div class="section-title">📝 Neovim</div>
+    <p class="desc-block">LazyVim distro on lazy.nvim. Fully transparent background so Ghostty's blur shows through. VSCode-style keybinds, diagnostics, and autosave.</p>
+
+    <div class="search-wrap">
+      <input class="search-input" type="text" placeholder="Search plugins…" :value="pluginQuery" @input="onPluginInput(($event.target as HTMLInputElement).value)">
+    </div>
+
+    <h3>AI</h3>
+    <div class="cards plugin-cards">
+      <div class="card" data-tags="ai claude copilot"><div class="card-name"><span class="tag tag-ai">AI</span>claudecode.nvim</div><div class="card-desc">Claude Code integration — AI edits without leaving Neovim.</div></div>
+      <div class="card" data-tags="ai copilot github"><div class="card-name"><span class="tag tag-ai">AI</span>copilot.lua + blink-copilot</div><div class="card-desc">GitHub Copilot piped through the blink.cmp completion engine.</div></div>
+    </div>
+
+    <h3>Completion & LSP</h3>
+    <div class="cards plugin-cards">
+      <div class="card" data-tags="completion lsp blink"><div class="card-name"><span class="tag tag-ed">editor</span>blink.cmp</div><div class="card-desc">Fast Rust-based completion engine. Replaces nvim-cmp.</div></div>
+      <div class="card" data-tags="lsp config"><div class="card-name"><span class="tag tag-ed">editor</span>nvim-lspconfig</div><div class="card-desc">LSP client configs for all language servers.</div></div>
+      <div class="card" data-tags="mason install lsp"><div class="card-name"><span class="tag tag-ed">editor</span>mason.nvim</div><div class="card-desc">Install/manage LSPs, linters, formatters from inside Neovim.</div></div>
+      <div class="card" data-tags="mason lsp bridge"><div class="card-name"><span class="tag tag-ed">editor</span>mason-lspconfig</div><div class="card-desc">Bridge between mason and lspconfig.</div></div>
+      <div class="card" data-tags="format conform"><div class="card-name"><span class="tag tag-ed">editor</span>conform.nvim</div><div class="card-desc">Auto-format on save, per-filetype formatter config.</div></div>
+      <div class="card" data-tags="lint async"><div class="card-name"><span class="tag tag-ed">editor</span>nvim-lint</div><div class="card-desc">Async linting, reports via diagnostics API.</div></div>
+      <div class="card" data-tags="lua lazydev"><div class="card-name"><span class="tag tag-ed">editor</span>lazydev.nvim</div><div class="card-desc">Lua LSP tuned for Neovim config editing.</div></div>
+      <div class="card" data-tags="json schema yaml"><div class="card-name"><span class="tag tag-ed">editor</span>SchemaStore.nvim</div><div class="card-desc">JSON/YAML schema validation from the SchemaStore registry.</div></div>
+      <div class="card" data-tags="snippets completion"><div class="card-name"><span class="tag tag-ed">editor</span>friendly-snippets</div><div class="card-desc">Community snippet collection for completion.</div></div>
+    </div>
+
+    <h3>Treesitter & Syntax</h3>
+    <div class="cards plugin-cards">
+      <div class="card" data-tags="treesitter syntax highlight"><div class="card-name"><span class="tag tag-lang">lang</span>nvim-treesitter</div><div class="card-desc">Incremental syntax highlighting via tree-sitter parsers.</div></div>
+      <div class="card" data-tags="treesitter textobjects select"><div class="card-name"><span class="tag tag-lang">lang</span>nvim-treesitter-textobjects</div><div class="card-desc">Select, move, swap functions and classes as text objects.</div></div>
+      <div class="card" data-tags="html jsx autotag"><div class="card-name"><span class="tag tag-lang">lang</span>nvim-ts-autotag</div><div class="card-desc">Auto-close and auto-rename HTML/JSX tags using treesitter.</div></div>
+      <div class="card" data-tags="comments treesitter toggle"><div class="card-name"><span class="tag tag-lang">lang</span>ts-comments.nvim</div><div class="card-desc">Treesitter-aware comment toggling per language.</div></div>
+    </div>
+
+    <h3>UI</h3>
+    <div class="cards plugin-cards">
+      <div class="card" data-tags="theme colorscheme tokyonight"><div class="card-name"><span class="tag tag-ui">UI</span>tokyonight.nvim</div><div class="card-desc">Default colorscheme — dark blue/purple palette.</div></div>
+      <div class="card" data-tags="theme catppuccin colorscheme"><div class="card-name"><span class="tag tag-ui">UI</span>catppuccin</div><div class="card-desc">Alternative pastel colorscheme.</div></div>
+      <div class="card" data-tags="transparent background"><div class="card-name"><span class="tag tag-ui">UI</span>transparent.nvim</div><div class="card-desc">Removes all bg highlights — Neo-tree sidebar included. Ghostty blur shows through.</div></div>
+      <div class="card" data-tags="statusline lualine"><div class="card-name"><span class="tag tag-ui">UI</span>lualine.nvim</div><div class="card-desc">Status bar with mode, file, git branch, diagnostics.</div></div>
+      <div class="card" data-tags="bufferline tabs buffer"><div class="card-name"><span class="tag tag-ui">UI</span>bufferline.nvim</div><div class="card-desc">Buffer tabs at the top of the screen.</div></div>
+      <div class="card" data-tags="noice ui cmdline messages"><div class="card-name"><span class="tag tag-ui">UI</span>noice.nvim</div><div class="card-desc">Replaces cmdline, messages, and popups with floating UI panels.</div></div>
+      <div class="card" data-tags="snacks dashboard picker notify"><div class="card-name"><span class="tag tag-ui">UI</span>snacks.nvim</div><div class="card-desc">Dashboard, file picker, notifier, and various small utilities.</div></div>
+      <div class="card" data-tags="nui component library"><div class="card-name"><span class="tag tag-ui">UI</span>nui.nvim</div><div class="card-desc">UI component library — used by noice and others.</div></div>
+      <div class="card" data-tags="icons mini"><div class="card-name"><span class="tag tag-ui">UI</span>mini.icons</div><div class="card-desc">Icon provider across the whole setup.</div></div>
+      <div class="card" data-tags="markdown render inline"><div class="card-name"><span class="tag tag-ui">UI</span>render-markdown.nvim</div><div class="card-desc">In-buffer markdown rendering — styled headings, code blocks, tables.</div></div>
+    </div>
+
+    <h3>Editor</h3>
+    <div class="cards plugin-cards">
+      <div class="card" data-tags="flash jump motion label"><div class="card-name"><span class="tag tag-ed">editor</span>flash.nvim</div><div class="card-desc">Label-based cursor jumps — leap anywhere on screen instantly.</div></div>
+      <div class="card" data-tags="find replace grug far"><div class="card-name"><span class="tag tag-ed">editor</span>grug-far.nvim</div><div class="card-desc">Find & replace across files in a side panel. Regex + ripgrep.</div></div>
+      <div class="card" data-tags="todo fixme hack comments"><div class="card-name"><span class="tag tag-ed">editor</span>todo-comments.nvim</div><div class="card-desc">Highlights TODO/FIXME/HACK/NOTE/WARN in code with icons.</div></div>
+      <div class="card" data-tags="trouble diagnostic errors quickfix"><div class="card-name"><span class="tag tag-ed">editor</span>trouble.nvim</div><div class="card-desc">Diagnostic + quickfix list panel.</div></div>
+      <div class="card" data-tags="gitsigns git blame hunk"><div class="card-name"><span class="tag tag-ed">editor</span>gitsigns.nvim</div><div class="card-desc">Git gutter signs + inline blame with human-readable time (3d ago).</div></div>
+      <div class="card" data-tags="rename lsp inc live"><div class="card-name"><span class="tag tag-ed">editor</span>inc-rename.nvim</div><div class="card-desc">Live LSP rename with real-time preview as you type.</div></div>
+      <div class="card" data-tags="dial increment decrement boolean hex"><div class="card-name"><span class="tag tag-ed">editor</span>dial.nvim</div><div class="card-desc">Enhanced Ctrl+A/X — increments booleans, dates, hex colors.</div></div>
+      <div class="card" data-tags="yanky yank clipboard ring"><div class="card-name"><span class="tag tag-ed">editor</span>yanky.nvim</div><div class="card-desc">Yank history ring — cycle previous yanks with p/P.</div></div>
+      <div class="card" data-tags="session persistence restore"><div class="card-name"><span class="tag tag-ed">editor</span>persistence.nvim</div><div class="card-desc">Auto-saves and restores sessions per directory.</div></div>
+      <div class="card" data-tags="which key keybindings hints"><div class="card-name"><span class="tag tag-ed">editor</span>which-key.nvim</div><div class="card-desc">Popup showing available keybindings when you pause mid-chord.</div></div>
+      <div class="card" data-tags="mini ai textobjects bracket quote"><div class="card-name"><span class="tag tag-ed">editor</span>mini.ai</div><div class="card-desc">Extended a/i text objects — brackets, quotes, functions, arguments.</div></div>
+      <div class="card" data-tags="mini pairs autopair brackets quotes"><div class="card-name"><span class="tag tag-ed">editor</span>mini.pairs</div><div class="card-desc">Auto-pairs brackets and quotes as you type.</div></div>
+      <div class="card" data-tags="mini hipatterns color inline"><div class="card-name"><span class="tag tag-ed">editor</span>mini.hipatterns</div><div class="card-desc">Highlights hex colors inline and marks TODO patterns.</div></div>
+      <div class="card" data-tags="neotest testing runner"><div class="card-name"><span class="tag tag-ed">editor</span>neotest</div><div class="card-desc">Test runner framework — run tests from inside Neovim.</div></div>
+      <div class="card" data-tags="neotest go golang test"><div class="card-name"><span class="tag tag-ed">editor</span>neotest-golang</div><div class="card-desc">Go adapter for neotest.</div></div>
+      <div class="card" data-tags="markdown preview browser"><div class="card-name"><span class="tag tag-ed">editor</span>markdown-preview.nvim</div><div class="card-desc">Live markdown preview in browser, synced to cursor position.</div></div>
+      <div class="card" data-tags="plenary utility library"><div class="card-name"><span class="tag tag-ed">editor</span>plenary.nvim</div><div class="card-desc">Lua utility library — required by many plugins.</div></div>
+      <div class="card" data-tags="nio async io neotest"><div class="card-name"><span class="tag tag-ed">editor</span>nvim-nio</div><div class="card-desc">Async I/O library — neotest dependency.</div></div>
+    </div>
+
+    <h3>Custom Config Highlights</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Feature</th><th>Detail</th></tr></thead>
+      <tbody>
+        <tr><td>Insert mode shortcuts</td><td>Ctrl+A (line start), Ctrl+E (end), Ctrl+D (del word fwd), Ctrl+K (del to EOL)</td></tr>
+        <tr><td>Autosave</td><td>FocusLost / BufLeave / WinLeave → silent write</td></tr>
+        <tr><td>Diagnostic icons</td><td>  ·  ·  ·  (VSCode style)</td></tr>
+        <tr><td>Git blame format</td><td>just now · 2h ago · 3d ago · 1w ago · 2mo ago</td></tr>
+        <tr><td>Neo-tree transparency</td><td>All NeoTree* highlight groups cleared on ColorScheme + FileType events</td></tr>
+        <tr><td>Inlay hints</td><td><code>#444b6a</code> + italic (VSCode dim style)</td></tr>
+        <tr><td>Float borders</td><td>Rounded everywhere</td></tr>
+        <tr><td>Plugin updates</td><td>Auto-checked, silent notify</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ═══ VSCODE ═══ -->
+  <section class="section" id="section-vscode">
+    <div class="section-title">💻 VS Code / Cursor Extensions</div>
+    <p class="desc-block">Extensions tracked in Brewfile — synced via <code>brew bundle</code>. Works for both VS Code and Cursor.</p>
+
+    <div class="search-wrap">
+      <input class="search-input" type="text" placeholder="Search extensions…" :value="extQuery" @input="onExtInput(($event.target as HTMLInputElement).value)">
+    </div>
+
+    <div id="ext-list">
+      <div class="ext-section">
+        <h3>AI & Agents</h3>
+        <div class="tbl-wrap"><table class="ext-table">
+          <thead><tr><th>Extension</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr data-ext="claude anthropic"><td><code>anthropic.claude-code</code></td><td>Claude Code extension for VS Code</td></tr>
+            <tr data-ext="claude cline dev"><td><code>saoudrizwan.claude-dev</code></td><td>Cline — AI coding agent (Claude Dev)</td></tr>
+            <tr data-ext="openai chatgpt codex"><td><code>openai.chatgpt</code></td><td>ChatGPT + Codex integration</td></tr>
+            <tr data-ext="coderabbit review"><td><code>coderabbit.coderabbit-vscode</code></td><td>AI code review bot</td></tr>
+            <tr data-ext="intellicode ai"><td><code>visualstudioexptteam.vscodeintellicode</code></td><td>AI IntelliSense completions</td></tr>
+            <tr data-ext="intellicode api"><td><code>visualstudioexptteam.intellicode-api-usage-examples</code></td><td>API usage examples from IntelliCode</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="ext-section">
+        <h3>Git</h3>
+        <div class="tbl-wrap"><table class="ext-table">
+          <thead><tr><th>Extension</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr data-ext="gitlens git blame"><td><code>eamodio.gitlens</code></td><td>Git blame, history, code lens, compare</td></tr>
+            <tr data-ext="git history log"><td><code>donjayamanne.githistory</code></td><td>Visual git log and file history</td></tr>
+            <tr data-ext="github pr issues"><td><code>github.vscode-pull-request-github</code></td><td>PRs and issues inside VS Code</td></tr>
+            <tr data-ext="github actions workflow"><td><code>github.vscode-github-actions</code></td><td>GitHub Actions YAML editing + runs</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="ext-section">
+        <h3>Linting & Formatting</h3>
+        <div class="tbl-wrap"><table class="ext-table">
+          <thead><tr><th>Extension</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr data-ext="biome lint format"><td><code>biomejs.biome</code></td><td>Biome — fast JS/TS formatter + linter</td></tr>
+            <tr data-ext="eslint lint"><td><code>dbaeumer.vscode-eslint</code></td><td>ESLint integration</td></tr>
+            <tr data-ext="prettier format"><td><code>esbenp.prettier-vscode</code></td><td>Prettier formatter</td></tr>
+            <tr data-ext="oxc linter rust"><td><code>oxc.oxc-vscode</code></td><td>Oxc — Rust-based JS/TS linter</td></tr>
+            <tr data-ext="wallaby quokka live"><td><code>wallabyjs.console-ninja</code></td><td>Console output inline in editor</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="ext-section">
+        <h3>Language Support</h3>
+        <div class="tbl-wrap"><table class="ext-table">
+          <thead><tr><th>Extension</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr data-ext="vue volar"><td><code>vue.volar</code></td><td>Vue 3 language support (official)</td></tr>
+            <tr data-ext="volar ai"><td><code>volartools.volar-ai</code></td><td>Volar AI enhancements</td></tr>
+            <tr data-ext="astro"><td><code>astro-build.astro-vscode</code></td><td>Astro framework support</td></tr>
+            <tr data-ext="python"><td><code>ms-python.python</code></td><td>Python language support</td></tr>
+            <tr data-ext="python debug debugpy"><td><code>ms-python.debugpy</code></td><td>Python debugger</td></tr>
+            <tr data-ext="pyright python cursor"><td><code>anysphere.cursorpyright</code></td><td>Pyright (Cursor fork)</td></tr>
+            <tr data-ext="yaml schema red hat"><td><code>redhat.vscode-yaml</code></td><td>YAML with JSON schema validation</td></tr>
+            <tr data-ext="svg vector"><td><code>jock.svg</code></td><td>SVG preview and editing</td></tr>
+            <tr data-ext="svg preview"><td><code>simonsiefke.svg-preview</code></td><td>SVG file preview</td></tr>
+            <tr data-ext="markdown mermaid diagram"><td><code>bierner.markdown-mermaid</code></td><td>Mermaid diagrams in Markdown</td></tr>
+            <tr data-ext="markdown all in one"><td><code>yzhang.markdown-all-in-one</code></td><td>Markdown editing toolkit</td></tr>
+            <tr data-ext="pdf viewer"><td><code>tomoki1207.pdf</code></td><td>PDF file viewer</td></tr>
+            <tr data-ext="nuxt mdc content"><td><code>nuxt.mdc</code></td><td>MDC (Nuxt Content) support</td></tr>
+            <tr data-ext="powershell"><td><code>ms-vscode.powershell</code></td><td>PowerShell support</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="ext-section">
+        <h3>Frontend & Tailwind</h3>
+        <div class="tbl-wrap"><table class="ext-table">
+          <thead><tr><th>Extension</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr data-ext="tailwind css intellisense"><td><code>bradlc.vscode-tailwindcss</code></td><td>Tailwind IntelliSense — class completions + hover docs</td></tr>
+            <tr data-ext="tailwind docs"><td><code>austenc.tailwind-docs</code></td><td>Quick Tailwind docs lookup</td></tr>
+            <tr data-ext="auto close tag html"><td><code>formulahendry.auto-close-tag</code></td><td>Auto-close HTML/JSX tags</td></tr>
+            <tr data-ext="auto rename tag html"><td><code>formulahendry.auto-rename-tag</code></td><td>Auto-rename paired HTML tags</td></tr>
+            <tr data-ext="color highlight css hex"><td><code>naumovs.color-highlight</code></td><td>Inline CSS color swatch highlights</td></tr>
+            <tr data-ext="image gutter preview"><td><code>kisstkondoros.vscode-gutter-preview</code></td><td>Image preview in the editor gutter</td></tr>
+            <tr data-ext="image viewer"><td><code>vscode-infra.image-viewer</code></td><td>Image file viewer</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="ext-section">
+        <h3>Vue / Nuxt</h3>
+        <div class="tbl-wrap"><table class="ext-table">
+          <thead><tr><th>Extension</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr data-ext="nuxt nuxtr"><td><code>nuxtr.nuxtr-vscode</code></td><td>Nuxt developer tools and commands</td></tr>
+            <tr data-ext="nuxt extensions"><td><code>nuxtr.nuxt-vscode-extentions</code></td><td>Curated Nuxt extension pack</td></tr>
+            <tr data-ext="vue snippets"><td><code>hollowtree.vue-snippets</code></td><td>Vue component snippets</td></tr>
+            <tr data-ext="vue snippets sarah"><td><code>sdras.vue-vscode-snippets</code></td><td>Sarah Drasner's Vue snippets</td></tr>
+            <tr data-ext="vue syntax"><td><code>jcbuisson.vue</code></td><td>Vue syntax highlighting</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="ext-section">
+        <h3>React / Next / Vite</h3>
+        <div class="tbl-wrap"><table class="ext-table">
+          <thead><tr><th>Extension</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr data-ext="react es7 snippets"><td><code>dsznajder.es7-react-js-snippets</code></td><td>React ES7+ snippets</td></tr>
+            <tr data-ext="react typescript"><td><code>infeng.vscode-react-typescript</code></td><td>React TypeScript helpers</td></tr>
+            <tr data-ext="npm intellisense autocomplete"><td><code>christian-kohler.npm-intellisense</code></td><td>npm module import autocomplete</td></tr>
+            <tr data-ext="vite antfu"><td><code>antfu.vite</code></td><td>Vite project integration</td></tr>
+            <tr data-ext="vite serve"><td><code>phondani0.vite-serve</code></td><td>Vite serve command shortcut</td></tr>
+            <tr data-ext="goto alias import"><td><code>antfu.goto-alias</code></td><td>Jump to aliased import targets</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="ext-section">
+        <h3>Testing</h3>
+        <div class="tbl-wrap"><table class="ext-table">
+          <thead><tr><th>Extension</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr data-ext="vitest test runner"><td><code>vitest.explorer</code></td><td>Vitest test explorer UI</td></tr>
+            <tr data-ext="wallaby real time test"><td><code>wallabyjs.wallaby-vscode</code></td><td>Real-time test runner with inline results</td></tr>
+            <tr data-ext="quokka live scratchpad"><td><code>wallabyjs.quokka-vscode</code></td><td>Live JS/TS scratchpad</td></tr>
+            <tr data-ext="rest client http"><td><code>humao.rest-client</code></td><td>HTTP requests in .http files</td></tr>
+            <tr data-ext="thunder client rest api"><td><code>rangav.vscode-thunder-client</code></td><td>Thunder Client REST GUI</td></tr>
+            <tr data-ext="live server reload"><td><code>ms-vscode.live-server</code></td><td>Live reload dev server</td></tr>
+            <tr data-ext="live server ritwick"><td><code>ritwickdey.liveserver</code></td><td>Live server (alternative)</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="ext-section">
+        <h3>Database & Infrastructure</h3>
+        <div class="tbl-wrap"><table class="ext-table">
+          <thead><tr><th>Extension</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr data-ext="sqlite database viewer"><td><code>qwtel.sqlite-viewer</code></td><td>SQLite browser</td></tr>
+            <tr data-ext="data preview csv json"><td><code>randomfractalsinc.vscode-data-preview</code></td><td>Data file preview — CSV, JSON, etc.</td></tr>
+            <tr data-ext="docker container"><td><code>ms-azuretools.vscode-docker</code></td><td>Docker integration</td></tr>
+            <tr data-ext="remote containers dev"><td><code>ms-vscode-remote.remote-containers</code></td><td>Dev Containers support</td></tr>
+            <tr data-ext="remote ssh cursor"><td><code>anysphere.remote-ssh</code></td><td>Remote SSH (Cursor fork)</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="ext-section">
+        <h3>3D / Graphics / Animation</h3>
+        <div class="tbl-wrap"><table class="ext-table">
+          <thead><tr><th>Extension</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr data-ext="three js 3d webgl"><td><code>en10ve.threejs</code></td><td>Three.js snippets and helpers</td></tr>
+            <tr data-ext="gsap animation"><td><code>hridoy.gsap-snippets</code></td><td>GSAP animation snippets</td></tr>
+            <tr data-ext="3d editor"><td><code>degreat.3e</code></td><td>3D editor utilities</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <div class="ext-section">
+        <h3>Productivity</h3>
+        <div class="tbl-wrap"><table class="ext-table">
+          <thead><tr><th>Extension</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr data-ext="material icons theme"><td><code>pkief.material-icon-theme</code></td><td>Material icon set for file explorer</td></tr>
+            <tr data-ext="emoji icons"><td><code>mightbesimon.emoji-icons</code></td><td>Emoji icon theme</td></tr>
+            <tr data-ext="bracket select"><td><code>chunsen.bracket-select</code></td><td>Select content inside brackets</td></tr>
+            <tr data-ext="bracket pair toggle"><td><code>dzhavat.bracket-pair-toggler</code></td><td>Toggle bracket pair coloring</td></tr>
+            <tr data-ext="comment translate i18n"><td><code>intellsmi.comment-translate</code></td><td>Translate comments inline</td></tr>
+            <tr data-ext="translate vscode"><td><code>chun.vscode-translate</code></td><td>Translation helper</td></tr>
+            <tr data-ext="angular nx console"><td><code>nrwl.angular-console</code></td><td>Nx/Angular console</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ GIT ═══ -->
+  <section class="section" id="section-git">
+    <div class="section-title">🌿 Git + Delta</div>
+
+    <h3>Core Settings</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Setting</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Pager</td><td><code>delta</code></td></tr>
+        <tr><td>Editor</td><td><code>nvim</code></td></tr>
+        <tr><td>Merge style</td><td><code>zdiff3</code></td></tr>
+        <tr><td>Pull</td><td><code>--rebase</code></td></tr>
+        <tr><td>Push</td><td>autoSetupRemote = true</td></tr>
+        <tr><td>rerere</td><td>enabled — remembers conflict resolutions</td></tr>
+        <tr><td>Branch sort</td><td><code>-committerdate</code> (most recent first)</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Aliases</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Alias</th><th>Command</th></tr></thead>
+      <tbody>
+        <tr><td><code>git lg</code></td><td><code>log --oneline --graph --decorate --all</code></td></tr>
+        <tr><td><code>git undo</code></td><td><code>reset --soft HEAD~1</code></td></tr>
+        <tr><td><code>git wip</code></td><td>Stage everything + commit "wip"</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Delta — Diff Viewer</h3>
+    <p class="desc-block">Syntax-highlighted, side-by-side diffs themed to Cyber Wave colors.</p>
+    <div class="cfg-grid">
+      <div class="cfg-card">
+        <h4>Layout</h4>
+        <div class="kv"><span class="k">Mode</span><span class="v">Side-by-side</span></div>
+        <div class="kv"><span class="k">Line numbers</span><span class="v">true</span></div>
+        <div class="kv"><span class="k">Navigate</span><span class="v">n / N between hunks</span></div>
+        <div class="kv"><span class="k">Syntax theme</span><span class="v">base16</span></div>
+      </div>
+      <div class="cfg-card">
+        <h4>Colors</h4>
+        <div class="kv"><span class="k">File name</span><span class="v" style="color:#b4fa72">bold #b4fa72</span></div>
+        <div class="kv"><span class="k">Hunk header</span><span class="v" style="color:#007972">#007972 box</span></div>
+        <div class="kv"><span class="k">Added bg</span><span class="v"><code>#0d3320</code></span></div>
+        <div class="kv"><span class="k">Removed bg</span><span class="v"><code>#3d0d0d</code></span></div>
+        <div class="kv"><span class="k">Line num +</span><span class="v" style="color:#b4fa72">#b4fa72</span></div>
+        <div class="kv"><span class="k">Line num -</span><span class="v" style="color:#ff8272">#ff8272</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ LAZYGIT ═══ -->
+  <section class="section" id="section-lazygit">
+    <div class="section-title">🦥 lazygit</div>
+    <p class="desc-block">Full TUI git client. Launch with <code>lazygit</code> or from inside Neovim. Config at <code>config/lazygit/config.yml</code>.</p>
+
+    <h3>Custom Commands</h3>
+    <div class="cards">
+      <div class="card">
+        <div class="card-name"><span class="tag tag-ai">AI</span> AI Commit — <code>Ctrl+A</code></div>
+        <div class="card-desc">
+          In the <strong>Files</strong> panel, press <code>Ctrl+A</code> to pipe <code>git diff --cached</code> into the Claude CLI. Claude generates a conventional commit message (<code>feat:</code>, <code>fix:</code>, <code>chore:</code>, etc.) and fills it into the commit input automatically.
+        </div>
+      </div>
+    </div>
+
+    <h3>Command Definition</h3>
+    <div class="codeblock"><span style="color:var(--blue)">customCommands</span>:
+  - <span style="color:var(--blue)">key</span>: <span style="color:var(--green)">"&lt;c-a&gt;"</span>
+    <span style="color:var(--blue)">command</span>: <span style="color:var(--green)">'git diff --cached | claude -p "Generate a concise git commit message..."'</span>
+    <span style="color:var(--blue)">context</span>: <span style="color:var(--green)">"files"</span>
+    <span style="color:var(--blue)">subprocess</span>: <span style="color:var(--yellow)">true</span>
+    <span style="color:var(--blue)">description</span>: <span style="color:var(--green)">"AI commit message (Claude)"</span></div>
+  </section>
+
+  <!-- ═══ ZELLIJ ═══ -->
+  <section class="section" id="section-zellij">
+    <div class="section-title">🪟 Zellij</div>
+    <p class="desc-block">Rust-based terminal multiplexer. Faster and more modern than tmux. Custom keybinds with defaults cleared.</p>
+
+    <div class="cfg-grid" style="margin-bottom:20px">
+      <div class="cfg-card">
+        <h4>Config</h4>
+        <div class="kv"><span class="k">Default shell</span><span class="v">fish</span></div>
+        <div class="kv"><span class="k">Default layout</span><span class="v">compact</span></div>
+        <div class="kv"><span class="k">Pane frames</span><span class="v">disabled</span></div>
+        <div class="kv"><span class="k">Keybinds</span><span class="v">fully custom</span></div>
+      </div>
+      <div class="cfg-card">
+        <h4>Shell Aliases</h4>
+        <div class="kv"><span class="k" style="color:var(--blue)">zj</span><span class="v" style="color:var(--fg-dim)">zellij</span></div>
+        <div class="kv"><span class="k" style="color:var(--blue)">zjs</span><span class="v" style="color:var(--fg-dim)">zellij -s &lt;name&gt;</span></div>
+        <div class="kv"><span class="k" style="color:var(--blue)">zja</span><span class="v" style="color:var(--fg-dim)">zellij attach</span></div>
+        <div class="kv"><span class="k" style="color:var(--blue)">zjac</span><span class="v" style="color:var(--fg-dim)">zellij attach --create</span></div>
+        <div class="kv"><span class="k" style="color:var(--blue)">zjr</span><span class="v" style="color:var(--fg-dim)">zellij action rename-session &lt;name&gt;</span></div>
+        <div class="kv"><span class="k" style="color:var(--blue)">zjd</span><span class="v" style="color:var(--fg-dim)">zellij delete-session</span></div>
+        <div class="kv"><span class="k" style="color:var(--blue)">zjda</span><span class="v" style="color:var(--fg-dim)">zellij delete-all-sessions</span></div>
+      </div>
+    </div>
+
+    <div class="zj-sheet">
+      <div class="zj-sheet-hd">● ZELLIJ — PANES &amp; TABS</div>
+
+      <div class="zj-group">
+        <div class="zj-group-hd"><span class="zj-mode-lbl">PANE MODE →</span><span class="zj-pill">CTRL+P</span></div>
+        <div class="zj-row"><span class="zj-lbl">Split down</span><span class="zj-keys"><span class="zj-kbd">Ctrl p</span><span class="zj-sep">→</span><span class="zj-kbd">d</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Split right</span><span class="zj-keys"><span class="zj-kbd">Ctrl p</span><span class="zj-sep">→</span><span class="zj-kbd">r</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Move focus <span style="color:var(--fg-dim);font-size:11px">(no mode)</span></span><span class="zj-keys"><span class="zj-kbd">⌥ hjkl</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Shrink pane <span style="color:var(--fg-dim);font-size:11px">(no mode)</span></span><span class="zj-keys"><span class="zj-kbd">⌥ -</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Increase pane <span style="color:var(--fg-dim);font-size:11px">(no mode)</span></span><span class="zj-keys"><span class="zj-kbd">⌥ =</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Close pane</span><span class="zj-keys"><span class="zj-kbd">Ctrl p</span><span class="zj-sep">→</span><span class="zj-kbd">x</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Rename pane</span><span class="zj-keys"><span class="zj-kbd">Ctrl p</span><span class="zj-sep">→</span><span class="zj-kbd">c</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Fullscreen</span><span class="zj-keys"><span class="zj-kbd">Ctrl p</span><span class="zj-sep">→</span><span class="zj-kbd">f</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Float / embed</span><span class="zj-keys"><span class="zj-kbd">Ctrl p</span><span class="zj-sep">→</span><span class="zj-kbd">w</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Toggle frames</span><span class="zj-keys"><span class="zj-kbd">Ctrl p</span><span class="zj-sep">→</span><span class="zj-kbd">z</span></span></div>
+      </div>
+
+      <div class="zj-group">
+        <div class="zj-group-hd"><span class="zj-mode-lbl">TABS →</span><span class="zj-pill">CTRL+T</span></div>
+        <div class="zj-row"><span class="zj-lbl">New tab</span><span class="zj-keys"><span class="zj-kbd">Ctrl t</span><span class="zj-sep">→</span><span class="zj-kbd">n</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Next / Prev</span><span class="zj-keys"><span class="zj-kbd">Ctrl t</span><span class="zj-sep">→</span><span class="zj-kbd">l</span><span class="zj-sep">/</span><span class="zj-kbd">h</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Go to tab</span><span class="zj-keys"><span class="zj-kbd">Ctrl t</span><span class="zj-sep">→</span><span class="zj-kbd">1-9</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Rename</span><span class="zj-keys"><span class="zj-kbd">Ctrl t</span><span class="zj-sep">→</span><span class="zj-kbd">r</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Close</span><span class="zj-keys"><span class="zj-kbd">Ctrl t</span><span class="zj-sep">→</span><span class="zj-kbd">x</span></span></div>
+      </div>
+
+      <div class="zj-group">
+        <div class="zj-group-hd"><span class="zj-mode-lbl">SCROLL →</span><span class="zj-pill">CTRL+S</span></div>
+        <div class="zj-row"><span class="zj-lbl">Scroll up / down</span><span class="zj-keys"><span class="zj-kbd">Ctrl s</span><span class="zj-sep">→</span><span class="zj-kbd">k</span><span class="zj-sep">/</span><span class="zj-kbd">j</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Half page</span><span class="zj-keys"><span class="zj-kbd">Ctrl s</span><span class="zj-sep">→</span><span class="zj-kbd">u</span><span class="zj-sep">/</span><span class="zj-kbd">d</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Search</span><span class="zj-keys"><span class="zj-kbd">Ctrl s</span><span class="zj-sep">→</span><span class="zj-kbd">/</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Edit in $EDITOR</span><span class="zj-keys"><span class="zj-kbd">Ctrl s</span><span class="zj-sep">→</span><span class="zj-kbd">e</span></span></div>
+      </div>
+
+      <div class="zj-group">
+        <div class="zj-group-hd"><span class="zj-mode-lbl">SESSIONS →</span><span class="zj-pill">CTRL+O</span></div>
+        <div class="zj-row"><span class="zj-lbl">Detach</span><span class="zj-keys"><span class="zj-kbd">Ctrl o</span><span class="zj-sep">→</span><span class="zj-kbd">d</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Session picker</span><span class="zj-keys"><span class="zj-kbd">Ctrl o</span><span class="zj-sep">→</span><span class="zj-kbd">w</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">New named session <span style="color:var(--fg-dim);font-size:11px">(zjs)</span></span><span class="zj-keys"><span class="zj-kbd zj-kbd-cli">zellij -s &lt;name&gt;</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Attach or create <span style="color:var(--fg-dim);font-size:11px">(zjac)</span></span><span class="zj-keys"><span class="zj-kbd zj-kbd-cli">zellij attach --create</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Rename <span style="color:var(--fg-dim);font-size:11px">(zjr)</span></span><span class="zj-keys"><span class="zj-kbd zj-kbd-cli">zellij action rename-session &lt;name&gt;</span></span></div>
+      </div>
+
+      <div class="zj-note">⌥+hjkl to switch panes instantly (no mode needed). ⌥+- / ⌥+= to shrink/increase pane size without entering any mode. ⌥+arrows won't work in Ghostty — Ghostty intercepts those for word jump. Resize mode: Ctrl+n → hjkl, equalize: =</div>
+    </div>
+  </section>
+
+  <!-- ═══ BTOP ═══ -->
+  <section class="section" id="section-btop">
+    <div class="section-title">📊 btop</div>
+    <p class="desc-block">Rich resource monitor — CPU, memory, network, processes. Config at <code>config/btop/btop.conf</code>.</p>
+
+    <div class="cfg-grid">
+      <div class="cfg-card">
+        <h4>Appearance</h4>
+        <div class="kv"><span class="k">Theme</span><span class="v">tokyo-night</span></div>
+        <div class="kv"><span class="k">Background</span><span class="v">transparent</span></div>
+        <div class="kv"><span class="k">Graph style</span><span class="v">braille (max res)</span></div>
+        <div class="kv"><span class="k">Rounded corners</span><span class="v">false</span></div>
+        <div class="kv"><span class="k">Terminal sync</span><span class="v">true (anti-flicker)</span></div>
+      </div>
+      <div class="cfg-card">
+        <h4>Boxes Shown</h4>
+        <div class="kv"><span class="k">CPU</span><span class="v">✓ upper + lower (inverted)</span></div>
+        <div class="kv"><span class="k">Memory</span><span class="v">✓ graphs mode</span></div>
+        <div class="kv"><span class="k">Network</span><span class="v">✓ auto-scale</span></div>
+        <div class="kv"><span class="k">Processes</span><span class="v">✓</span></div>
+        <div class="kv"><span class="k">GPU</span><span class="v">auto-detect</span></div>
+      </div>
+      <div class="cfg-card">
+        <h4>Process Settings</h4>
+        <div class="kv"><span class="k">Sort</span><span class="v">cpu lazy</span></div>
+        <div class="kv"><span class="k">Per-cpu usage</span><span class="v">false</span></div>
+        <div class="kv"><span class="k">Tree view</span><span class="v">false</span></div>
+        <div class="kv"><span class="k">CPU graphs</span><span class="v">per-process</span></div>
+        <div class="kv"><span class="k">Follow detail</span><span class="v">true</span></div>
+      </div>
+      <div class="cfg-card">
+        <h4>System</h4>
+        <div class="kv"><span class="k">Update interval</span><span class="v">2000ms</span></div>
+        <div class="kv"><span class="k">Uptime</span><span class="v">shown in CPU box</span></div>
+        <div class="kv"><span class="k">Temp scale</span><span class="v">Celsius</span></div>
+        <div class="kv"><span class="k">CPU watts</span><span class="v">shown</span></div>
+        <div class="kv"><span class="k">Battery</span><span class="v">shown with watts</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FASTFETCH ═══ -->
+  <section class="section" id="section-fastfetch">
+    <div class="section-title">🌿 fastfetch</div>
+    <p class="desc-block">System info display shown on terminal launch. Config at <code>config/fastfetch/config.jsonc</code>.</p>
+
+    <div class="cfg-grid">
+      <div class="cfg-card">
+        <h4>Logo</h4>
+        <div class="kv"><span class="k">Type</span><span class="v">Custom ASCII file</span></div>
+        <div class="kv"><span class="k">Source</span><span class="v">ascii.txt</span></div>
+        <div class="kv"><span class="k">Content</span><span class="v">Bonsai tree + owl + "amirah" wordmark</span></div>
+        <div class="kv"><span class="k">Generator</span><span class="v">gen_bonsai.py</span></div>
+        <div class="kv"><span class="k">Padding right</span><span class="v">5</span></div>
+      </div>
+      <div class="cfg-card">
+        <h4>Colors</h4>
+        <div class="kv"><span class="k">Keys</span><span class="v" style="color:#33859e">RGB 51, 133, 158 (steel blue)</span></div>
+        <div class="kv"><span class="k">Title</span><span class="v" style="color:#99d1ce">RGB 153, 209, 206 (light teal)</span></div>
+        <div class="kv"><span class="k">Separator</span><span class="v">": "</span></div>
+      </div>
+    </div>
+
+    <h3>Modules</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Module</th><th>Shows</th></tr></thead>
+      <tbody>
+        <tr><td>title</td><td>"amirah" (hardcoded)</td></tr>
+        <tr><td>separator</td><td>Divider line</td></tr>
+        <tr><td>os</td><td>macOS version</td></tr>
+        <tr><td>host</td><td>Machine model</td></tr>
+        <tr><td>kernel</td><td>Darwin kernel version</td></tr>
+        <tr><td>uptime</td><td>System uptime</td></tr>
+        <tr><td>packages</td><td>Installed package counts (brew, etc.)</td></tr>
+        <tr><td>shell</td><td>Active shell + version</td></tr>
+        <tr><td>display</td><td>Resolution + refresh rate</td></tr>
+        <tr><td>wm</td><td>Window manager</td></tr>
+        <tr><td>wmtheme</td><td>WM theme</td></tr>
+        <tr><td>cpu</td><td>CPU model + speed</td></tr>
+        <tr><td>gpu</td><td>GPU model</td></tr>
+        <tr><td>memory</td><td>RAM used / total</td></tr>
+        <tr><td>battery</td><td>Charge level</td></tr>
+        <tr><td>localip</td><td>Local network IP</td></tr>
+        <tr><td>locale</td><td>System locale</td></tr>
+        <tr><td>colors</td><td>Terminal color block swatches</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ═══ SCREENSHOT ═══ -->
+  <section class="section" id="section-screenshot">
+    <div class="section-title">📸 Screenshot Beautifier</div>
+    <p class="desc-block">Custom shell scripts that post-process macOS screenshots — adding rounded corners, drop shadow, and a gradient background. Triggered via macOS Shortcuts app with a global keyboard shortcut. Output saved to <code>~/Documents/Screenshots/</code> and auto-copied to clipboard.</p>
+
+    <h3>Result</h3>
+    <div class="cfg-grid">
+      <div class="cfg-card">
+        <h4>What it does</h4>
+        <div class="kv"><span class="k">Rounded corners</span><span class="v">20px radius</span></div>
+        <div class="kv"><span class="k">Drop shadow</span><span class="v">60% opacity, 25px blur</span></div>
+        <div class="kv"><span class="k">Background</span><span class="v">Purple gradient</span></div>
+        <div class="kv"><span class="k">Padding</span><span class="v">80px around image</span></div>
+        <div class="kv"><span class="k">Output</span><span class="v">PNG to Documents/Screenshots</span></div>
+        <div class="kv"><span class="k">Clipboard</span><span class="v">Auto-copied after capture</span></div>
+      </div>
+      <div class="cfg-card">
+        <h4>Shortcuts</h4>
+        <div class="kv"><span class="k">Fullscreen</span><span class="v"><code>Cmd+Option+S</code></span></div>
+        <div class="kv"><span class="k">Region / Selection</span><span class="v"><code>Cmd+Option+A</code></span></div>
+        <div class="kv"><span class="k">Trigger via</span><span class="v">macOS Shortcuts app</span></div>
+        <div class="kv"><span class="k">Works from</span><span class="v">any app globally</span></div>
+      </div>
+    </div>
+
+    <div class="sp-preview">
+      <img src="/images/ss-selection.png" alt="Beautified region screenshot with rounded corners, drop shadow, and purple gradient background" />
+    </div>
+
+    <h3>Requirements</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Dependency</th><th>Install</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>imagemagick</code></td><td><code>brew install imagemagick</code></td><td>Image processing — rounded corners, shadow, composite</td></tr>
+        <tr><td>macOS Shortcuts app</td><td>Built-in (macOS 12+)</td><td>Global keyboard shortcut trigger</td></tr>
+        <tr><td>Screen Recording permission</td><td>System Settings → Privacy</td><td>Allow Shortcuts app to capture screen</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Setup — Step by Step</h3>
+    <div class="zj-sheet">
+      <div class="zj-sheet-hd">● STEP 1 — Install &amp; Create Scripts</div>
+      <div class="zj-group">
+        <div class="zj-row"><span class="zj-lbl">Install ImageMagick</span><span class="zj-keys"><span class="zj-kbd zj-kbd-cli">brew install imagemagick</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Create bin folder</span><span class="zj-keys"><span class="zj-kbd zj-kbd-cli">mkdir -p ~/.local/bin</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Fullscreen script</span><span class="zj-keys"><span class="zj-kbd" style="color:var(--blue)">~/.local/bin/screenshot-beautify.sh</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Region script</span><span class="zj-keys"><span class="zj-kbd" style="color:var(--blue)">~/.local/bin/screenshot-region-beautify.sh</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Make executable</span><span class="zj-keys"><span class="zj-kbd zj-kbd-cli">chmod +x ~/.local/bin/screenshot-*.sh</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Create output folder</span><span class="zj-keys"><span class="zj-kbd zj-kbd-cli">mkdir -p ~/Documents/Screenshots</span></span></div>
+      </div>
+    </div>
+
+    <div class="zj-sheet">
+      <div class="zj-sheet-hd">● STEP 2 — Shortcuts App (do twice — fullscreen + region)</div>
+      <div class="zj-group">
+        <div class="zj-row"><span class="zj-lbl">1. Open Shortcuts app</span><span class="zj-keys"><span class="zj-kbd">Cmd+Space</span><span class="zj-sep">→</span><span class="zj-kbd">Shortcuts</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">2. New shortcut</span><span class="zj-keys"><span class="zj-kbd">+</span><span class="zj-sep">top right</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">3. Add action</span><span class="zj-keys"><span class="zj-sep">search</span><span class="zj-kbd">Run Shell Script</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">4. Paste script path (fullscreen)</span><span class="zj-keys"><span class="zj-kbd zj-kbd-cli">$HOME/.local/bin/screenshot-beautify.sh</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">4b. Or region script</span><span class="zj-keys"><span class="zj-kbd zj-kbd-cli">$HOME/.local/bin/screenshot-region-beautify.sh</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">5. Set shell</span><span class="zj-keys"><span class="zj-kbd">zsh</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">6. Assign keyboard shortcut</span><span class="zj-keys"><span class="zj-kbd">⋮</span><span class="zj-sep">→</span><span class="zj-kbd">Add Keyboard Shortcut</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Fullscreen shortcut</span><span class="zj-keys"><span class="zj-kbd">Cmd+Option+S</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Region shortcut</span><span class="zj-keys"><span class="zj-kbd">Cmd+Option+A</span></span></div>
+      </div>
+    </div>
+
+    <div class="sp-preview">
+      <img src="/images/ss-fullscreen.png" alt="macOS Shortcuts app with Screenshot Region Beautify and Screenshot Fullscreen Beautify shortcuts" />
+    </div>
+
+    <div class="zj-sheet">
+      <div class="zj-sheet-hd">● STEP 3 — Permissions</div>
+      <div class="zj-group">
+        <div class="zj-row"><span class="zj-lbl">Grant Screen Recording</span><span class="zj-keys"><span class="zj-kbd">System Settings</span><span class="zj-sep">→</span><span class="zj-kbd">Privacy & Security</span><span class="zj-sep">→</span><span class="zj-kbd">Screen Recording</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Enable for</span><span class="zj-keys"><span class="zj-kbd">Shortcuts</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Grant Accessibility</span><span class="zj-keys"><span class="zj-kbd">System Settings</span><span class="zj-sep">→</span><span class="zj-kbd">Privacy</span><span class="zj-sep">→</span><span class="zj-kbd">Accessibility → Shortcuts ON</span></span></div>
+        <div class="zj-row"><span class="zj-lbl">Restart required</span><span class="zj-keys"><span class="zj-sep">yes — after granting both permissions</span></span></div>
+      </div>
+      <div class="zj-note">After restart, test with ▶ Play button in Shortcuts app first, then test keyboard shortcut from any app.</div>
+    </div>
+
+    <h3>Script Config</h3>
+    <p class="desc-block">Edit the <code># --- config ---</code> block at the top of either script to customize appearance. No need to redo Shortcuts after editing.</p>
+    <div class="codeblock"><span style="color:var(--fg-dim)"># --- config ---</span>
+<span style="color:var(--blue)">CORNER_RADIUS</span>=<span style="color:var(--green)">20</span>        <span style="color:var(--fg-dim)"># px, bigger = rounder corners</span>
+<span style="color:var(--blue)">SHADOW_OFFSET</span>=<span style="color:var(--green)">20</span>        <span style="color:var(--fg-dim)"># px, shadow shift down</span>
+<span style="color:var(--blue)">SHADOW_SIGMA</span>=<span style="color:var(--green)">25</span>         <span style="color:var(--fg-dim)"># blur radius</span>
+<span style="color:var(--blue)">SHADOW_OPACITY</span>=<span style="color:var(--green)">60</span>       <span style="color:var(--fg-dim)"># 0-100</span>
+<span style="color:var(--blue)">PADDING</span>=<span style="color:var(--green)">80</span>              <span style="color:var(--fg-dim)"># whitespace around image</span>
+<span style="color:var(--blue)">BG</span>=<span style="color:var(--green)">"gradient:#667eea-#764ba2"</span>  <span style="color:var(--fg-dim)"># background — solid or gradient</span>
+<span style="color:var(--fg-dim)"># --- config ---</span></div>
+
+    <h3>Background Examples</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>BG value</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td><code>"gradient:#667eea-#764ba2"</code></td><td>Purple gradient (default)</td></tr>
+        <tr><td><code>"gradient:#f8f9fa-#e9ecef"</code></td><td>Light gray gradient</td></tr>
+        <tr><td><code>"gradient:#0f0c29-#302b63"</code></td><td>Deep blue gradient</td></tr>
+        <tr><td><code>"gradient:#11998e-#38ef7d"</code></td><td>Teal to green</td></tr>
+        <tr><td><code>"#1e1e2e"</code></td><td>Solid dark (Catppuccin bg)</td></tr>
+        <tr><td><code>"#001a22"</code></td><td>Solid Cyber Wave bg</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Script Locations</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>File</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>~/.local/bin/screenshot-beautify.sh</code></td><td>Fullscreen capture + beautify</td></tr>
+        <tr><td><code>~/.local/bin/screenshot-region-beautify.sh</code></td><td>Interactive region select + beautify</td></tr>
+        <tr><td><code>~/Documents/Screenshots/</code></td><td>Output folder</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ═══ BREW CLI ═══ -->
+  <section class="section" id="section-brew-cli">
+    <div class="section-title">🍺 Brew — CLI Tools</div>
+
+    <h3>Dev</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Package</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>gh</code></td><td>GitHub CLI — PRs, issues, workflows</td></tr>
+        <tr><td><code>lazygit</code></td><td>TUI git client</td></tr>
+        <tr><td><code>delta</code></td><td>Syntax-highlighted git diffs</td></tr>
+        <tr><td><code>git-lfs</code></td><td>Large file storage for git</td></tr>
+        <tr><td><code>mise</code></td><td>Runtime version manager</td></tr>
+        <tr><td><code>direnv</code></td><td>Per-directory .envrc loading</td></tr>
+        <tr><td><code>biome</code></td><td>Fast JS/TS formatter + linter</td></tr>
+        <tr><td><code>golangci-lint</code></td><td>Go linter aggregator</td></tr>
+        <tr><td><code>terraform</code></td><td>Infrastructure as code</td></tr>
+        <tr><td><code>supabase</code></td><td>Supabase CLI</td></tr>
+        <tr><td><code>cloudflared</code></td><td>Cloudflare Tunnel</td></tr>
+        <tr><td><code>sesh</code></td><td>Session manager (joshmedeski tap)</td></tr>
+        <tr><td><code>rtk</code></td><td>Rust Token Killer — Claude Code token optimizer</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>File & Search</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Package</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>eza</code></td><td>Modern ls with icons + git</td></tr>
+        <tr><td><code>bat</code></td><td>cat with syntax highlighting</td></tr>
+        <tr><td><code>fd</code></td><td>Fast find alternative</td></tr>
+        <tr><td><code>ripgrep</code></td><td>Fast grep — used by Neovim</td></tr>
+        <tr><td><code>fzf</code></td><td>Fuzzy finder</td></tr>
+        <tr><td><code>yazi</code></td><td>TUI file manager with image preview</td></tr>
+        <tr><td><code>tree</code></td><td>Directory tree display</td></tr>
+        <tr><td><code>dust</code></td><td>Disk usage visualizer</td></tr>
+        <tr><td><code>duf</code></td><td>Disk usage summary</td></tr>
+        <tr><td><code>trash</code></td><td>Safe delete to macOS Trash</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Shell</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Package</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>starship</code></td><td>Cross-shell prompt</td></tr>
+        <tr><td><code>atuin</code></td><td>History sync + TUI (also curl install)</td></tr>
+        <tr><td><code>zoxide</code></td><td>Frecent directory jumping</td></tr>
+        <tr><td><code>zsh-autosuggestions</code></td><td>Inline suggestions</td></tr>
+        <tr><td><code>zsh-syntax-highlighting</code></td><td>Command coloring</td></tr>
+        <tr><td><code>tmux</code></td><td>Terminal multiplexer (backup)</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>System & Monitoring</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Package</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>btop</code></td><td>Rich resource monitor</td></tr>
+        <tr><td><code>fastfetch</code></td><td>System info on terminal open</td></tr>
+        <tr><td><code>docker</code></td><td>Container runtime CLI</td></tr>
+        <tr><td><code>ollama</code></td><td>Run LLMs locally</td></tr>
+        <tr><td><code>postgresql@14</code></td><td>Local Postgres</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Utilities & Media</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Package</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>jq</code></td><td>JSON processor</td></tr>
+        <tr><td><code>httpie</code></td><td>HTTP client with colored output</td></tr>
+        <tr><td><code>wget</code></td><td>File downloader</td></tr>
+        <tr><td><code>ffmpeg</code></td><td>Video/audio processing</td></tr>
+        <tr><td><code>gifsicle</code></td><td>GIF optimization</td></tr>
+        <tr><td><code>figlet</code></td><td>ASCII art banners</td></tr>
+        <tr><td><code>pnpm</code></td><td>Fast Node package manager</td></tr>
+        <tr><td><code>go</code></td><td>Go compiler</td></tr>
+        <tr><td><code>python@3.13</code></td><td>Python 3.13</td></tr>
+        <tr><td><code>python@3.14</code></td><td>Python 3.14</td></tr>
+        <tr><td><code>nodebrew</code></td><td>Node.js version switcher</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Go Packages</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Package</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code>gopls</code></td><td>Go language server</td></tr>
+        <tr><td><code>godoc</code></td><td>Go documentation server</td></tr>
+        <tr><td><code>github.com/amirah/bui</code></td><td>Personal TUI toolkit</td></tr>
+        <tr><td><code>github.com/osbrjp/miko</code></td><td>Internal org tool</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <!-- ═══ BREW CASK ═══ -->
+  <section class="section" id="section-brew-cask">
+    <div class="section-title">📦 Brew — Cask Apps</div>
+    <div class="cards">
+      <div class="card"><div class="card-name"><span class="tag tag-cask">cask</span>ghostty</div><div class="card-desc">Primary terminal — GPU-accelerated, native macOS.</div></div>
+      <div class="card"><div class="card-name"><span class="tag tag-cask">cask</span>cursor</div><div class="card-desc">AI-first code editor (VS Code fork) with built-in LLM assistance.</div></div>
+      <div class="card"><div class="card-name"><span class="tag tag-cask">cask</span>visual-studio-code</div><div class="card-desc">Microsoft VS Code — extensions tracked in Brewfile.</div></div>
+      <div class="card"><div class="card-name"><span class="tag tag-cask">cask</span>docker-desktop</div><div class="card-desc">Docker GUI and container runtime.</div></div>
+      <div class="card"><div class="card-name"><span class="tag tag-cask">cask</span>dbeaver-community</div><div class="card-desc">Universal database GUI — Postgres, MySQL, SQLite.</div></div>
+      <div class="card"><div class="card-name"><span class="tag tag-cask">cask</span>gitkraken-cli</div><div class="card-desc">GitKraken CLI for git operations.</div></div>
+      <div class="card"><div class="card-name"><span class="tag tag-cask">cask</span>rectangle</div><div class="card-desc">Window snap and resize with keyboard shortcuts.</div></div>
+      <div class="card"><div class="card-name"><span class="tag tag-cask">cask</span>tailscale-app</div><div class="card-desc">Mesh VPN — connect machines without exposing ports.</div></div>
+      <div class="card"><div class="card-name"><span class="tag tag-cask">cask</span>rustdesk</div><div class="card-desc">Open-source remote desktop — self-hosted.</div></div>
+      <div class="card"><div class="card-name"><span class="tag tag-cask">cask</span>xnapper</div><div class="card-desc">Screenshot tool with beautiful framing for macOS.</div></div>
+      <div class="card"><div class="card-name"><span class="tag tag-cask">cask</span>ngrok</div><div class="card-desc">Expose localhost to internet for webhook testing.</div></div>
+      <div class="card"><div class="card-name"><span class="tag tag-cask">cask</span>codex</div><div class="card-desc">OpenAI Codex CLI.</div></div>
+      <div class="card"><div class="card-name"><span class="tag tag-cask">cask</span>session-manager-plugin</div><div class="card-desc">AWS SSM — SSH into EC2 without open ports.</div></div>
+      <div class="card"><div class="card-name"><span class="tag tag-cask">cask</span>font-hack-nerd-font</div><div class="card-desc">Active terminal font — Nerd Font patched.</div></div>
+      <div class="card"><div class="card-name"><span class="tag tag-cask">cask</span>font-jetbrains-mono-nerd-font</div><div class="card-desc">Alternative Nerd Font with ligatures.</div></div>
+    </div>
+  </section>
+
+  <!-- ═══ FONTS ═══ -->
+  <section class="section" id="section-fonts">
+    <div class="section-title">🔤 Fonts</div>
+    <p class="desc-block">Both are Nerd Fonts — patched with thousands of icons used by eza, starship, lualine, yazi, and more.</p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="card-name"><span class="tag tag-active">active</span>Hack Nerd Font</div>
+        <div class="card-desc">Active in Ghostty (size 11, thickened) and Neovim. Clean monospace with strong legibility at small sizes.</div>
+      </div>
+      <div class="card">
+        <div class="card-name"><span class="tag tag-avail">available</span>JetBrains Mono Nerd Font</div>
+        <div class="card-desc">Wider with ligature support. Swap in ghostty config: <code>font-family = JetBrainsMono Nerd Font</code></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+</div>
+</template>
