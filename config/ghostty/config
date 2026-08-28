@@ -53,21 +53,6 @@ shell-integration-features = sudo,ssh-env,ssh-terminfo
 unfocused-split-opacity = 0.6
 split-divider-color = #007972
 
-# ── BEHAVIOR ─────────────────────────────────────────
-window-save-state = always
-window-inherit-working-directory = true
-confirm-close-surface = false
-link-url = true
-copy-on-select = clipboard
-scrollback-limit = 10000
-resize-overlay = never
-
-# ── QUICK TERMINAL (dropdown with F1) ────────────────
-quick-terminal-position = top
-quick-terminal-screen = main
-quick-terminal-animation-duration = 0.2
-keybind = global:f1=toggle_quick_terminal
-
 # ── CURSOR SHADERS ───────────────────────────────────
 custom-shader = shaders/cursor_warp_faded.glsl
 custom-shader = shaders/ripple_cursor_custom.glsl
