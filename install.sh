@@ -16,7 +16,7 @@ echo "→ Installing brew packages..."
 brew bundle --file="$DOTFILES/Brewfile"
 
 # Create symlinks for ~/.config/* entries
-CONFIGS=(nvim ghostty lazygit zellij btop fastfetch git)
+CONFIGS=(nvim ghostty lazygit zellij btop fastfetch git zed)
 
 mkdir -p ~/.config
 
