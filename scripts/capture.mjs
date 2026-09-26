@@ -22,8 +22,10 @@ const ROWS = 30;
 const TUI_SETTLE_MS = 3500;
 
 // Fresh copy of the fixture each run, so demos that write (trash, direnv) stay idempotent.
-const demoDir = join(tmpdir(), "ghostty-theme-demo");
-rmSync(demoDir, { recursive: true, force: true });
+// Own parent dir, so file managers (yazi) show only "demo" in the parent column.
+const demoDir = join(tmpdir(), "ghostty-theme-capture", "demo");
+rmSync(dirname(demoDir), { recursive: true, force: true });
+mkdirSync(dirname(demoDir), { recursive: true });
 execFileSync("cp", ["-R", join(root, "scripts/demo"), demoDir]);
 const gitEnv = {
   ...process.env,
@@ -34,7 +36,7 @@ const git = (...args) => execFileSync("git", args, { cwd: demoDir, env: gitEnv }
 git("init", "-q", "-b", "main");
 git("add", "README.md", "data.json");
 git("commit", "-q", "-m", "chore: add demo fixture");
-git("add", "src", "docs", ".envrc");
+git("add", "src", "docs", "api");
 git("commit", "-q", "-m", "feat: greet with the Cyber Wave theme");
 writeFileSync(join(demoDir, ".git/info/exclude"), ".zoxide/\n.cfg/\n");
 
@@ -109,15 +111,32 @@ function captureTui(cmd, keys = []) {
   return shot;
 }
 
+// Last line of defence: anything that still looks like a local path or this
+// machine's name — even wrapped across lines by a TUI — blocks the write.
+function leaks(text) {
+  const flat = text.replace(/\x1b\[[0-9;]*m/g, "").replace(/[\n│┃|]/g, "").replace(/\s+/g, "");
+  return ["/Users/", "/var/folders", "/private/var", host.slice(0, 12)].filter((s) => flat.includes(s.replace(/\s+/g, "")));
+}
+
 const only = process.argv.slice(2);
 mkdirSync(outDir, { recursive: true });
+let failed = 0;
 
 for (const t of tools) {
   if (!t.demo || !t.mode) continue;
   if (only.length && !only.includes(t.id)) continue;
   const raw = t.mode === "tui" ? captureTui(t.run ?? t.demo, t.keys) : captureCli(t.run ?? t.demo);
+  if (t.cleanup) spawnSync("bash", ["-c", t.cleanup], { cwd: demoDir, env, stdio: "ignore" });
   const text = redact(raw).replace(/\s+$/, "") + "\n";
+  const found = leaks(text);
+  if (found.length) {
+    console.error(`✗   ${t.id.padEnd(30)} not saved — output contains ${found.join(", ")}`);
+    failed++;
+    continue;
+  }
   writeFileSync(join(outDir, `${t.id}.ansi`), text);
   const lines = text.split("\n").length;
   console.log(`${t.mode.padEnd(3)} ${t.id.padEnd(30)} ${lines} lines`);
 }
+
+if (failed) process.exit(1);

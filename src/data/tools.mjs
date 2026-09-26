@@ -5,6 +5,8 @@
 //         inside scripts/demo/ so output never contains personal files.
 // run   — optional: what actually executes when it differs from `demo`
 //         (e.g. a privacy-safe config), so the site still shows the plain command.
+// cleanup — optional: runs after the capture to remove anything the demo left
+//         behind (e.g. zellij sessions that outlive the pane)
 // mode  — "cli": run and save coloured stdout
 //         "tui": run inside a detached tmux pane and snapshot the screen
 //         (omit when there is nothing safe to run — the card links to the docs)
@@ -30,15 +32,19 @@ export const tools = [
   { id: "zoxide", group: "shell", mode: "cli",
     demo: "zoxide add src docs && zoxide query --list --score" },
   { id: "fzf", group: "shell", mode: "tui",
-    demo: "find . -type f | fzf --preview 'bat --color=always --style=numbers {}' --height=100%" },
+    demo: "fzf --preview 'bat --color=always --style=numbers {}'",
+    run: "git ls-files | fzf --preview 'bat --color=always --style=numbers {}'" },
   { id: "direnv", group: "shell", mode: "cli",
-    demo: "direnv allow . && direnv exec . sh -c 'echo $GREETING'" },
+    demo: "cd api && direnv allow . && direnv exec . sh -c 'echo $GREETING'" },
   { id: "zsh-autosuggestions", group: "shell" },
   { id: "zsh-syntax-highlighting", group: "shell" },
   { id: "tmux", group: "shell", mode: "tui", demo: "tmux new \"eza --tree --icons\" \; split-window -h \"bat src/app.ts\"",
     run: "tmux -L ghostty-demo -f /dev/null new 'eza --tree --icons; sleep 99' \; set status-style bg=#007972 \; split-window -h 'bat --paging=never src/app.ts; sleep 99'" },
   { id: "sesh", group: "shell", mode: "cli", demo: "sesh --help" },
-  { id: "zellij", group: "shell", section: "zellij", mode: "tui", demo: "zellij --layout compact" },
+  { id: "zellij", group: "shell", section: "zellij", mode: "tui", demo: "zellij --layout compact",
+    // fixed name so `cleanup` can delete it — zellij sessions outlive the tmux pane
+    run: "zellij --layout compact options --session-name ghostty-capture --show-startup-tips false",
+    cleanup: "zellij kill-session ghostty-capture; zellij delete-session --force ghostty-capture" },
   { id: "atuin", group: "shell", section: "atuin", type: "curl",
     url: "https://atuin.sh", desc: "Magical shell history — sync, search and stats",
     install: "curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh",
