@@ -1,0 +1,15 @@
+---
+// A real Ghostty window screenshot from scripts/shoot.sh (public/images/shots/<id>.webp).
+interface Props {
+  id: string;
+  alt: string;
+}
+
+const { id, alt } = Astro.props;
+const src = `${import.meta.env.BASE_URL}images/shots/${id}.webp`;
+---
+
+<figure class="shot">
+  <img src={src} alt={alt} loading="lazy" decoding="async">
+  <figcaption>Real Ghostty window on this MacBook — Cyber Wave theme, Hack Nerd Font, font-size 8.</figcaption>
+</figure>

@@ -70,3 +70,8 @@ a.tool-name:hover { color: var(--green); text-decoration: underline; }
 .tool-docs { display: inline-block; margin-bottom: 14px; font-size: 12px; color: var(--teal); }
 .tool .term { margin-bottom: 14px; }
 .main a { color: var(--blue); }
+
+/* Real Ghostty screenshots (scripts/shoot.sh) */
+.shot { margin: 0 0 20px; }
+.shot img { display: block; width: 100%; height: auto; }
+.shot figcaption { font-size: 11px; color: var(--fg-dim); text-align: center; margin-top: -6px; }
