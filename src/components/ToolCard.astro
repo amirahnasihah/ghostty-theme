@@ -1,0 +1,28 @@
+---
+// One tool in the "All tools" catalogue: official link, what it does, install, real output.
+import Terminal from "./Terminal.astro";
+
+interface Props {
+  tool: {
+    id: string; name: string; url?: string; desc: string; type: string;
+    install: string | null; outputHtml: string | null; section?: string;
+  };
+}
+
+const { tool } = Astro.props;
+---
+
+<article class="tool" id={`tool-${tool.id}`} data-search={`${tool.id} ${tool.desc}`.toLowerCase()}>
+  <header class="tool-head">
+    <span class={`tag ${tool.type === "cask" ? "tag-cask" : "tag-shell"}`}>{tool.type}</span>
+    {tool.url
+      ? <a class="tool-name" href={tool.url} target="_blank" rel="noopener">{tool.name} ↗</a>
+      : <span class="tool-name">{tool.name}</span>}
+    {tool.section && <span class="tool-more" onclick={`show('${tool.section}', document.querySelector('.nav-item[data-id="${tool.section}"]'))`}>full setup →</span>}
+  </header>
+  <p class="tool-desc">{tool.desc}</p>
+  {tool.install && <code class="tool-install">{tool.install}</code>}
+  {tool.outputHtml
+    ? <Terminal id={tool.id} />
+    : tool.url && <a class="tool-docs" href={tool.url} target="_blank" rel="noopener">GUI app — see screenshots on the official site ↗</a>}
+</article>

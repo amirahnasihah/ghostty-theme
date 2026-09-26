@@ -1,0 +1,65 @@
+---
+import Terminal from "../components/Terminal.astro";
+---
+
+<div class="section-title">🐚 Zsh</div>
+
+<h3>In the terminal</h3>
+<Terminal id="eza" />
+
+
+  <h3>Core Shell Tools</h3>
+  <div class="cards">
+    <div class="card"><div class="card-name"><span class="tag tag-shell">shell</span>Starship</div><div class="card-desc">Powerline prompt with git, language version, and time segments. Cyber Wave themed.</div></div>
+    <div class="card"><div class="card-name"><span class="tag tag-shell">shell</span>Atuin</div><div class="card-desc">Shell history sync & TUI search — replaces Ctrl+R. Curl install.</div></div>
+    <div class="card"><div class="card-name"><span class="tag tag-shell">shell</span>zoxide</div><div class="card-desc">Smart <code>cd</code> — jump to frecent directories with <code>z name</code>.</div></div>
+    <div class="card"><div class="card-name"><span class="tag tag-shell">shell</span>fzf</div><div class="card-desc">Fuzzy finder with bat previews. Multi-select, preview toggled with Ctrl+/.</div></div>
+    <div class="card"><div class="card-name"><span class="tag tag-shell">shell</span>zsh-autosuggestions</div><div class="card-desc">Fish-style inline ghost suggestions from history.</div></div>
+    <div class="card"><div class="card-name"><span class="tag tag-shell">shell</span>zsh-syntax-highlighting</div><div class="card-desc">Colors valid/invalid commands as you type.</div></div>
+    <div class="card"><div class="card-name"><span class="tag tag-shell">shell</span>direnv</div><div class="card-desc">Automatically loads .envrc env vars when entering directories.</div></div>
+  </div>
+
+  <h3>Aliases</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Alias</th><th>Command</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td colspan="3" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Claude</td></tr>
+      <tr><td><code>cld</code></td><td><code>claude</code></td><td>Claude Code CLI</td></tr>
+      <tr><td><code>cdp</code></td><td><code>claude --dangerously-skip-permissions</code></td><td>Claude — skip all permission prompts</td></tr>
+      <tr><td><code>cr</code></td><td><code>claude --resume</code></td><td>Resume last Claude session</td></tr>
+      <tr colspan="3" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;"><td colspan="3" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Shell</td></tr>
+      <tr><td><code>cl</code></td><td><code>clear</code></td><td>Clear terminal</td></tr>
+      <tr><td><code>zrc</code></td><td><code>source ~/.zshrc</code></td><td>Reload shell config</td></tr>
+      <tr><td colspan="3" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Editor & Apps</td></tr>
+      <tr><td><code>v</code></td><td><code>nvim</code></td><td>Open Neovim</td></tr>
+      <tr><td><code>ff</code></td><td><code>fastfetch</code></td><td>Show system info</td></tr>
+      <tr><td><code>zj</code></td><td><code>zellij</code></td><td>Open Zellij multiplexer</td></tr>
+      <tr><td><code>zjs</code></td><td><code>zellij -s &lt;name&gt;</code></td><td>Create + attach with custom name</td></tr>
+      <tr><td><code>zja</code></td><td><code>zellij attach</code></td><td>Attach to a Zellij session</td></tr>
+      <tr><td><code>zjac</code></td><td><code>zellij attach --create</code></td><td>Attach or create session</td></tr>
+      <tr><td><code>zjr</code></td><td><code>zellij action rename-session &lt;name&gt;</code></td><td>Rename a Zellij session</td></tr>
+      <tr><td><code>zjd</code></td><td><code>zellij delete-session</code></td><td>Delete a Zellij session</td></tr>
+      <tr><td><code>zjda</code></td><td><code>zellij delete-all-sessions</code></td><td>Delete all Zellij sessions</td></tr>
+      <tr><td colspan="3" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">File listing — eza</td></tr>
+      <tr><td><code>ls</code></td><td><code>eza --icons</code></td><td>List with icons</td></tr>
+      <tr><td><code>ll</code></td><td><code>eza -lh --icons --git</code></td><td>Long list + git status</td></tr>
+      <tr><td><code>la</code></td><td><code>eza -lah --icons --git</code></td><td>Long list including hidden</td></tr>
+      <tr><td><code>lt</code></td><td><code>eza --tree --icons</code></td><td>Tree view</td></tr>
+      <tr><td colspan="3" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Navigation</td></tr>
+      <tr><td><code>y</code></td><td>yazi wrapper function</td><td>Open yazi, cd into selected dir on quit</td></tr>
+      <tr><td colspan="3" style="color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.08em;padding-top:10px;">Deploy</td></tr>
+      <tr><td><code>pvdeploy</code></td><td><code>vercel deploy --prod --scope ...</code></td><td>Deploy to production Vercel team</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>fzf Config</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Setting</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Multi-select</td><td>enabled by default</td></tr>
+      <tr><td>Preview command</td><td><code>bat --color=always --style=numbers {"{}"}</code></td></tr>
+      <tr><td>Toggle preview</td><td><code>Ctrl+/</code></td></tr>
+      <tr><td>Preview window</td><td>right 55%, wrapped</td></tr>
+      <tr><td>Ctrl+T preview</td><td><code>bat --color=always --style=numbers {"{}"}</code></td></tr>
+    </tbody>
+  </table></div>

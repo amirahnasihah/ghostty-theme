@@ -1,0 +1,28 @@
+---
+import Terminal from "../components/Terminal.astro";
+---
+
+<div class="section-title">🦥 lazygit</div>
+  <p class="desc-block">Full TUI git client. Launch with <code>lazygit</code> or from inside Neovim. Config at <code>config/lazygit/config.yml</code>.</p>
+
+<h3>In the terminal</h3>
+<Terminal id="lazygit" />
+
+
+  <h3>Custom Commands</h3>
+  <div class="cards">
+    <div class="card">
+      <div class="card-name"><span class="tag tag-ai">AI</span> AI Commit — <code>Ctrl+A</code></div>
+      <div class="card-desc">
+        In the <strong>Files</strong> panel, press <code>Ctrl+A</code> to pipe <code>git diff --cached</code> into the Claude CLI. Claude generates a conventional commit message (<code>feat:</code>, <code>fix:</code>, <code>chore:</code>, etc.) and fills it into the commit input automatically.
+      </div>
+    </div>
+  </div>
+
+  <h3>Command Definition</h3>
+  <div class="codeblock"><span style="color:var(--blue)">customCommands</span>:
+- <span style="color:var(--blue)">key</span>: <span style="color:var(--green)">"&lt;c-a&gt;"</span>
+  <span style="color:var(--blue)">command</span>: <span style="color:var(--green)">'git diff --cached | claude -p "Generate a concise git commit message..."'</span>
+  <span style="color:var(--blue)">context</span>: <span style="color:var(--green)">"files"</span>
+  <span style="color:var(--blue)">subprocess</span>: <span style="color:var(--yellow)">true</span>
+  <span style="color:var(--blue)">description</span>: <span style="color:var(--green)">"AI commit message (Claude)"</span></div>

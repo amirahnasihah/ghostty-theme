@@ -1,0 +1,24 @@
+---
+import ToolCard from "../components/ToolCard.astro";
+import { toolsByGroup, tools } from "../lib/tools.mjs";
+---
+
+<div class="section-title">🧰 All Tools</div>
+<p class="desc-block">
+  Everything in the <code>Brewfile</code> — {tools.length} tools. Each one links to its official site and shows
+  <strong>real output captured on this MacBook</strong> (<code>pnpm capture</code>), not a description.
+  Install everything with <code>brew bundle --file=Brewfile</code>.
+</p>
+
+<div class="search-wrap">
+  <input class="search-input" type="text" placeholder="Search tools…" oninput="filterTools(this.value)">
+</div>
+
+{toolsByGroup.map((g) => (
+  <div class="tool-group" data-group={g.id}>
+    <h3>{g.label}</h3>
+    <div class="tool-list">
+      {g.tools.map((t) => <ToolCard tool={t} />)}
+    </div>
+  </div>
+))}

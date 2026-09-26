@@ -1,0 +1,30 @@
+---
+import Terminal from "../components/Terminal.astro";
+---
+
+<div class="section-title">🐑 herdr</div>
+<p class="desc-block">
+  <a href="https://herdr.dev" target="_blank" rel="noopener">herdr</a> — an agent multiplexer that lives in the terminal.
+  Workspaces on the left, tabs and split panes on the right, and an <strong>agents</strong> list that tracks every
+  Claude Code / Codex session and which one needs attention. Sessions persist on a background server, so closing
+  Ghostty doesn't kill running agents.
+</p>
+
+<h3>In the terminal</h3>
+<Terminal id="herdr" />
+
+<div class="cfg-grid">
+  <div class="cfg-card">
+    <h4>Everyday commands</h4>
+    <div class="kv"><span class="k"><code>herdr</code></span><span class="v">launch / attach</span></div>
+    <div class="kv"><span class="k"><code>herdr --session work</code></span><span class="v">named session</span></div>
+    <div class="kv"><span class="k"><code>herdr session list</code></span><span class="v">all sessions</span></div>
+    <div class="kv"><span class="k"><code>herdr status</code></span><span class="v">server + client</span></div>
+  </div>
+  <div class="cfg-card">
+    <h4>Install</h4>
+    <div class="kv"><span class="k">brew</span><span class="v"><code>brew install herdr</code></span></div>
+    <div class="kv"><span class="k">Config</span><span class="v"><code>~/.config/herdr/config.toml</code></span></div>
+    <div class="kv"><span class="k">Defaults</span><span class="v"><code>herdr --default-config</code></span></div>
+  </div>
+</div>

@@ -1,0 +1,176 @@
+<div class="section-title">💻 VS Code / Cursor Extensions</div>
+  <p class="desc-block">Extensions tracked in Brewfile — synced via <code>brew bundle</code>. Works for both VS Code and Cursor.</p>
+
+  <div class="search-wrap">
+    <input class="search-input" type="text" placeholder="Search extensions…" oninput="filterExt(this.value)">
+  </div>
+
+  <div id="ext-list">
+    <div class="ext-section">
+      <h3>AI & Agents</h3>
+      <div class="tbl-wrap"><table class="ext-table">
+        <thead><tr><th>Extension</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr data-ext="claude anthropic"><td><code>anthropic.claude-code</code></td><td>Claude Code extension for VS Code</td></tr>
+          <tr data-ext="claude cline dev"><td><code>saoudrizwan.claude-dev</code></td><td>Cline — AI coding agent (Claude Dev)</td></tr>
+          <tr data-ext="openai chatgpt codex"><td><code>openai.chatgpt</code></td><td>ChatGPT + Codex integration</td></tr>
+          <tr data-ext="coderabbit review"><td><code>coderabbit.coderabbit-vscode</code></td><td>AI code review bot</td></tr>
+          <tr data-ext="intellicode ai"><td><code>visualstudioexptteam.vscodeintellicode</code></td><td>AI IntelliSense completions</td></tr>
+          <tr data-ext="intellicode api"><td><code>visualstudioexptteam.intellicode-api-usage-examples</code></td><td>API usage examples from IntelliCode</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="ext-section">
+      <h3>Git</h3>
+      <div class="tbl-wrap"><table class="ext-table">
+        <thead><tr><th>Extension</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr data-ext="gitlens git blame"><td><code>eamodio.gitlens</code></td><td>Git blame, history, code lens, compare</td></tr>
+          <tr data-ext="git history log"><td><code>donjayamanne.githistory</code></td><td>Visual git log and file history</td></tr>
+          <tr data-ext="github pr issues"><td><code>github.vscode-pull-request-github</code></td><td>PRs and issues inside VS Code</td></tr>
+          <tr data-ext="github actions workflow"><td><code>github.vscode-github-actions</code></td><td>GitHub Actions YAML editing + runs</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="ext-section">
+      <h3>Linting & Formatting</h3>
+      <div class="tbl-wrap"><table class="ext-table">
+        <thead><tr><th>Extension</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr data-ext="biome lint format"><td><code>biomejs.biome</code></td><td>Biome — fast JS/TS formatter + linter</td></tr>
+          <tr data-ext="eslint lint"><td><code>dbaeumer.vscode-eslint</code></td><td>ESLint integration</td></tr>
+          <tr data-ext="prettier format"><td><code>esbenp.prettier-vscode</code></td><td>Prettier formatter</td></tr>
+          <tr data-ext="oxc linter rust"><td><code>oxc.oxc-vscode</code></td><td>Oxc — Rust-based JS/TS linter</td></tr>
+          <tr data-ext="wallaby quokka live"><td><code>wallabyjs.console-ninja</code></td><td>Console output inline in editor</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="ext-section">
+      <h3>Language Support</h3>
+      <div class="tbl-wrap"><table class="ext-table">
+        <thead><tr><th>Extension</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr data-ext="vue volar"><td><code>vue.volar</code></td><td>Vue 3 language support (official)</td></tr>
+          <tr data-ext="volar ai"><td><code>volartools.volar-ai</code></td><td>Volar AI enhancements</td></tr>
+          <tr data-ext="astro"><td><code>astro-build.astro-vscode</code></td><td>Astro framework support</td></tr>
+          <tr data-ext="python"><td><code>ms-python.python</code></td><td>Python language support</td></tr>
+          <tr data-ext="python debug debugpy"><td><code>ms-python.debugpy</code></td><td>Python debugger</td></tr>
+          <tr data-ext="pyright python cursor"><td><code>anysphere.cursorpyright</code></td><td>Pyright (Cursor fork)</td></tr>
+          <tr data-ext="yaml schema red hat"><td><code>redhat.vscode-yaml</code></td><td>YAML with JSON schema validation</td></tr>
+          <tr data-ext="svg vector"><td><code>jock.svg</code></td><td>SVG preview and editing</td></tr>
+          <tr data-ext="svg preview"><td><code>simonsiefke.svg-preview</code></td><td>SVG file preview</td></tr>
+          <tr data-ext="markdown mermaid diagram"><td><code>bierner.markdown-mermaid</code></td><td>Mermaid diagrams in Markdown</td></tr>
+          <tr data-ext="markdown all in one"><td><code>yzhang.markdown-all-in-one</code></td><td>Markdown editing toolkit</td></tr>
+          <tr data-ext="pdf viewer"><td><code>tomoki1207.pdf</code></td><td>PDF file viewer</td></tr>
+          <tr data-ext="nuxt mdc content"><td><code>nuxt.mdc</code></td><td>MDC (Nuxt Content) support</td></tr>
+          <tr data-ext="powershell"><td><code>ms-vscode.powershell</code></td><td>PowerShell support</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="ext-section">
+      <h3>Frontend & Tailwind</h3>
+      <div class="tbl-wrap"><table class="ext-table">
+        <thead><tr><th>Extension</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr data-ext="tailwind css intellisense"><td><code>bradlc.vscode-tailwindcss</code></td><td>Tailwind IntelliSense — class completions + hover docs</td></tr>
+          <tr data-ext="tailwind docs"><td><code>austenc.tailwind-docs</code></td><td>Quick Tailwind docs lookup</td></tr>
+          <tr data-ext="auto close tag html"><td><code>formulahendry.auto-close-tag</code></td><td>Auto-close HTML/JSX tags</td></tr>
+          <tr data-ext="auto rename tag html"><td><code>formulahendry.auto-rename-tag</code></td><td>Auto-rename paired HTML tags</td></tr>
+          <tr data-ext="color highlight css hex"><td><code>naumovs.color-highlight</code></td><td>Inline CSS color swatch highlights</td></tr>
+          <tr data-ext="image gutter preview"><td><code>kisstkondoros.vscode-gutter-preview</code></td><td>Image preview in the editor gutter</td></tr>
+          <tr data-ext="image viewer"><td><code>vscode-infra.image-viewer</code></td><td>Image file viewer</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="ext-section">
+      <h3>Vue / Nuxt</h3>
+      <div class="tbl-wrap"><table class="ext-table">
+        <thead><tr><th>Extension</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr data-ext="nuxt nuxtr"><td><code>nuxtr.nuxtr-vscode</code></td><td>Nuxt developer tools and commands</td></tr>
+          <tr data-ext="nuxt extensions"><td><code>nuxtr.nuxt-vscode-extentions</code></td><td>Curated Nuxt extension pack</td></tr>
+          <tr data-ext="vue snippets"><td><code>hollowtree.vue-snippets</code></td><td>Vue component snippets</td></tr>
+          <tr data-ext="vue snippets sarah"><td><code>sdras.vue-vscode-snippets</code></td><td>Sarah Drasner's Vue snippets</td></tr>
+          <tr data-ext="vue syntax"><td><code>jcbuisson.vue</code></td><td>Vue syntax highlighting</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="ext-section">
+      <h3>React / Next / Vite</h3>
+      <div class="tbl-wrap"><table class="ext-table">
+        <thead><tr><th>Extension</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr data-ext="react es7 snippets"><td><code>dsznajder.es7-react-js-snippets</code></td><td>React ES7+ snippets</td></tr>
+          <tr data-ext="react typescript"><td><code>infeng.vscode-react-typescript</code></td><td>React TypeScript helpers</td></tr>
+          <tr data-ext="npm intellisense autocomplete"><td><code>christian-kohler.npm-intellisense</code></td><td>npm module import autocomplete</td></tr>
+          <tr data-ext="vite antfu"><td><code>antfu.vite</code></td><td>Vite project integration</td></tr>
+          <tr data-ext="vite serve"><td><code>phondani0.vite-serve</code></td><td>Vite serve command shortcut</td></tr>
+          <tr data-ext="goto alias import"><td><code>antfu.goto-alias</code></td><td>Jump to aliased import targets</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="ext-section">
+      <h3>Testing</h3>
+      <div class="tbl-wrap"><table class="ext-table">
+        <thead><tr><th>Extension</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr data-ext="vitest test runner"><td><code>vitest.explorer</code></td><td>Vitest test explorer UI</td></tr>
+          <tr data-ext="wallaby real time test"><td><code>wallabyjs.wallaby-vscode</code></td><td>Real-time test runner with inline results</td></tr>
+          <tr data-ext="quokka live scratchpad"><td><code>wallabyjs.quokka-vscode</code></td><td>Live JS/TS scratchpad</td></tr>
+          <tr data-ext="rest client http"><td><code>humao.rest-client</code></td><td>HTTP requests in .http files</td></tr>
+          <tr data-ext="thunder client rest api"><td><code>rangav.vscode-thunder-client</code></td><td>Thunder Client REST GUI</td></tr>
+          <tr data-ext="live server reload"><td><code>ms-vscode.live-server</code></td><td>Live reload dev server</td></tr>
+          <tr data-ext="live server ritwick"><td><code>ritwickdey.liveserver</code></td><td>Live server (alternative)</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="ext-section">
+      <h3>Database & Infrastructure</h3>
+      <div class="tbl-wrap"><table class="ext-table">
+        <thead><tr><th>Extension</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr data-ext="sqlite database viewer"><td><code>qwtel.sqlite-viewer</code></td><td>SQLite browser</td></tr>
+          <tr data-ext="data preview csv json"><td><code>randomfractalsinc.vscode-data-preview</code></td><td>Data file preview — CSV, JSON, etc.</td></tr>
+          <tr data-ext="docker container"><td><code>ms-azuretools.vscode-docker</code></td><td>Docker integration</td></tr>
+          <tr data-ext="remote containers dev"><td><code>ms-vscode-remote.remote-containers</code></td><td>Dev Containers support</td></tr>
+          <tr data-ext="remote ssh cursor"><td><code>anysphere.remote-ssh</code></td><td>Remote SSH (Cursor fork)</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="ext-section">
+      <h3>3D / Graphics / Animation</h3>
+      <div class="tbl-wrap"><table class="ext-table">
+        <thead><tr><th>Extension</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr data-ext="three js 3d webgl"><td><code>en10ve.threejs</code></td><td>Three.js snippets and helpers</td></tr>
+          <tr data-ext="gsap animation"><td><code>hridoy.gsap-snippets</code></td><td>GSAP animation snippets</td></tr>
+          <tr data-ext="3d editor"><td><code>degreat.3e</code></td><td>3D editor utilities</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <div class="ext-section">
+      <h3>Productivity</h3>
+      <div class="tbl-wrap"><table class="ext-table">
+        <thead><tr><th>Extension</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr data-ext="material icons theme"><td><code>pkief.material-icon-theme</code></td><td>Material icon set for file explorer</td></tr>
+          <tr data-ext="emoji icons"><td><code>mightbesimon.emoji-icons</code></td><td>Emoji icon theme</td></tr>
+          <tr data-ext="bracket select"><td><code>chunsen.bracket-select</code></td><td>Select content inside brackets</td></tr>
+          <tr data-ext="bracket pair toggle"><td><code>dzhavat.bracket-pair-toggler</code></td><td>Toggle bracket pair coloring</td></tr>
+          <tr data-ext="comment translate i18n"><td><code>intellsmi.comment-translate</code></td><td>Translate comments inline</td></tr>
+          <tr data-ext="translate vscode"><td><code>chun.vscode-translate</code></td><td>Translation helper</td></tr>
+          <tr data-ext="angular nx console"><td><code>nrwl.angular-console</code></td><td>Nx/Angular console</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>

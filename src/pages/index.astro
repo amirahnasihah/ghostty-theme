@@ -1,0 +1,110 @@
+---
+import "../styles/global.css";
+import "../styles/terminal.css";
+import pageScript from "../scripts.js?raw";
+
+import Ghostty from "../sections/ghostty.astro";
+import Zsh from "../sections/zsh.astro";
+import Starship from "../sections/starship.astro";
+import Atuin from "../sections/atuin.astro";
+import Fish from "../sections/fish.astro";
+import Nvim from "../sections/nvim.astro";
+import Vscode from "../sections/vscode.astro";
+import Git from "../sections/git.astro";
+import Lazygit from "../sections/lazygit.astro";
+import Zellij from "../sections/zellij.astro";
+import Herdr from "../sections/herdr.astro";
+import Yazi from "../sections/yazi.astro";
+import Btop from "../sections/btop.astro";
+import Fastfetch from "../sections/fastfetch.astro";
+import Screenshot from "../sections/screenshot.astro";
+import Tools from "../sections/tools.astro";
+import Fonts from "../sections/fonts.astro";
+
+// Sidebar order = page order. The first section is shown by default.
+const nav = [
+  { group: "Terminal", items: [{ id: "ghostty", icon: "👻", label: "Ghostty", Section: Ghostty }] },
+  { group: "Shell", items: [
+    { id: "zsh", icon: "🐚", label: "Zsh", Section: Zsh },
+    { id: "starship", icon: "🚀", label: "Starship", Section: Starship },
+    { id: "atuin", icon: "🐢", label: "Atuin", Section: Atuin },
+    { id: "fish", icon: "🐟", label: "Fish", Section: Fish },
+  ] },
+  { group: "Editor", items: [
+    { id: "nvim", icon: "📝", label: "Neovim", Section: Nvim },
+    { id: "vscode", icon: "💻", label: "VS Code / Cursor", Section: Vscode },
+  ] },
+  { group: "Git", items: [
+    { id: "git", icon: "🌿", label: "Git + Delta", Section: Git },
+    { id: "lazygit", icon: "🦥", label: "lazygit", Section: Lazygit },
+  ] },
+  { group: "Multiplexer", items: [
+    { id: "zellij", icon: "🪟", label: "Zellij", Section: Zellij },
+    { id: "herdr", icon: "🐑", label: "herdr", Section: Herdr },
+  ] },
+  { group: "Files", items: [{ id: "yazi", icon: "🦆", label: "yazi", Section: Yazi }] },
+  { group: "System", items: [
+    { id: "btop", icon: "📊", label: "btop", Section: Btop },
+    { id: "fastfetch", icon: "🌿", label: "fastfetch", Section: Fastfetch },
+    { id: "screenshot", icon: "📸", label: "Screenshot", Section: Screenshot },
+  ] },
+  { group: "Packages", items: [
+    { id: "tools", icon: "🧰", label: "All tools", Section: Tools },
+    { id: "fonts", icon: "🔤", label: "Fonts", Section: Fonts },
+  ] },
+];
+const first = nav[0].items[0].id;
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.svg`} type="image/svg+xml">
+  <title>Terminal Setup — amirah</title>
+  <meta name="description" content="amirah's terminal setup — Ghostty, zsh, Neovim, zellij, herdr and every CLI tool, with real terminal output.">
+</head>
+<body>
+<div class="shell">
+
+<button class="hamburger" onclick="toggleMenu()">☰</button>
+<div class="sidebar-overlay" onclick="toggleMenu()"></div>
+
+<nav class="sidebar">
+  <div class="sidebar-title">~/ghostty-theme</div>
+  {nav.map(({ group, items }) => (
+    <>
+      <div class="nav-group">{group}</div>
+      {items.map(({ id, icon, label }) => (
+        <div class:list={["nav-item", { active: id === first }]} data-id={id} onclick={`show('${id}',this)`}>
+          <span class="nav-icon">{icon}</span>{label}
+        </div>
+      ))}
+    </>
+  ))}
+</nav>
+
+<main class="main">
+  <div class="header">
+    <div class="prompt-line">
+      <span class="seg s-teal">  </span>
+      <span class="seg s-teal2"> ~/ghostty-theme </span>
+      <span class="seg s-git">  main </span>
+      <span class="seg s-lang">  astro </span>
+    </div>
+    <h1>Terminal Setup</h1>
+    <p>amirah's full terminal environment — every tool, plugin, and config setting, with real output from the terminal.</p>
+  </div>
+
+  {nav.flatMap(({ items }) => items).map(({ id, Section }) => (
+    <section class:list={["section", { active: id === first }]} id={`section-${id}`}>
+      <Section />
+    </section>
+  ))}
+</main>
+</div>
+
+<script is:inline set:html={pageScript} />
+</body>
+</html>

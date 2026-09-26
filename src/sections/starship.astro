@@ -1,0 +1,70 @@
+---
+import Terminal from "../components/Terminal.astro";
+---
+
+<div class="section-title">🚀 Starship</div>
+  <p class="desc-block"><strong style="color:#769ff0">Tokyo Night preset</strong> — rounded pill segments using <code>U+E0B4</code> Powerline caps. Time format customized to <code>%d %b %I:%M %p</code>.</p>
+
+<h3>In the terminal</h3>
+<Terminal id="starship" />
+
+
+  <h3>Prompt Preview</h3>
+  <div class="sp-preview">
+    <img src="images/starship.png" alt="Starship prompt screenshot">
+    <hr class="sp-divider">
+    <div class="pl-bar">
+      <span style="display:inline-flex;align-items:center;color:#a3aed2;letter-spacing:-1px;padding-right:2px;font-family:'Hack Nerd Font',monospace;">░▒▓</span>
+      <span class="pl-seg" style="background:#a3aed2;color:#090c0c;font-weight:600;">&#xE711;</span>
+      <span class="pl-arrow" style="color:#a3aed2;background:#769ff0;">&#xE0B4;</span>
+      <span class="pl-seg" style="background:#769ff0;color:#e3e5e5;">…/go-lang</span>
+      <span class="pl-arrow" style="color:#769ff0;background:#394260;">&#xE0B4;</span>
+      <span class="pl-seg" style="background:#394260;color:#769ff0;">&#xF418; i2-20260507-1311 $?</span>
+      <span class="pl-arrow" style="color:#394260;background:#212736;">&#xE0B4;</span>
+      <span class="pl-seg" style="background:#212736;color:#769ff0;">&#xE627; v1.26.3</span>
+      <span class="pl-arrow" style="color:#212736;background:#1d2230;">&#xE0B4;</span>
+      <span class="pl-seg" style="background:#1d2230;color:#a0a9cb;">&#xF43A; 19 May 04:25 PM</span>
+      <span class="pl-arrow" style="color:#1d2230;background:transparent;">&#xE0B4;</span>
+    </div>
+    <div class="pl-char" style="color:#9ece6a;">❯</div>
+  </div>
+
+  <h3>Segments</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Segment</th><th>Background</th><th>Text</th><th>Shows</th></tr></thead>
+    <tbody>
+      <tr><td><code>░▒▓</code> gradient</td><td>terminal bg</td><td><code>#a3aed2</code></td><td>Powerline fade-in, no background</td></tr>
+      <tr><td>Icon</td><td><code>#a3aed2</code></td><td><code>#090c0c</code></td><td>U+E711 nerd font icon</td></tr>
+      <tr><td>Directory</td><td><code>#769ff0</code></td><td><code>#e3e5e5</code></td><td>Path, 3 levels, <code>…/</code> truncation</td></tr>
+      <tr><td>Git branch</td><td><code>#394260</code></td><td><code>#769ff0</code></td><td>Branch name</td></tr>
+      <tr><td>Git status</td><td><code>#394260</code></td><td><code>#769ff0</code></td><td>Ahead/behind + dirty indicators</td></tr>
+      <tr><td>Node.js</td><td><code>#212736</code></td><td><code>#769ff0</code></td><td>Version in JS/TS projects</td></tr>
+      <tr><td>Bun</td><td><code>#212736</code></td><td><code>#769ff0</code></td><td>Version in Bun projects</td></tr>
+      <tr><td>Rust</td><td><code>#212736</code></td><td><code>#769ff0</code></td><td>Version in Rust projects</td></tr>
+      <tr><td>Go</td><td><code>#212736</code></td><td><code>#769ff0</code></td><td>Version in Go projects</td></tr>
+      <tr><td>PHP</td><td><code>#212736</code></td><td><code>#769ff0</code></td><td>Version in PHP projects</td></tr>
+      <tr><td>Time</td><td><code>#1d2230</code></td><td><code>#a0a9cb</code></td><td>Format: <code>%d %b %I:%M %p</code> → <code>19 May 11:42 AM</code></td></tr>
+      <tr><td>Separator</td><td>—</td><td>—</td><td><code>U+E0B4</code> rounded cap — makes the pill shape</td></tr>
+      <tr><td>Character <code>❯</code></td><td>—</td><td><code>#769ff0</code> / red</td><td>Success / error</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Color Palette</h3>
+  <div class="palette">
+    <div class="swatch"><div class="swatch-box" style="background:#a3aed2"></div><div class="swatch-label">#a3aed2</div></div>
+    <div class="swatch"><div class="swatch-box" style="background:#769ff0"></div><div class="swatch-label">#769ff0</div></div>
+    <div class="swatch"><div class="swatch-box" style="background:#394260"></div><div class="swatch-label">#394260</div></div>
+    <div class="swatch"><div class="swatch-box" style="background:#212736"></div><div class="swatch-label">#212736</div></div>
+    <div class="swatch"><div class="swatch-box" style="background:#1d2230"></div><div class="swatch-label">#1d2230</div></div>
+    <div class="swatch"><div class="swatch-box" style="background:#a0a9cb"></div><div class="swatch-label">#a0a9cb</div></div>
+    <div class="swatch"><div class="swatch-box" style="background:#e3e5e5"></div><div class="swatch-label">#e3e5e5</div></div>
+  </div>
+
+  <h3>Timeouts</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Setting</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td><code>scan_timeout</code></td><td>1000ms</td></tr>
+      <tr><td><code>command_timeout</code></td><td>5000ms</td></tr>
+    </tbody>
+  </table></div>

@@ -1,0 +1,52 @@
+---
+import Terminal from "../components/Terminal.astro";
+---
+
+<div class="section-title">🌿 fastfetch</div>
+  <p class="desc-block">System info display shown on terminal launch. Config at <code>config/fastfetch/config.jsonc</code>.</p>
+
+<h3>In the terminal</h3>
+<Terminal id="fastfetch" />
+
+
+  <div class="cfg-grid">
+    <div class="cfg-card">
+      <h4>Logo</h4>
+      <div class="kv"><span class="k">Type</span><span class="v">Custom ASCII file</span></div>
+      <div class="kv"><span class="k">Source</span><span class="v">ascii.txt</span></div>
+      <div class="kv"><span class="k">Content</span><span class="v">Bonsai tree + owl + "amirah" wordmark</span></div>
+      <div class="kv"><span class="k">Generator</span><span class="v">gen_bonsai.py</span></div>
+      <div class="kv"><span class="k">Padding right</span><span class="v">5</span></div>
+    </div>
+    <div class="cfg-card">
+      <h4>Colors</h4>
+      <div class="kv"><span class="k">Keys</span><span class="v" style="color:#33859e">RGB 51, 133, 158 (steel blue)</span></div>
+      <div class="kv"><span class="k">Title</span><span class="v" style="color:#99d1ce">RGB 153, 209, 206 (light teal)</span></div>
+      <div class="kv"><span class="k">Separator</span><span class="v">": "</span></div>
+    </div>
+  </div>
+
+  <h3>Modules</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Module</th><th>Shows</th></tr></thead>
+    <tbody>
+      <tr><td>title</td><td>"amirah" (hardcoded)</td></tr>
+      <tr><td>separator</td><td>Divider line</td></tr>
+      <tr><td>os</td><td>macOS version</td></tr>
+      <tr><td>host</td><td>Machine model</td></tr>
+      <tr><td>kernel</td><td>Darwin kernel version</td></tr>
+      <tr><td>uptime</td><td>System uptime</td></tr>
+      <tr><td>packages</td><td>Installed package counts (brew, etc.)</td></tr>
+      <tr><td>shell</td><td>Active shell + version</td></tr>
+      <tr><td>display</td><td>Resolution + refresh rate</td></tr>
+      <tr><td>wm</td><td>Window manager</td></tr>
+      <tr><td>wmtheme</td><td>WM theme</td></tr>
+      <tr><td>cpu</td><td>CPU model + speed</td></tr>
+      <tr><td>gpu</td><td>GPU model</td></tr>
+      <tr><td>memory</td><td>RAM used / total</td></tr>
+      <tr><td>battery</td><td>Charge level</td></tr>
+      <tr><td>localip</td><td>Local network IP</td></tr>
+      <tr><td>locale</td><td>System locale</td></tr>
+      <tr><td>colors</td><td>Terminal color block swatches</td></tr>
+    </tbody>
+  </table></div>

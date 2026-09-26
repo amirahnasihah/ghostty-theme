@@ -1,0 +1,45 @@
+---
+import Terminal from "../components/Terminal.astro";
+---
+
+<div class="section-title">📊 btop</div>
+  <p class="desc-block">Rich resource monitor — CPU, memory, network, processes. Config at <code>config/btop/btop.conf</code>.</p>
+
+<h3>In the terminal</h3>
+<Terminal id="btop" />
+
+
+  <div class="cfg-grid">
+    <div class="cfg-card">
+      <h4>Appearance</h4>
+      <div class="kv"><span class="k">Theme</span><span class="v">tokyo-night</span></div>
+      <div class="kv"><span class="k">Background</span><span class="v">transparent</span></div>
+      <div class="kv"><span class="k">Graph style</span><span class="v">braille (max res)</span></div>
+      <div class="kv"><span class="k">Rounded corners</span><span class="v">false</span></div>
+      <div class="kv"><span class="k">Terminal sync</span><span class="v">true (anti-flicker)</span></div>
+    </div>
+    <div class="cfg-card">
+      <h4>Boxes Shown</h4>
+      <div class="kv"><span class="k">CPU</span><span class="v">✓ upper + lower (inverted)</span></div>
+      <div class="kv"><span class="k">Memory</span><span class="v">✓ graphs mode</span></div>
+      <div class="kv"><span class="k">Network</span><span class="v">✓ auto-scale</span></div>
+      <div class="kv"><span class="k">Processes</span><span class="v">✓</span></div>
+      <div class="kv"><span class="k">GPU</span><span class="v">auto-detect</span></div>
+    </div>
+    <div class="cfg-card">
+      <h4>Process Settings</h4>
+      <div class="kv"><span class="k">Sort</span><span class="v">cpu lazy</span></div>
+      <div class="kv"><span class="k">Per-cpu usage</span><span class="v">false</span></div>
+      <div class="kv"><span class="k">Tree view</span><span class="v">false</span></div>
+      <div class="kv"><span class="k">CPU graphs</span><span class="v">per-process</span></div>
+      <div class="kv"><span class="k">Follow detail</span><span class="v">true</span></div>
+    </div>
+    <div class="cfg-card">
+      <h4>System</h4>
+      <div class="kv"><span class="k">Update interval</span><span class="v">2000ms</span></div>
+      <div class="kv"><span class="k">Uptime</span><span class="v">shown in CPU box</span></div>
+      <div class="kv"><span class="k">Temp scale</span><span class="v">Celsius</span></div>
+      <div class="kv"><span class="k">CPU watts</span><span class="v">shown</span></div>
+      <div class="kv"><span class="k">Battery</span><span class="v">shown with watts</span></div>
+    </div>
+  </div>

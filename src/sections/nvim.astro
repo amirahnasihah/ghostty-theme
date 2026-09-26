@@ -1,0 +1,92 @@
+---
+import Terminal from "../components/Terminal.astro";
+---
+
+<div class="section-title">📝 Neovim</div>
+  <p class="desc-block">LazyVim distro on lazy.nvim. Fully transparent background so Ghostty's blur shows through. VSCode-style keybinds, diagnostics, and autosave.</p>
+
+<h3>In the terminal</h3>
+<Terminal id="neovim" />
+
+
+  <div class="search-wrap">
+    <input class="search-input" type="text" placeholder="Search plugins…" oninput="filterPlugins(this.value)">
+  </div>
+
+  <h3>AI</h3>
+  <div class="cards plugin-cards">
+    <div class="card" data-tags="ai claude copilot"><div class="card-name"><span class="tag tag-ai">AI</span>claudecode.nvim</div><div class="card-desc">Claude Code integration — AI edits without leaving Neovim.</div></div>
+    <div class="card" data-tags="ai copilot github"><div class="card-name"><span class="tag tag-ai">AI</span>copilot.lua + blink-copilot</div><div class="card-desc">GitHub Copilot piped through the blink.cmp completion engine.</div></div>
+  </div>
+
+  <h3>Completion & LSP</h3>
+  <div class="cards plugin-cards">
+    <div class="card" data-tags="completion lsp blink"><div class="card-name"><span class="tag tag-ed">editor</span>blink.cmp</div><div class="card-desc">Fast Rust-based completion engine. Replaces nvim-cmp.</div></div>
+    <div class="card" data-tags="lsp config"><div class="card-name"><span class="tag tag-ed">editor</span>nvim-lspconfig</div><div class="card-desc">LSP client configs for all language servers.</div></div>
+    <div class="card" data-tags="mason install lsp"><div class="card-name"><span class="tag tag-ed">editor</span>mason.nvim</div><div class="card-desc">Install/manage LSPs, linters, formatters from inside Neovim.</div></div>
+    <div class="card" data-tags="mason lsp bridge"><div class="card-name"><span class="tag tag-ed">editor</span>mason-lspconfig</div><div class="card-desc">Bridge between mason and lspconfig.</div></div>
+    <div class="card" data-tags="format conform"><div class="card-name"><span class="tag tag-ed">editor</span>conform.nvim</div><div class="card-desc">Auto-format on save, per-filetype formatter config.</div></div>
+    <div class="card" data-tags="lint async"><div class="card-name"><span class="tag tag-ed">editor</span>nvim-lint</div><div class="card-desc">Async linting, reports via diagnostics API.</div></div>
+    <div class="card" data-tags="lua lazydev"><div class="card-name"><span class="tag tag-ed">editor</span>lazydev.nvim</div><div class="card-desc">Lua LSP tuned for Neovim config editing.</div></div>
+    <div class="card" data-tags="json schema yaml"><div class="card-name"><span class="tag tag-ed">editor</span>SchemaStore.nvim</div><div class="card-desc">JSON/YAML schema validation from the SchemaStore registry.</div></div>
+    <div class="card" data-tags="snippets completion"><div class="card-name"><span class="tag tag-ed">editor</span>friendly-snippets</div><div class="card-desc">Community snippet collection for completion.</div></div>
+  </div>
+
+  <h3>Treesitter & Syntax</h3>
+  <div class="cards plugin-cards">
+    <div class="card" data-tags="treesitter syntax highlight"><div class="card-name"><span class="tag tag-lang">lang</span>nvim-treesitter</div><div class="card-desc">Incremental syntax highlighting via tree-sitter parsers.</div></div>
+    <div class="card" data-tags="treesitter textobjects select"><div class="card-name"><span class="tag tag-lang">lang</span>nvim-treesitter-textobjects</div><div class="card-desc">Select, move, swap functions and classes as text objects.</div></div>
+    <div class="card" data-tags="html jsx autotag"><div class="card-name"><span class="tag tag-lang">lang</span>nvim-ts-autotag</div><div class="card-desc">Auto-close and auto-rename HTML/JSX tags using treesitter.</div></div>
+    <div class="card" data-tags="comments treesitter toggle"><div class="card-name"><span class="tag tag-lang">lang</span>ts-comments.nvim</div><div class="card-desc">Treesitter-aware comment toggling per language.</div></div>
+  </div>
+
+  <h3>UI</h3>
+  <div class="cards plugin-cards">
+    <div class="card" data-tags="theme colorscheme tokyonight"><div class="card-name"><span class="tag tag-ui">UI</span>tokyonight.nvim</div><div class="card-desc">Default colorscheme — dark blue/purple palette.</div></div>
+    <div class="card" data-tags="theme catppuccin colorscheme"><div class="card-name"><span class="tag tag-ui">UI</span>catppuccin</div><div class="card-desc">Alternative pastel colorscheme.</div></div>
+    <div class="card" data-tags="transparent background"><div class="card-name"><span class="tag tag-ui">UI</span>transparent.nvim</div><div class="card-desc">Removes all bg highlights — Neo-tree sidebar included. Ghostty blur shows through.</div></div>
+    <div class="card" data-tags="statusline lualine"><div class="card-name"><span class="tag tag-ui">UI</span>lualine.nvim</div><div class="card-desc">Status bar with mode, file, git branch, diagnostics.</div></div>
+    <div class="card" data-tags="bufferline tabs buffer"><div class="card-name"><span class="tag tag-ui">UI</span>bufferline.nvim</div><div class="card-desc">Buffer tabs at the top of the screen.</div></div>
+    <div class="card" data-tags="noice ui cmdline messages"><div class="card-name"><span class="tag tag-ui">UI</span>noice.nvim</div><div class="card-desc">Replaces cmdline, messages, and popups with floating UI panels.</div></div>
+    <div class="card" data-tags="snacks dashboard picker notify"><div class="card-name"><span class="tag tag-ui">UI</span>snacks.nvim</div><div class="card-desc">Dashboard, file picker, notifier, and various small utilities.</div></div>
+    <div class="card" data-tags="nui component library"><div class="card-name"><span class="tag tag-ui">UI</span>nui.nvim</div><div class="card-desc">UI component library — used by noice and others.</div></div>
+    <div class="card" data-tags="icons mini"><div class="card-name"><span class="tag tag-ui">UI</span>mini.icons</div><div class="card-desc">Icon provider across the whole setup.</div></div>
+    <div class="card" data-tags="markdown render inline"><div class="card-name"><span class="tag tag-ui">UI</span>render-markdown.nvim</div><div class="card-desc">In-buffer markdown rendering — styled headings, code blocks, tables.</div></div>
+  </div>
+
+  <h3>Editor</h3>
+  <div class="cards plugin-cards">
+    <div class="card" data-tags="flash jump motion label"><div class="card-name"><span class="tag tag-ed">editor</span>flash.nvim</div><div class="card-desc">Label-based cursor jumps — leap anywhere on screen instantly.</div></div>
+    <div class="card" data-tags="find replace grug far"><div class="card-name"><span class="tag tag-ed">editor</span>grug-far.nvim</div><div class="card-desc">Find & replace across files in a side panel. Regex + ripgrep.</div></div>
+    <div class="card" data-tags="todo fixme hack comments"><div class="card-name"><span class="tag tag-ed">editor</span>todo-comments.nvim</div><div class="card-desc">Highlights TODO/FIXME/HACK/NOTE/WARN in code with icons.</div></div>
+    <div class="card" data-tags="trouble diagnostic errors quickfix"><div class="card-name"><span class="tag tag-ed">editor</span>trouble.nvim</div><div class="card-desc">Diagnostic + quickfix list panel.</div></div>
+    <div class="card" data-tags="gitsigns git blame hunk"><div class="card-name"><span class="tag tag-ed">editor</span>gitsigns.nvim</div><div class="card-desc">Git gutter signs + inline blame with human-readable time (3d ago).</div></div>
+    <div class="card" data-tags="rename lsp inc live"><div class="card-name"><span class="tag tag-ed">editor</span>inc-rename.nvim</div><div class="card-desc">Live LSP rename with real-time preview as you type.</div></div>
+    <div class="card" data-tags="dial increment decrement boolean hex"><div class="card-name"><span class="tag tag-ed">editor</span>dial.nvim</div><div class="card-desc">Enhanced Ctrl+A/X — increments booleans, dates, hex colors.</div></div>
+    <div class="card" data-tags="yanky yank clipboard ring"><div class="card-name"><span class="tag tag-ed">editor</span>yanky.nvim</div><div class="card-desc">Yank history ring — cycle previous yanks with p/P.</div></div>
+    <div class="card" data-tags="session persistence restore"><div class="card-name"><span class="tag tag-ed">editor</span>persistence.nvim</div><div class="card-desc">Auto-saves and restores sessions per directory.</div></div>
+    <div class="card" data-tags="which key keybindings hints"><div class="card-name"><span class="tag tag-ed">editor</span>which-key.nvim</div><div class="card-desc">Popup showing available keybindings when you pause mid-chord.</div></div>
+    <div class="card" data-tags="mini ai textobjects bracket quote"><div class="card-name"><span class="tag tag-ed">editor</span>mini.ai</div><div class="card-desc">Extended a/i text objects — brackets, quotes, functions, arguments.</div></div>
+    <div class="card" data-tags="mini pairs autopair brackets quotes"><div class="card-name"><span class="tag tag-ed">editor</span>mini.pairs</div><div class="card-desc">Auto-pairs brackets and quotes as you type.</div></div>
+    <div class="card" data-tags="mini hipatterns color inline"><div class="card-name"><span class="tag tag-ed">editor</span>mini.hipatterns</div><div class="card-desc">Highlights hex colors inline and marks TODO patterns.</div></div>
+    <div class="card" data-tags="neotest testing runner"><div class="card-name"><span class="tag tag-ed">editor</span>neotest</div><div class="card-desc">Test runner framework — run tests from inside Neovim.</div></div>
+    <div class="card" data-tags="neotest go golang test"><div class="card-name"><span class="tag tag-ed">editor</span>neotest-golang</div><div class="card-desc">Go adapter for neotest.</div></div>
+    <div class="card" data-tags="markdown preview browser"><div class="card-name"><span class="tag tag-ed">editor</span>markdown-preview.nvim</div><div class="card-desc">Live markdown preview in browser, synced to cursor position.</div></div>
+    <div class="card" data-tags="plenary utility library"><div class="card-name"><span class="tag tag-ed">editor</span>plenary.nvim</div><div class="card-desc">Lua utility library — required by many plugins.</div></div>
+    <div class="card" data-tags="nio async io neotest"><div class="card-name"><span class="tag tag-ed">editor</span>nvim-nio</div><div class="card-desc">Async I/O library — neotest dependency.</div></div>
+  </div>
+
+  <h3>Custom Config Highlights</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Feature</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>Insert mode shortcuts</td><td>Ctrl+A (line start), Ctrl+E (end), Ctrl+D (del word fwd), Ctrl+K (del to EOL)</td></tr>
+      <tr><td>Autosave</td><td>FocusLost / BufLeave / WinLeave → silent write</td></tr>
+      <tr><td>Diagnostic icons</td><td>  ·  ·  ·  (VSCode style)</td></tr>
+      <tr><td>Git blame format</td><td>just now · 2h ago · 3d ago · 1w ago · 2mo ago</td></tr>
+      <tr><td>Neo-tree transparency</td><td>All NeoTree* highlight groups cleared on ColorScheme + FileType events</td></tr>
+      <tr><td>Inlay hints</td><td><code>#444b6a</code> + italic (VSCode dim style)</td></tr>
+      <tr><td>Float borders</td><td>Rounded everywhere</td></tr>
+      <tr><td>Plugin updates</td><td>Auto-checked, silent notify</td></tr>
+    </tbody>
+  </table></div>
