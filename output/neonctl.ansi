@@ -1,0 +1,123 @@
+[1mneonctl <command> [0m[32m[options][39m[0m[22m
+
+Commands:
+[36mneonctl auth[39m
+[90m└────────────────>[39m  Authenticate [aliases: login]
+[36mneonctl profile[39m
+[90m└────────────────>[39m  Manage named sets of Neon credentials [aliases: profiles]
+[36mneonctl api-keys[39m
+[90m└────────────────>[39m  Manage API keys [aliases: api-key]
+[36mneonctl api [path][39m
+[90m└────────────────>[39m  Call any Neon API route directly (authenticated passthroug
+                      h)
+[36mneonctl me[39m
+[90m└────────────────>[39m  Show current user
+[36mneonctl orgs[39m
+[90m└────────────────>[39m  Manage organizations [aliases: org]
+[36mneonctl projects[39m
+[90m└────────────────>[39m  Manage projects [aliases: project]
+[36mneonctl ip-allow[39m
+[90m└────────────────>[39m  Manage IP Allow
+[36mneonctl vpc[39m
+[90m└────────────────>[39m  Manage VPC endpoints and project VPC restrictions
+[36mneonctl neon-auth[39m
+[90m└────────────────>[39m  Manage Neon Auth
+[36mneonctl branches[39m
+[90m└────────────────>[39m  Manage branches [aliases: branch]
+[36mneonctl databases[39m
+[90m└────────────────>[39m  Manage databases [aliases: database, db]
+[36mneonctl roles[39m
+[90m└────────────────>[39m  Manage roles [aliases: role]
+[36mneonctl operations[39m
+[90m└────────────────>[39m  Manage operations [aliases: operation]
+[36mneonctl logs[39m
+[90m└────────────────>[39m  Query branch logs
+[36mneonctl snapshots[39m
+[90m└────────────────>[39m  Manage snapshots [aliases: snapshot]
+[36mneonctl inspect[39m
+[90m└────────────────>[39m  Inspect a branch's Postgres health and configuration [alia
+                      ses: inspection]
+[36mneonctl connection-string [branch][39m
+[90m└────────────────>[39m  Get connection string [aliases: cs]
+[36mneonctl psql [branch][39m
+[90m└────────────────>[39m  Connect to a database via psql
+[36mneonctl set-context[39m
+[90m└────────────────>[39m  Deprecated: use `neonctl link`. Set the .neon context (raw
+                       write).
+[36mneonctl checkout [id|name][39m
+[90m└────────────────>[39m  Pin a branch in the local context (.neon) so subsequent co
+                      mmands target it
+[36mneonctl link[39m
+[90m└────────────────>[39m  Link the current directory to a Neon project
+[36mneonctl open[39m
+[90m└────────────────>[39m  Open the linked project in the Neon Console
+[36mneonctl claim[39m
+[90m└────────────────>[39m  Create and claim temporary Neon projects [aliases: claimab
+                      le]
+[36mneonctl init[39m
+[90m└────────────────>[39m  Set up this directory for Neon: agent tooling, a linked pr
+                      oject, and neon.ts. In an empty directory, scaffolds a tem
+                      plate first. Skills needs Node.js 22.20 or newer.
+[36mneonctl mcp[39m
+[90m└────────────────>[39m  Install the Neon MCP server into coding agents
+[36mneonctl plugins[39m
+[90m└────────────────>[39m  Install the Neon plugin into coding agents
+[36mneonctl skills[39m
+[90m└────────────────>[39m  Install Neon agent skills into coding agents
+[36mneonctl data-api[39m
+[90m└────────────────>[39m  Manage the Neon Data API for a database
+[36mneonctl functions[39m
+[90m└────────────────>[39m  Manage Neon Functions [aliases: function]
+[36mneonctl dev[39m
+[90m└────────────────>[39m  Run Neon Functions locally with a dev server
+[36mneonctl diff [compare-branch][39m
+[90m└────────────────>[39m  Show a git-style schema diff between the current branch an
+                      d another branch
+[36mneonctl config[39m
+[90m└────────────────>[39m  Manage a branch with a neon.ts policy
+[36mneonctl status[39m
+[90m└────────────────>[39m  Show the branch's live Neon state (alias of `config status
+                      `)
+[36mneonctl deploy[39m
+[90m└────────────────>[39m  Apply a neon.ts policy to a branch (alias for `config appl
+                      y`)
+[36mneonctl env[39m
+[90m└────────────────>[39m  Manage a branch's Neon env variables locally
+[36mneonctl buckets[39m
+[90m└────────────────>[39m  Manage branch object-storage buckets and their objects [al
+                      iases: bucket]
+[36mneonctl bootstrap [directory][39m
+[90m└────────────────>[39m  Scaffold a new project from a Neon starter template, then
+                      install agent tooling and link a Neon project
+[36mneonctl completion[39m
+[90m└────────────────>[39m  generate completion script
+
+Global options:
+[32m-o, --output[39m
+[90m└────────────────>[39m  [38;2;210;210;210mSet output format [string] [choices: "jso
+                    n", "yaml", "table"] [default: "table"]
+[32m--config-dir[39m
+[90m└────────────────>[39m  [38;2;210;210;210mPath to config directory [string] [defaul
+                    t: "~/.config/neon"]
+[32m--profile[39m
+[90m└────────────────>[39m  [38;2;210;210;210mNamed credentials to use, from profiles.j
+                    son (default: NEON_PROFILE, else DEFAULT) [string]
+[32m--api-key[39m
+[90m└────────────────>[39m  [38;2;210;210;210mAPI key [string] [default: NEON_API_KEY]
+[32m--color[39m
+[90m└────────────────>[39m  [38;2;210;210;210mColorize the output. Example: --no-color,
+                     --color false [boolean] [default: true]
+[32m--analytics[39m
+[90m└────────────────>[39m  [38;2;210;210;210mManage analytics. Example: --no-analytics
+                    , --analytics false [boolean] [default: true]
+[32m-h, --help[39m
+[90m└────────────────>[39m  [38;2;210;210;210mShow help [boolean] [default: false]
+[32m-v, --version[39m
+[90m└────────────────>[39m  [38;2;210;210;210mShow version number [boolean]
+
+Options:
+[32m--context-file[39m
+[90m└────────────────>[39m  [38;2;210;210;210mContext file [string] [default: (current-
+                    context-file)]
+
+For more information, visit https://neon.com/docs/reference/neon-cli

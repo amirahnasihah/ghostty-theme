@@ -1,0 +1,25 @@
+Command line interface for Daytona Sandboxes
+
+Usage:
+  daytona [flags]
+  daytona [command]
+
+User
+  login         Log in to Daytona
+  logout        Logout from Daytona
+  organization  Manage Daytona organizations
+
+Sandbox
+  archive       Archive a sandbox
+  create        Create a new sandbox
+  delete        Delete a sandbox
+  exec          Execute a command in a sandbox
+  info          Get sandbox info
+  list          List sandboxes
+  pause         Pause a sandbox
+  preview-url   Get signed preview URL for a sandbox port
+  snapshot      Manage Daytona snapshots
+  ssh           SSH into a sandbox
+  start         Start a sandbox
+  stop          Stop a sandbox
+  volume        Manage Daytona volumes

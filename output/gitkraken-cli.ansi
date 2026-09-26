@@ -1,0 +1,24 @@
+
+Welcome to the GitKraken CLI — an AI-powered, premium developer experience that enhances Git workflows across any repository.
+⚠️ You’re using the public preview of the new GitKraken CLI. Features may evolve before general availability.
+
+Usage:
+  gk [flags]
+  gk [command]
+
+AUTHENTICATING
+  auth         Authenticate with the GitKraken platform
+  provider     Add or remove provider tokens
+  whoami       Show the authenticated GitKraken user, active organization, and connected providers
+
+CORE COMMANDS
+  agents       List AI agents and their integration status
+  ai           Use AI in the CLI
+  graph        Display commit graph in current repository
+  issue        Manage your issues
+  mcp          Start a local MCP server for your favorite MCP client to interact with
+  organization Manage your Gitkraken organizations
+  pr           Manage your pull requests
+  repo         Work with repositories
+  work         Interact with your work. Alias: 'w'
+  workspace    Interact with your workspaces. Alias: 'ws'

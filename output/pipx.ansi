@@ -1,0 +1,20 @@
+[1;34musage: [0m[1;35mpipx[0m [[32m-h[0m] [[36m--version[0m]
+            [32m{install,install-all,uninject,inject,expose,unexpose,pin,unpin,upgrade,upgrade-all,upgrade-shared,uninstall,uninstall-all,reset,reinstall,reinstall-all,health,repair,list,interpreter,cache,manifest,run,exec,runpip,ensurepath,environment,completions,help} ...[0m
+
+Install and execute apps from Python packages.
+
+Binaries can either be installed globally into isolated Virtual Environments
+or run directly in a temporary Virtual Environment.
+
+Virtual Environment location is ~/Library/Application Support/pipx/venvs.
+Symlinks to apps are placed in ~/.local/bin.
+Symlinks to manual pages are placed in ~/.local/share/man.
+
+optional environment variables:
+  PIPX_HOME              Overrides default pipx location. Virtual Environments will be installed
+                        to $PIPX_HOME/venvs.
+  PIPX_GLOBAL_HOME       Used instead of PIPX_HOME when the `--global` option is given.
+  PIPX_BIN_DIR           Overrides location of app installations. Apps are symlinked or copied
+                        here.
+  PIPX_GLOBAL_BIN_DIR    Used instead of PIPX_BIN_DIR when the `--global` option is given.
+  PIPX_MAN_DIR           Overrides location of manual pages installations. Manual pages are

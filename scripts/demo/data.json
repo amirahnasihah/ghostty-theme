@@ -1,0 +1,1 @@
+{"theme":"Cyber Wave","font":{"family":"Hack Nerd Font","size":8},"opacity":0.85,"shaders":["cursor_warp_faded.glsl","ripple_cursor_custom.glsl"],"tools":["ghostty","zellij","nvim","lazygit","btop"]}

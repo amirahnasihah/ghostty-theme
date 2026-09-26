@@ -1,0 +1,4 @@
+# Notes
+
+- ghostty
+- zellij

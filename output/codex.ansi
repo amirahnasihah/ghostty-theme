@@ -1,0 +1,25 @@
+Codex CLI
+
+If no subcommand is specified, options will be forwarded to the interactive CLI.
+
+[1m[4mUsage:[0m codex [OPTIONS] [PROMPT]
+       codex [OPTIONS] <COMMAND> [ARGS]
+
+[1m[4mCommands:[0m
+  [1magents[0m            Browse all agent sessions on the shared local app-server daemon
+  [1mexec[0m              Run Codex non-interactively [aliases: e]
+  [1mreview[0m            Run a code review non-interactively
+  [1mlogin[0m             Manage login
+  [1mlogout[0m            Remove stored authentication credentials
+  [1mmcp[0m               Manage external MCP servers for Codex
+  [1mplugin[0m            Manage Codex plugins
+  [1mmcp-server[0m        Start Codex as an MCP server (stdio)
+  [1mapp-server[0m        [experimental] Run the app server or related tooling
+  [1mremote-control[0m    [experimental] Manage the app-server daemon with remote control enabled
+  [1mapp[0m               Launch the Desktop app (opens the app installer if missing)
+  [1mcompletion[0m        Generate shell completion scripts
+  [1mupdate[0m            Update Codex to the latest version
+  [1mdoctor[0m            Diagnose local Codex installation, config, auth, and runtime health
+  [1msandbox[0m           Run commands within a Codex-provided sandbox
+  [1mdebug[0m             Debugging tools
+  [1mapply[0m             Apply the latest diff produced by Codex agent as a `git apply` to your local

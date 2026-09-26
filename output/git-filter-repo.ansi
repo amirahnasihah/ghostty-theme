@@ -1,0 +1,20 @@
+GIT-FILTER-REPO(1)                Git Manual                GIT-FILTER-REPO(1)
+
+NNAAMMEE
+       git-filter-repo - Rewrite repository history
+
+SSYYNNOOPPSSIISS
+       _g_i_t _f_i_l_t_e_r_-_r_e_p_o --analyze
+       _g_i_t _f_i_l_t_e_r_-_r_e_p_o [<path_filtering_options>] [<content_filtering_options>]
+               [<ref_renaming_options>] [<commit_message_filtering_options>]
+               [<name_or_email_filtering_options>] [<parent_rewriting_options>]
+               [<generic_callback_options>] [<miscellaneous_options>]
+
+
+DDEESSCCRRIIPPTTIIOONN
+       Rapidly rewrite entire repository history using user-specified filters.
+       This is a destructive operation which should not be used lightly; it
+       writes new commits, trees, tags, and blobs corresponding to (but
+       filtered from) the original objects in the repository, then deletes the
+       original history and leaves only the new. See the section called
+       “DISCUSSION” for more details on the ramifications of using this tool.
