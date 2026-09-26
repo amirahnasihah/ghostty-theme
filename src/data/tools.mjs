@@ -25,7 +25,8 @@ export const groups = [
 export const tools = [
   // ── shell ─────────────────────────────────────────────
   { id: "starship", group: "shell", section: "starship", mode: "cli",
-    demo: "starship prompt --status=0 --cmd-duration=1234 --terminal-width=90 | sed -E 's/%\\{|%\\}//g'" },
+    demo: "starship prompt",
+    run: "starship prompt --status=0 --cmd-duration=1234 --terminal-width=90 | sed -E 's/%\\{|%\\}//g'" },
   { id: "zoxide", group: "shell", mode: "cli",
     demo: "zoxide add src docs && zoxide query --list --score" },
   { id: "fzf", group: "shell", mode: "tui",
@@ -128,7 +129,8 @@ export const tools = [
 
   // ── apps (casks without a CLI) ────────────────────────
   { id: "ghostty", group: "apps", section: "ghostty", mode: "cli",
-    demo: "ghostty +show-config | grep -vE '^(keybind|palette)' | head -30" },
+    demo: "ghostty +show-config",
+    run: "ghostty +show-config | grep -vE '^(keybind|palette)' | head -30" },
   { id: "cursor", group: "apps" },
   { id: "visual-studio-code", group: "apps", section: "vscode" },
   { id: "docker-desktop", group: "apps" },
