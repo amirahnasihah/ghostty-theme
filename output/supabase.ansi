@@ -1,0 +1,27 @@
+Supabase CLI 2.65.5
+
+Usage:
+  supabase [command]
+
+Quick Start:
+  bootstrap            Bootstrap a Supabase project from a starter template
+
+Local Development:
+  db                   Manage Postgres databases
+  gen                  Run code generation tools
+  init                 Initialize a local project
+  inspect              Tools to inspect your Supabase project
+  link                 Link to a Supabase project
+  login                Authenticate using an access token
+  logout               Log out and delete access tokens locally
+  migration            Manage database migration scripts
+  seed                 Seed a Supabase project from supabase/config.toml
+  services             Show versions of all Supabase services
+  start                Start containers for Supabase local development
+  status               Show status of local Supabase containers
+  stop                 Stop all local Supabase containers
+  test                 Run tests on local Supabase containers
+  unlink               Unlink a Supabase project
+
+A new version of Supabase CLI is available: [93mv2.118.0[0m (currently installed v2.65.5)
+We recommend updating regularly for new features and bug fixes: [1mhttps://supabase.com/docs/guides/cli/getting-started#updating-the-supabase-cli[0m

@@ -1,0 +1,42 @@
+atuin 18.16.1
+Ellie Huxtable <ellie@atuin.sh>
+Magical shell history
+
+[1m[32mUsage:[0m
+  [1m[32matuin[0m [32m<COMMAND>[0m
+
+[1m[33mCommands:[0m
+  [1m[32msetup[0m            Setup Atuin features
+  [1m[32mhistory[0m          Manipulate shell history
+  [1m[32mhook[0m             Manage AI-agent shell hooks
+  [1m[32mimport[0m           Import shell history from file
+  [1m[32mstats[0m            Calculate statistics for your history
+  [1m[32msearch[0m           Interactive history search
+  [1m[32msync[0m             Sync with the configured server
+  [1m[32mlogin[0m            Login to the configured server
+  [1m[32mlogout[0m           Log out
+  [1m[32mregister[0m         Register with the configured server
+  [1m[32mkey[0m              Print the encryption key for transfer to another machine
+  [1m[32mstatus[0m           Display the sync status
+  [1m[32maccount[0m          Manage your sync account
+  [1m[32mkv[0m               Get or set small key-value pairs
+  [1m[32mstore[0m            Manage the atuin data store
+  [1m[32mdotfiles[0m         Manage your dotfiles with Atuin
+  [1m[32mscripts[0m          Manage your scripts with Atuin
+  [1m[32minit[0m             Print Atuin's shell init script
+  [1m[32minfo[0m             Information about dotfiles locations and ENV vars
+  [1m[32mdoctor[0m           Run the doctor to check for common issues
+  [1m[32mwrapped[0m          
+  [1m[32mdaemon[0m           *Experimental* Manage the background daemon
+  [1m[32mdefault-config[0m   Print the default atuin configuration (config.toml)
+  [1m[32mconfig[0m           
+  [1m[32mai[0m               Run the AI assistant
+  [1m[32mpty-proxy[0m        PTY proxy for atuin
+  [1m[32muuid[0m             Generate a UUID
+  [1m[32mcontributors[0m     
+  [1m[32mgen-completions[0m  Generate shell completions
+  [1m[32mhelp[0m             Print this message or the help of the given subcommand(s)
+
+[1m[33mOptions:[0m
+  [1m[32m-h[0m, [1m[32m--help[0m     Print help
+  [1m[32m-V[0m, [1m[32m--version[0m  Print version

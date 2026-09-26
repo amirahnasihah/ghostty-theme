@@ -1,0 +1,22 @@
+---
+import Terminal from "../components/Terminal.astro";
+---
+
+<div class="section-title">🐢 Atuin</div>
+  <p class="desc-block">Shell history replacement. Replaces Ctrl+R with a full-screen fuzzy TUI. Syncs history encrypted across all your machines.</p>
+
+<h3>In the terminal</h3>
+<Terminal id="atuin" />
+
+
+  <div class="cards">
+    <div class="card"><div class="card-name">Smart Search</div><div class="card-desc">Full-screen history TUI with filtering by host, directory, exit code, and time.</div></div>
+    <div class="card"><div class="card-name">Encrypted Sync</div><div class="card-desc">End-to-end encrypted history sync across machines via Atuin server.</div></div>
+    <div class="card"><div class="card-name">Stats</div><div class="card-desc">Run <code>atuin stats</code> to see most-used commands and usage patterns.</div></div>
+    <div class="card"><div class="card-name">Install Method</div><div class="card-desc">curl installer → <code>~/.atuin/bin/</code>. Also listed in Brewfile as fallback.</div></div>
+  </div>
+
+  <h3>Shell Init (<code>.zshrc</code>)</h3>
+  <div class="codeblock"><span style="color:var(--fg-dim)"># === atuin ===</span>
+<span style="color:var(--blue)">.</span> <span style="color:var(--green)">"$HOME/.atuin/bin/env"</span>
+<span style="color:var(--blue)">eval</span> <span style="color:var(--green)">"$(atuin init zsh)"</span></div>

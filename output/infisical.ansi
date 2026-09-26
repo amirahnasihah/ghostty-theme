@@ -1,0 +1,25 @@
+Infisical is a simple, end-to-end encrypted service that enables teams to sync and manage their environment variables across their development life cycle.
+
+Usage:
+  infisical [command]
+
+Available Commands:
+  agent           Used to launch a client daemon that streamlines authentication and secret retrieval processes in various environments
+  bootstrap       Used to bootstrap your Infisical instance
+  cert-manager    Certificate management commands
+  dynamic-secrets Used to list dynamic secrets
+  export          Used to export environment variables to a file
+  gateway         Run the Infisical gateway or manage its systemd service
+  help            Help about any command
+  init            Used to connect your local project with Infisical project
+  kmip            Used to manage KMIP servers
+  login           Login into your Infisical account
+  pam             PAM-related commands
+  proxy           Used to run Infisical proxy server
+  relay           Relay-related commands
+  reset           Used to delete all Infisical related data on your machine
+  run             Used to inject environments variables into your application process
+  scan            Scan for leaked secrets in git history, directories, and files
+  secrets         Used to create, read update and delete secrets
+  service-token   Manage service tokens
+  ssh             Used to issue SSH credentials

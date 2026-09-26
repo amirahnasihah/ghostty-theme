@@ -1,0 +1,27 @@
+---
+import Shot from "../components/Shot.astro";
+import Terminal from "../components/Terminal.astro";
+---
+
+<div class="section-title">🦆 yazi</div>
+<p class="desc-block">
+  <a href="https://yazi-rs.github.io" target="_blank" rel="noopener">yazi</a> — blazing fast terminal file manager
+  written in Rust. Three columns (parent · current · preview) with syntax-highlighted previews via bat, and image
+  previews in Ghostty.
+</p>
+
+<h3>In the terminal</h3>
+<Shot id="yazi" alt="yazi file manager in Ghostty" />
+<Terminal id="yazi" />
+
+<h3>Shell wrapper (<code>.zshrc</code>)</h3>
+<p class="desc-block"><code>y</code> opens yazi and <code>cd</code>s into the directory you were in when you quit.</p>
+<div class="codeblock">{`function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+    yazi --cwd-file="$tmp" "$@"
+    local cwd="$(cat -- "$tmp")"
+    if [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+}`}</div>

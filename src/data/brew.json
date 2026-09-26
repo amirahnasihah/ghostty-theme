@@ -1,0 +1,482 @@
+[
+  {
+    "id": "asciinema",
+    "type": "formula",
+    "url": "https://asciinema.org",
+    "desc": "Record and share terminal sessions"
+  },
+  {
+    "id": "awscli",
+    "type": "formula",
+    "url": "https://aws.amazon.com/cli/",
+    "desc": "Official Amazon AWS command-line interface"
+  },
+  {
+    "id": "bat",
+    "type": "formula",
+    "url": "https://github.com/sharkdp/bat",
+    "desc": "Clone of cat(1) with syntax highlighting and Git integration"
+  },
+  {
+    "id": "biome",
+    "type": "formula",
+    "url": "https://biomejs.dev/",
+    "desc": "Toolchain of the web"
+  },
+  {
+    "id": "blackhole-2ch",
+    "type": "cask",
+    "url": "https://existential.audio/blackhole/",
+    "desc": "Virtual Audio Driver"
+  },
+  {
+    "id": "btop",
+    "type": "formula",
+    "url": "https://github.com/aristocratos/btop",
+    "desc": "Resource monitor. C++ version and continuation of bashtop and bpytop"
+  },
+  {
+    "id": "cliclick",
+    "type": "formula",
+    "url": "https://www.bluem.net/jump/cliclick/",
+    "desc": "Tool for emulating mouse and keyboard events"
+  },
+  {
+    "id": "cloudflared",
+    "type": "formula",
+    "url": "https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/",
+    "desc": "Cloudflare Tunnel client (formerly Argo Tunnel)"
+  },
+  {
+    "id": "cmake",
+    "type": "formula",
+    "url": "https://www.cmake.org/",
+    "desc": "Cross-platform make"
+  },
+  {
+    "id": "codex",
+    "type": "cask",
+    "url": "https://github.com/openai/codex",
+    "desc": "OpenAI's coding agent that runs in your terminal"
+  },
+  {
+    "id": "composer",
+    "type": "formula",
+    "url": "https://getcomposer.org/",
+    "desc": "Dependency Manager for PHP"
+  },
+  {
+    "id": "cursor",
+    "type": "cask",
+    "url": "https://www.cursor.com/",
+    "desc": "Write, edit, and chat about your code with AI"
+  },
+  {
+    "id": "daytona",
+    "type": "formula",
+    "url": "https://daytona.io",
+    "desc": "Daytona CLI"
+  },
+  {
+    "id": "dbeaver-community",
+    "type": "cask",
+    "url": "https://dbeaver.io/",
+    "desc": "Universal database tool and SQL client"
+  },
+  {
+    "id": "direnv",
+    "type": "formula",
+    "url": "https://direnv.net/",
+    "desc": "Load/unload environment variables based on $PWD"
+  },
+  {
+    "id": "docker",
+    "type": "formula",
+    "url": "https://www.docker.com/",
+    "desc": "Pack, ship and run any application as a lightweight container"
+  },
+  {
+    "id": "docker-desktop",
+    "type": "cask",
+    "url": "https://www.docker.com/products/docker-desktop",
+    "desc": "App to build and share containerised applications and microservices"
+  },
+  {
+    "id": "eza",
+    "type": "formula",
+    "url": "https://eza.rocks",
+    "desc": "Modern, maintained replacement for ls"
+  },
+  {
+    "id": "fastfetch",
+    "type": "formula",
+    "url": "https://github.com/fastfetch-cli/fastfetch",
+    "desc": "Like neofetch, but much faster because written mostly in C"
+  },
+  {
+    "id": "ffmpeg",
+    "type": "formula",
+    "url": "https://ffmpeg.org/",
+    "desc": "Play, record, convert, and stream select audio and video codecs"
+  },
+  {
+    "id": "figlet",
+    "type": "formula",
+    "url": "https://www.figlet.org/",
+    "desc": "Banner-like program prints strings as ASCII art"
+  },
+  {
+    "id": "flyctl",
+    "type": "formula",
+    "url": "https://fly.io",
+    "desc": "Command-line tools for fly.io services"
+  },
+  {
+    "id": "font-hack-nerd-font",
+    "type": "cask",
+    "url": "https://github.com/ryanoasis/nerd-fonts",
+    "desc": ""
+  },
+  {
+    "id": "font-jetbrains-mono-nerd-font",
+    "type": "cask",
+    "url": "https://github.com/ryanoasis/nerd-fonts",
+    "desc": ""
+  },
+  {
+    "id": "fzf",
+    "type": "formula",
+    "url": "https://junegunn.github.io/fzf/",
+    "desc": "Command-line fuzzy finder written in Go"
+  },
+  {
+    "id": "gcloud-cli",
+    "type": "cask",
+    "url": "https://cloud.google.com/cli/",
+    "desc": "Set of tools to manage resources and applications hosted on Google Cloud"
+  },
+  {
+    "id": "gh",
+    "type": "formula",
+    "url": "https://cli.github.com/",
+    "desc": "GitHub command-line tool"
+  },
+  {
+    "id": "ghostty",
+    "type": "cask",
+    "url": "https://ghostty.org/",
+    "desc": "Terminal emulator that uses platform-native UI and GPU acceleration"
+  },
+  {
+    "id": "gifsicle",
+    "type": "formula",
+    "url": "https://www.lcdf.org/gifsicle/",
+    "desc": "GIF image/animation creator/editor"
+  },
+  {
+    "id": "git-filter-repo",
+    "type": "formula",
+    "url": "https://github.com/newren/git-filter-repo",
+    "desc": "Quickly rewrite git repository history"
+  },
+  {
+    "id": "git-lfs",
+    "type": "formula",
+    "url": "https://git-lfs.com/",
+    "desc": "Git extension for versioning large files"
+  },
+  {
+    "id": "gitkraken-cli",
+    "type": "cask",
+    "url": "https://github.com/gitkraken/gk-cli",
+    "desc": "CLI for GitKraken"
+  },
+  {
+    "id": "go",
+    "type": "formula",
+    "url": "https://go.dev/",
+    "desc": "Open source programming language to build simple/reliable/efficient software"
+  },
+  {
+    "id": "golangci-lint",
+    "type": "formula",
+    "url": "https://golangci-lint.run/",
+    "desc": "Fast linters runner for Go"
+  },
+  {
+    "id": "herdr",
+    "type": "formula",
+    "url": "https://herdr.dev",
+    "desc": "Agent multiplexer that lives in your terminal"
+  },
+  {
+    "id": "httpie",
+    "type": "formula",
+    "url": "https://httpie.io/",
+    "desc": "User-friendly cURL replacement (command-line HTTP client)"
+  },
+  {
+    "id": "imagemagick",
+    "type": "formula",
+    "url": "https://imagemagick.org",
+    "desc": "Tools and libraries to manipulate images in select formats"
+  },
+  {
+    "id": "infisical",
+    "type": "formula",
+    "url": "https://infisical.com",
+    "desc": "The official Infisical CLI"
+  },
+  {
+    "id": "jq",
+    "type": "formula",
+    "url": "https://jqlang.github.io/jq/",
+    "desc": "Lightweight and flexible command-line JSON processor"
+  },
+  {
+    "id": "lazygit",
+    "type": "formula",
+    "url": "https://github.com/jesseduffield/lazygit/",
+    "desc": "Simple terminal UI for git commands"
+  },
+  {
+    "id": "microsoft-excel",
+    "type": "cask",
+    "url": "https://www.microsoft.com/en-US/microsoft-365/excel",
+    "desc": "Spreadsheet software"
+  },
+  {
+    "id": "neonctl",
+    "type": "formula",
+    "url": "https://neon.tech/docs/reference/neon-cli",
+    "desc": "Neon CLI tool"
+  },
+  {
+    "id": "neovim",
+    "type": "formula",
+    "url": "https://neovim.io/",
+    "desc": "Ambitious Vim-fork focused on extensibility and agility"
+  },
+  {
+    "id": "ngrok",
+    "type": "cask",
+    "url": "https://ngrok.com/",
+    "desc": "Reverse proxy, secure introspectable tunnels to localhost"
+  },
+  {
+    "id": "nodebrew",
+    "type": "formula",
+    "url": "https://github.com/hokaccha/nodebrew",
+    "desc": "Node.js version manager"
+  },
+  {
+    "id": "ollama",
+    "type": "formula",
+    "url": "https://ollama.com/",
+    "desc": "Create, run, and share large language models (LLMs)"
+  },
+  {
+    "id": "php",
+    "type": "formula",
+    "url": "https://www.php.net/",
+    "desc": "General-purpose scripting language"
+  },
+  {
+    "id": "pipx",
+    "type": "formula",
+    "url": "https://pipx.pypa.io",
+    "desc": "Execute binaries from Python packages in isolated environments"
+  },
+  {
+    "id": "platformio",
+    "type": "formula",
+    "url": "https://platformio.org/",
+    "desc": "Your Gateway to Embedded Software Development Excellence"
+  },
+  {
+    "id": "pnpm",
+    "type": "formula",
+    "url": "https://pnpm.io/",
+    "desc": "Fast, disk space efficient package manager"
+  },
+  {
+    "id": "poppler",
+    "type": "formula",
+    "url": "https://poppler.freedesktop.org/",
+    "desc": "PDF rendering library (based on the xpdf-3.0 code base)"
+  },
+  {
+    "id": "postgresql@14",
+    "type": "formula",
+    "url": "https://www.postgresql.org/",
+    "desc": "Object-relational database system"
+  },
+  {
+    "id": "python@3.12",
+    "type": "formula",
+    "url": "https://www.python.org/",
+    "desc": "Interpreted, interactive, object-oriented programming language"
+  },
+  {
+    "id": "python@3.13",
+    "type": "formula",
+    "url": "https://www.python.org/",
+    "desc": "Interpreted, interactive, object-oriented programming language"
+  },
+  {
+    "id": "python@3.14",
+    "type": "formula",
+    "url": "https://www.python.org/",
+    "desc": "Interpreted, interactive, object-oriented programming language"
+  },
+  {
+    "id": "qpdf",
+    "type": "formula",
+    "url": "https://qpdf.sourceforge.io/",
+    "desc": "Tools for and transforming and inspecting PDF files"
+  },
+  {
+    "id": "rclone",
+    "type": "formula",
+    "url": "https://rclone.org/",
+    "desc": "Rsync for cloud storage"
+  },
+  {
+    "id": "rectangle",
+    "type": "cask",
+    "url": "https://rectangleapp.com/",
+    "desc": "Move and resize windows using keyboard shortcuts or snap areas"
+  },
+  {
+    "id": "ripgrep",
+    "type": "formula",
+    "url": "https://github.com/BurntSushi/ripgrep",
+    "desc": "Search tool like grep and The Silver Searcher"
+  },
+  {
+    "id": "rtk",
+    "type": "formula",
+    "url": "https://www.rtk-ai.app/",
+    "desc": "CLI proxy to minimize LLM token consumption"
+  },
+  {
+    "id": "rustdesk",
+    "type": "cask",
+    "url": "https://rustdesk.com/",
+    "desc": "Open source virtual/remote desktop application"
+  },
+  {
+    "id": "sesh",
+    "type": "formula",
+    "url": "https://github.com/joshmedeski/sesh",
+    "desc": "Smart terminal session manager"
+  },
+  {
+    "id": "session-manager-plugin",
+    "type": "cask",
+    "url": "https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html",
+    "desc": "Plugin for AWS CLI to start and end sessions that connect to managed instances"
+  },
+  {
+    "id": "starship",
+    "type": "formula",
+    "url": "https://starship.rs/",
+    "desc": "Cross-shell prompt for astronauts"
+  },
+  {
+    "id": "supabase",
+    "type": "formula",
+    "url": "https://supabase.com",
+    "desc": "Supabase CLI"
+  },
+  {
+    "id": "tailscale-app",
+    "type": "cask",
+    "url": "https://tailscale.com/",
+    "desc": "Mesh VPN based on WireGuard"
+  },
+  {
+    "id": "tectonic",
+    "type": "formula",
+    "url": "https://tectonic-typesetting.github.io/",
+    "desc": "Modernized, complete, self-contained TeX/LaTeX engine"
+  },
+  {
+    "id": "terraform",
+    "type": "formula",
+    "url": "https://www.terraform.io/",
+    "desc": "Tool to build, change, and version infrastructure"
+  },
+  {
+    "id": "tmux",
+    "type": "formula",
+    "url": "https://tmux.github.io/",
+    "desc": "Terminal multiplexer"
+  },
+  {
+    "id": "trash",
+    "type": "formula",
+    "url": "https://hasseg.org/trash/",
+    "desc": "CLI tool that moves files or folder to the trash"
+  },
+  {
+    "id": "tree",
+    "type": "formula",
+    "url": "https://oldmanprogrammer.net/source.php?dir=projects/tree",
+    "desc": "Display directories as trees (with optional color/HTML output)"
+  },
+  {
+    "id": "visual-studio-code",
+    "type": "cask",
+    "url": "https://code.visualstudio.com/",
+    "desc": "Open-source code editor"
+  },
+  {
+    "id": "wget",
+    "type": "formula",
+    "url": "https://www.gnu.org/software/wget/",
+    "desc": "Internet file retriever"
+  },
+  {
+    "id": "whisper.cpp",
+    "type": "formula",
+    "url": "https://github.com/ggml-org/whisper.cpp",
+    "desc": "Port of OpenAI's Whisper model in C/C++"
+  },
+  {
+    "id": "xnapper",
+    "type": "cask",
+    "url": "https://xnapper.com/",
+    "desc": "Screenshot tool"
+  },
+  {
+    "id": "yazi",
+    "type": "formula",
+    "url": "https://yazi-rs.github.io",
+    "desc": "Blazing fast terminal file manager written in Rust, based on async I/O"
+  },
+  {
+    "id": "zellij",
+    "type": "formula",
+    "url": "https://zellij.dev",
+    "desc": "Pluggable terminal workspace, with terminal multiplexer as the base feature"
+  },
+  {
+    "id": "zoxide",
+    "type": "formula",
+    "url": "https://github.com/ajeetdsouza/zoxide",
+    "desc": "Shell extension to navigate your filesystem faster"
+  },
+  {
+    "id": "zsh-autosuggestions",
+    "type": "formula",
+    "url": "https://github.com/zsh-users/zsh-autosuggestions",
+    "desc": "Fish-like fast/unobtrusive autosuggestions for zsh"
+  },
+  {
+    "id": "zsh-syntax-highlighting",
+    "type": "formula",
+    "url": "https://github.com/zsh-users/zsh-syntax-highlighting",
+    "desc": "Fish shell like syntax highlighting for zsh"
+  }
+]

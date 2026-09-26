@@ -1,0 +1,24 @@
+
+  [37mSesh is a smart terminal session manager that helps you create and manage tmux sessions quickly and easily using zoxide.[m
+         
+  [1;34mUSAGE[m  
+         
+    [37msesh [command] [--flags][m  
+            
+  [1;34mCOMMANDS[m  
+            
+    [36mclone[m [--flags]       [37mClone a git repo and connect to it as a session[m
+    [36mcompletion[m [command]  [37mGenerate the autocompletion script for the specified shell[m
+    [36mconnect[m [--flags]     [37mConnect to the given session[m
+    [36mhelp[m [command]        [37mHelp about any command[m
+    [36mlast[m                  [37mConnect to the last tmux session[m
+    [36mlist[m [--flags]        [37mList sessions[m
+    [36mpicker[m [--flags]      [37mInteractive session picker[m
+    [36mpreview[m               [37mPreview a session or directory[m
+    [36mroot[m                  [37mShow the root from the active session[m
+         
+  [1;34mFLAGS[m  
+         
+    [35m-C --config[m           [37mPath to config file[m
+    [35m-h --help[m             [37mHelp for sesh[m
+    [35m-v --version[m          [37mVersion for sesh[m

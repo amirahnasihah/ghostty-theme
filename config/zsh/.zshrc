@@ -109,3 +109,6 @@ alias zj='zellij'
 
 # === Vercel deploy aliases ===
 alias pvdeploy="vercel deploy --prod --scope team_BwP71LAsa76h6o6wbJulvAbW"
+
+# Local secrets — never committed. Tokens themselves live in the macOS Keychain.
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local

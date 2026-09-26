@@ -1,0 +1,46 @@
+<div class="section-title">🌿 Git + Delta</div>
+
+  <h3>Core Settings</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Setting</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Pager</td><td><code>delta</code></td></tr>
+      <tr><td>Editor</td><td><code>nvim</code></td></tr>
+      <tr><td>Merge style</td><td><code>zdiff3</code></td></tr>
+      <tr><td>Pull</td><td><code>--rebase</code></td></tr>
+      <tr><td>Push</td><td>autoSetupRemote = true</td></tr>
+      <tr><td>rerere</td><td>enabled — remembers conflict resolutions</td></tr>
+      <tr><td>Branch sort</td><td><code>-committerdate</code> (most recent first)</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Aliases</h3>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Alias</th><th>Command</th></tr></thead>
+    <tbody>
+      <tr><td><code>git lg</code></td><td><code>log --oneline --graph --decorate --all</code></td></tr>
+      <tr><td><code>git undo</code></td><td><code>reset --soft HEAD~1</code></td></tr>
+      <tr><td><code>git wip</code></td><td>Stage everything + commit "wip"</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Delta — Diff Viewer</h3>
+  <p class="desc-block">Syntax-highlighted, side-by-side diffs themed to Cyber Wave colors.</p>
+  <div class="cfg-grid">
+    <div class="cfg-card">
+      <h4>Layout</h4>
+      <div class="kv"><span class="k">Mode</span><span class="v">Side-by-side</span></div>
+      <div class="kv"><span class="k">Line numbers</span><span class="v">true</span></div>
+      <div class="kv"><span class="k">Navigate</span><span class="v">n / N between hunks</span></div>
+      <div class="kv"><span class="k">Syntax theme</span><span class="v">base16</span></div>
+    </div>
+    <div class="cfg-card">
+      <h4>Colors</h4>
+      <div class="kv"><span class="k">File name</span><span class="v" style="color:#b4fa72">bold #b4fa72</span></div>
+      <div class="kv"><span class="k">Hunk header</span><span class="v" style="color:#007972">#007972 box</span></div>
+      <div class="kv"><span class="k">Added bg</span><span class="v"><code>#0d3320</code></span></div>
+      <div class="kv"><span class="k">Removed bg</span><span class="v"><code>#3d0d0d</code></span></div>
+      <div class="kv"><span class="k">Line num +</span><span class="v" style="color:#b4fa72">#b4fa72</span></div>
+      <div class="kv"><span class="k">Line num -</span><span class="v" style="color:#ff8272">#ff8272</span></div>
+    </div>
+  </div>

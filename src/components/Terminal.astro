@@ -1,0 +1,24 @@
+---
+// A terminal window showing a tool's real captured output: `$ demo` + what it printed.
+import { toolById } from "../lib/tools.mjs";
+
+interface Props {
+  id: string;
+  title?: string;
+}
+
+const { id, title } = Astro.props;
+const tool = toolById[id];
+if (!tool) throw new Error(`Terminal: unknown tool "${id}"`);
+---
+
+{tool.outputHtml && (
+  <figure class="term">
+    <div class="term-bar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="term-title">{title ?? `${tool.name} — ghostty`}</span>
+    </div>
+    <pre class="term-body"><span class="term-prompt">❯</span> <span class="term-cmd">{tool.demo}</span>
+<Fragment set:html={tool.outputHtml} /></pre>
+  </figure>
+)}

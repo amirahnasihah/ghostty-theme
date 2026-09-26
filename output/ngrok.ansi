@@ -1,0 +1,24 @@
+NAME:
+  ngrok - tunnel local ports to public URLs and inspect traffic
+
+USAGE:
+  ngrok [command] [flags]
+
+DESCRIPTION: 
+  ngrok puts network services, apps and APIs online.
+
+  ngrok exposes local networked services behinds NATs and firewalls to the
+  public internet over a secure tunnel. Share local websites, build/test
+  webhook consumers and self-host personal services.
+  Detailed help for each command is available by adding '--help' to any command or with
+  the 'ngrok help' command.
+
+  Open https://dashboard.ngrok.com/traffic-inspector to inspect traffic through your endpoints.
+
+
+EXAMPLES: 
+  # forward http traffic from assigned public URL to local port 80
+  ngrok http 80
+
+  # choose a URL instead of random assignment
+  ngrok http 8080 --url https://baz.ngrok.dev

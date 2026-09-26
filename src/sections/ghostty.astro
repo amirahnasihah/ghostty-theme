@@ -1,0 +1,85 @@
+---
+import Shot from "../components/Shot.astro";
+import Terminal from "../components/Terminal.astro";
+---
+
+<div class="section-title">👻 Ghostty</div>
+  <p class="desc-block">Fast, native GPU-accelerated terminal for macOS. Configured with the Cyber Wave dark teal color scheme, custom GLSL cursor shaders, and a global F1 dropdown.</p>
+
+<h3>In the terminal</h3>
+<Shot id="fastfetch" alt="Ghostty running fastfetch with the Cyber Wave theme" />
+<Terminal id="ghostty" />
+
+
+  <h3>Color Palette</h3>
+  <div class="palette">
+    <div class="swatch"><div class="swatch-box" style="background:#001a22"></div><div class="swatch-label">bg</div></div>
+    <div class="swatch"><div class="swatch-box" style="background:#007972"></div><div class="swatch-label">teal</div></div>
+    <div class="swatch"><div class="swatch-box" style="background:#b4fa72"></div><div class="swatch-label">green</div></div>
+    <div class="swatch"><div class="swatch-box" style="background:#a5d5fe"></div><div class="swatch-label">blue</div></div>
+    <div class="swatch"><div class="swatch-box" style="background:#ff8272"></div><div class="swatch-label">red</div></div>
+    <div class="swatch"><div class="swatch-box" style="background:#fefdc2"></div><div class="swatch-label">yellow</div></div>
+    <div class="swatch"><div class="swatch-box" style="background:#ff8ffd"></div><div class="swatch-label">purple</div></div>
+    <div class="swatch"><div class="swatch-box" style="background:#d0d1fe"></div><div class="swatch-label">lavender</div></div>
+    <div class="swatch"><div class="swatch-box" style="background:#f1f1f1"></div><div class="swatch-label">white</div></div>
+  </div>
+
+  <div class="cfg-grid">
+    <div class="cfg-card">
+      <h4>Appearance</h4>
+      <div class="kv"><span class="k">Theme</span><span class="v">Cyber Wave</span></div>
+      <div class="kv"><span class="k">Background</span><span class="v"><code>#001a22</code></span></div>
+      <div class="kv"><span class="k">Opacity</span><span class="v">85%</span></div>
+      <div class="kv"><span class="k">Blur</span><span class="v">8</span></div>
+      <div class="kv"><span class="k">Cursor</span><span class="v"><code>#007972</code></span></div>
+    </div>
+    <div class="cfg-card">
+      <h4>Font</h4>
+      <div class="kv"><span class="k">Family</span><span class="v">Hack Nerd Font</span></div>
+      <div class="kv"><span class="k">Size</span><span class="v">8</span></div>
+      <div class="kv"><span class="k">Thicken</span><span class="v">true</span></div>
+    </div>
+    <div class="cfg-card">
+      <h4>Window</h4>
+      <div class="kv"><span class="k">Titlebar</span><span class="v">macOS tabs</span></div>
+      <div class="kv"><span class="k">Padding</span><span class="v">10px / 8px</span></div>
+      <div class="kv"><span class="k">Scrollback</span><span class="v">10,000 lines</span></div>
+      <div class="kv"><span class="k">Copy on select</span><span class="v">clipboard</span></div>
+      <div class="kv"><span class="k">Link URLs</span><span class="v">true</span></div>
+      <div class="kv"><span class="k">Confirm close</span><span class="v">false</span></div>
+    </div>
+    <div class="cfg-card">
+      <h4>Splits</h4>
+      <div class="kv"><span class="k">Unfocused opacity</span><span class="v">60%</span></div>
+      <div class="kv"><span class="k">Divider color</span><span class="v"><code>#007972</code></span></div>
+      <div class="kv"><span class="k">New tab</span><span class="v"><code>Cmd+T</code></span></div>
+      <div class="kv"><span class="k">Option as Alt</span><span class="v">left</span></div>
+    </div>
+    <div class="cfg-card">
+      <h4>Quick Terminal</h4>
+      <div class="kv"><span class="k">Toggle</span><span class="v"><code>F1</code> global</span></div>
+      <div class="kv"><span class="k">Position</span><span class="v">Top</span></div>
+      <div class="kv"><span class="k">Screen</span><span class="v">Main</span></div>
+      <div class="kv"><span class="k">Animation</span><span class="v">0.2s</span></div>
+    </div>
+    <div class="cfg-card">
+      <h4>Shell Integration</h4>
+      <div class="kv"><span class="k">Mode</span><span class="v">Auto-detect</span></div>
+      <div class="kv"><span class="k">SSH env</span><span class="v">✓</span></div>
+      <div class="kv"><span class="k">SSH terminfo</span><span class="v">✓</span></div>
+      <div class="kv"><span class="k">sudo</span><span class="v">✓</span></div>
+    </div>
+  </div>
+
+  <h3>Cursor Shaders</h3>
+  <div class="shader-grid">
+    <div class="shader-card"><div class="sn"><span class="tag tag-active">active</span> cursor_warp_faded.glsl</div><div class="sd">Faded warp trail that follows the cursor</div></div>
+    <div class="shader-card"><div class="sn"><span class="tag tag-active">active</span> ripple_cursor_custom.glsl</div><div class="sd">Ripple rings emanating on cursor move</div></div>
+    <div class="shader-card"><div class="sn"><span class="tag tag-avail">avail</span> cursor_warp.glsl</div><div class="sd">Full warp effect variant</div></div>
+    <div class="shader-card"><div class="sn"><span class="tag tag-avail">avail</span> cursor_sweep.glsl</div><div class="sd">Sweep trail effect</div></div>
+    <div class="shader-card"><div class="sn"><span class="tag tag-avail">avail</span> cursor_tail.glsl</div><div class="sd">Following tail behind cursor</div></div>
+    <div class="shader-card"><div class="sn"><span class="tag tag-avail">avail</span> sonic_boom_cursor.glsl</div><div class="sd">Sonic boom shockwave on action</div></div>
+    <div class="shader-card"><div class="sn"><span class="tag tag-avail">avail</span> rectangle_boom_cursor.glsl</div><div class="sd">Rectangle explosion burst</div></div>
+    <div class="shader-card"><div class="sn"><span class="tag tag-avail">avail</span> ripple_cursor.glsl</div><div class="sd">Base ripple variant</div></div>
+    <div class="shader-card"><div class="sn"><span class="tag tag-avail">avail</span> ripple_rectangle_cursor.glsl</div><div class="sd">Ripple + rectangle combo</div></div>
+  </div>

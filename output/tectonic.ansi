@@ -1,0 +1,20 @@
+Process a (La)TeX document
+
+[1m[4mUsage:[0m [1mtectonic[0m [OPTIONS] <INPUT>
+
+[1m[4mArguments:[0m
+  <INPUT>  The file to process, or "-" to process the standard input stream
+
+[1m[4mOptions:[0m
+  [1m-X[0m                                Use experimental V2 interface (see `tectonic -X --help`)
+  [1m-c[0m, [1m--chatter[0m <CHATTER_LEVEL>     How much chatter to print when running [default: default]
+      [1m--color[0m <CLI_COLOR>           Enable/disable colorful log output [default: auto] [possible values: always, auto, never]
+  [1m-f[0m, [1m--format[0m <path>               The name of the "format" file used to initialize the TeX engine [default: latex]
+  [1m-b[0m, [1m--bundle[0m <BUNDLE>             Use this URL or path to find resource files instead of the default
+  [1m-C[0m, [1m--only-cached[0m                 Use only resource files cached locally
+      [1m--outfmt[0m <format>             The kind of output to generate [default: pdf]
+      [1m--makefile-rules[0m <dest_path>  Write Makefile-format rules expressing the dependencies of this run to <dest_path>
+      [1m--pass[0m <PASS>                 Which engines to run [default: default]
+  [1m-r[0m, [1m--reruns[0m <count>              Rerun the TeX engine exactly this many times after the first
+  [1m-k[0m, [1m--keep-intermediates[0m          Keep the intermediate files generated during processing
+      [1m--keep-logs[0m                   Keep the log files generated during processing

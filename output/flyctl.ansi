@@ -1,0 +1,25 @@
+This is flyctl, the Fly.io command line interface.
+
+Usage:
+  fly [flags]
+  fly [command]
+
+Deploying apps & machines
+  apps        Manage apps.
+  deploy      Deploy Fly applications
+  launch      Create and configure a new app from source code or a Docker image
+  machine     Manage Fly Machines.
+  status      Show app status
+
+Configuration & scaling
+  certs       Manage certificates
+  config      Manage an app's configuration
+  image       Manage app image
+  ips         Manage IP addresses for apps
+  scale       Scale app resources
+  secrets     Manage application secrets with the set and unset commands.
+  volumes     Manage Fly Volumes.
+
+Monitoring & managing things
+  checks      Manage health checks
+  console     Run a console in a new or existing machine

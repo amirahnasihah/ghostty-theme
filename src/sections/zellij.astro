@@ -1,0 +1,76 @@
+---
+import Terminal from "../components/Terminal.astro";
+---
+
+<div class="section-title">🪟 Zellij</div>
+  <p class="desc-block">Rust-based terminal multiplexer. Faster and more modern than tmux. Custom keybinds with defaults cleared.</p>
+
+<h3>In the terminal</h3>
+<Terminal id="zellij" />
+
+
+  <div class="cfg-grid" style="margin-bottom:20px">
+    <div class="cfg-card">
+      <h4>Config</h4>
+      <div class="kv"><span class="k">Default shell</span><span class="v">fish</span></div>
+      <div class="kv"><span class="k">Default layout</span><span class="v">compact</span></div>
+      <div class="kv"><span class="k">Pane frames</span><span class="v">disabled</span></div>
+      <div class="kv"><span class="k">Keybinds</span><span class="v">fully custom</span></div>
+    </div>
+    <div class="cfg-card">
+      <h4>Shell Aliases</h4>
+      <div class="kv"><span class="k" style="color:var(--blue)">zj</span><span class="v" style="color:var(--fg-dim)">zellij</span></div>
+      <div class="kv"><span class="k" style="color:var(--blue)">zjs</span><span class="v" style="color:var(--fg-dim)">zellij -s &lt;name&gt;</span></div>
+      <div class="kv"><span class="k" style="color:var(--blue)">zja</span><span class="v" style="color:var(--fg-dim)">zellij attach</span></div>
+      <div class="kv"><span class="k" style="color:var(--blue)">zjac</span><span class="v" style="color:var(--fg-dim)">zellij attach --create</span></div>
+      <div class="kv"><span class="k" style="color:var(--blue)">zjr</span><span class="v" style="color:var(--fg-dim)">zellij action rename-session &lt;name&gt;</span></div>
+      <div class="kv"><span class="k" style="color:var(--blue)">zjd</span><span class="v" style="color:var(--fg-dim)">zellij delete-session</span></div>
+      <div class="kv"><span class="k" style="color:var(--blue)">zjda</span><span class="v" style="color:var(--fg-dim)">zellij delete-all-sessions</span></div>
+    </div>
+  </div>
+
+  <div class="zj-sheet">
+    <div class="zj-sheet-hd">● ZELLIJ — PANES &amp; TABS</div>
+
+    <div class="zj-group">
+      <div class="zj-group-hd"><span class="zj-mode-lbl">PANE MODE →</span><span class="zj-pill">CTRL+P</span></div>
+      <div class="zj-row"><span class="zj-lbl">Split down</span><span class="zj-keys"><span class="zj-kbd">Ctrl p</span><span class="zj-sep">→</span><span class="zj-kbd">d</span></span></div>
+      <div class="zj-row"><span class="zj-lbl">Split right</span><span class="zj-keys"><span class="zj-kbd">Ctrl p</span><span class="zj-sep">→</span><span class="zj-kbd">r</span></span></div>
+      <div class="zj-row"><span class="zj-lbl">Move focus <span style="color:var(--fg-dim);font-size:11px">(no mode)</span></span><span class="zj-keys"><span class="zj-kbd">⌥ hjkl</span></span></div>
+      <div class="zj-row"><span class="zj-lbl">Shrink pane <span style="color:var(--fg-dim);font-size:11px">(no mode)</span></span><span class="zj-keys"><span class="zj-kbd">⌥ -</span></span></div>
+      <div class="zj-row"><span class="zj-lbl">Increase pane <span style="color:var(--fg-dim);font-size:11px">(no mode)</span></span><span class="zj-keys"><span class="zj-kbd">⌥ =</span></span></div>
+      <div class="zj-row"><span class="zj-lbl">Close pane</span><span class="zj-keys"><span class="zj-kbd">Ctrl p</span><span class="zj-sep">→</span><span class="zj-kbd">x</span></span></div>
+      <div class="zj-row"><span class="zj-lbl">Rename pane</span><span class="zj-keys"><span class="zj-kbd">Ctrl p</span><span class="zj-sep">→</span><span class="zj-kbd">c</span></span></div>
+      <div class="zj-row"><span class="zj-lbl">Fullscreen</span><span class="zj-keys"><span class="zj-kbd">Ctrl p</span><span class="zj-sep">→</span><span class="zj-kbd">f</span></span></div>
+      <div class="zj-row"><span class="zj-lbl">Float / embed</span><span class="zj-keys"><span class="zj-kbd">Ctrl p</span><span class="zj-sep">→</span><span class="zj-kbd">w</span></span></div>
+      <div class="zj-row"><span class="zj-lbl">Toggle frames</span><span class="zj-keys"><span class="zj-kbd">Ctrl p</span><span class="zj-sep">→</span><span class="zj-kbd">z</span></span></div>
+    </div>
+
+    <div class="zj-group">
+      <div class="zj-group-hd"><span class="zj-mode-lbl">TABS →</span><span class="zj-pill">CTRL+T</span></div>
+      <div class="zj-row"><span class="zj-lbl">New tab</span><span class="zj-keys"><span class="zj-kbd">Ctrl t</span><span class="zj-sep">→</span><span class="zj-kbd">n</span></span></div>
+      <div class="zj-row"><span class="zj-lbl">Next / Prev</span><span class="zj-keys"><span class="zj-kbd">Ctrl t</span><span class="zj-sep">→</span><span class="zj-kbd">l</span><span class="zj-sep">/</span><span class="zj-kbd">h</span></span></div>
+      <div class="zj-row"><span class="zj-lbl">Go to tab</span><span class="zj-keys"><span class="zj-kbd">Ctrl t</span><span class="zj-sep">→</span><span class="zj-kbd">1-9</span></span></div>
+      <div class="zj-row"><span class="zj-lbl">Rename</span><span class="zj-keys"><span class="zj-kbd">Ctrl t</span><span class="zj-sep">→</span><span class="zj-kbd">r</span></span></div>
+      <div class="zj-row"><span class="zj-lbl">Close</span><span class="zj-keys"><span class="zj-kbd">Ctrl t</span><span class="zj-sep">→</span><span class="zj-kbd">x</span></span></div>
+    </div>
+
+    <div class="zj-group">
+      <div class="zj-group-hd"><span class="zj-mode-lbl">SCROLL →</span><span class="zj-pill">CTRL+S</span></div>
+      <div class="zj-row"><span class="zj-lbl">Scroll up / down</span><span class="zj-keys"><span class="zj-kbd">Ctrl s</span><span class="zj-sep">→</span><span class="zj-kbd">k</span><span class="zj-sep">/</span><span class="zj-kbd">j</span></span></div>
+      <div class="zj-row"><span class="zj-lbl">Half page</span><span class="zj-keys"><span class="zj-kbd">Ctrl s</span><span class="zj-sep">→</span><span class="zj-kbd">u</span><span class="zj-sep">/</span><span class="zj-kbd">d</span></span></div>
+      <div class="zj-row"><span class="zj-lbl">Search</span><span class="zj-keys"><span class="zj-kbd">Ctrl s</span><span class="zj-sep">→</span><span class="zj-kbd">/</span></span></div>
+      <div class="zj-row"><span class="zj-lbl">Edit in $EDITOR</span><span class="zj-keys"><span class="zj-kbd">Ctrl s</span><span class="zj-sep">→</span><span class="zj-kbd">e</span></span></div>
+    </div>
+
+    <div class="zj-group">
+      <div class="zj-group-hd"><span class="zj-mode-lbl">SESSIONS →</span><span class="zj-pill">CTRL+O</span></div>
+      <div class="zj-row"><span class="zj-lbl">Detach</span><span class="zj-keys"><span class="zj-kbd">Ctrl o</span><span class="zj-sep">→</span><span class="zj-kbd">d</span></span></div>
+      <div class="zj-row"><span class="zj-lbl">Session picker</span><span class="zj-keys"><span class="zj-kbd">Ctrl o</span><span class="zj-sep">→</span><span class="zj-kbd">w</span></span></div>
+      <div class="zj-row"><span class="zj-lbl">New named session <span style="color:var(--fg-dim);font-size:11px">(zjs)</span></span><span class="zj-keys"><span class="zj-kbd zj-kbd-cli">zellij -s &lt;name&gt;</span></span></div>
+      <div class="zj-row"><span class="zj-lbl">Attach or create <span style="color:var(--fg-dim);font-size:11px">(zjac)</span></span><span class="zj-keys"><span class="zj-kbd zj-kbd-cli">zellij attach --create</span></span></div>
+      <div class="zj-row"><span class="zj-lbl">Rename <span style="color:var(--fg-dim);font-size:11px">(zjr)</span></span><span class="zj-keys"><span class="zj-kbd zj-kbd-cli">zellij action rename-session &lt;name&gt;</span></span></div>
+    </div>
+
+    <div class="zj-note">⌥+hjkl to switch panes instantly (no mode needed). ⌥+- / ⌥+= to shrink/increase pane size without entering any mode. ⌥+arrows won't work in Ghostty — Ghostty intercepts those for word jump. Resize mode: Ctrl+n → hjkl, equalize: =</div>
+  </div>

@@ -8,9 +8,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- Site rebuilt in Astro and deployed to GitHub Pages with GitHub Actions
+- Real terminal output for every tool (`pnpm capture`) and real Ghostty window screenshots for TUIs (`pnpm shoot`)
+- All tools catalogue generated from the Brewfile, with official links from Homebrew
+- herdr and yazi sections
+- Official preview images for GUI apps
+
 - `CHANGELOG.md`
 - Ghost favicon for the setup docs site
 - Screenshot beautifier preview images (`ss-selection.png`, `ss-fullscreen.png`)
+
+### Changed
+
+- Brewfile regenerated from installed packages (herdr, awscli, flyctl, neonctl, imagemagick and more; delta, fd, dust, duf and mise removed)
+- Ghostty `font-size` set to 8
+- Screenshot images converted from PNG (5–7 MB) to WebP (~120 KB)
 
 ### Fixed
 

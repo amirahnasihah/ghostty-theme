@@ -1,0 +1,10 @@
+<div class="section-title">🐟 Fish</div>
+  <p class="desc-block">Fish is Zellij's default shell (<code>default_shell "fish"</code>). Minimal config — just sources uv's Python env.</p>
+
+  <div class="cards">
+    <div class="card"><div class="card-name">Role</div><div class="card-desc">Default shell inside Zellij sessions. Interactive work stays in Zsh; Fish handles Zellij panes.</div></div>
+    <div class="card"><div class="card-name">uv env</div><div class="card-desc">Sources <code>~/.local/bin/env.fish</code> — makes uv-managed Python environments available.</div></div>
+  </div>
+
+  <h3>Config (<code>conf.d/uv.env.fish</code>)</h3>
+  <div class="codeblock"><span style="color:var(--blue)">source</span> <span style="color:var(--green)">"$HOME/.local/bin/env.fish"</span></div>
