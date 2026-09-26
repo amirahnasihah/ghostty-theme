@@ -1,7 +1,7 @@
 name: Deploy site
 
 # Builds the Astro site and publishes it to GitHub Pages:
-# https://amirahnasihah.github.io/ghostty-theme/
+# https://config.amrhnshh.com (custom domain set in Settings → Pages)
 # Requires Settings → Pages → Source: "GitHub Actions".
 on:
   push:

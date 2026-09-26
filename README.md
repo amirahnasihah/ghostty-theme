@@ -3,7 +3,7 @@
 My terminal setup — Ghostty (Cyber Wave), zsh + starship, Neovim, zellij, herdr
 and every CLI tool in the `Brewfile` — with the real output of each tool.
 
-**Site:** https://amirahnasihah.github.io/ghostty-theme/
+**Site:** https://config.amrhnshh.com
 
 ## Use the dotfiles
 
@@ -19,7 +19,7 @@ Astro, deployed to GitHub Pages by `.github/workflows/deploy.yml` on every push 
 
 ```bash
 pnpm install
-pnpm dev              # http://localhost:4321/ghostty-theme/
+pnpm dev              # http://localhost:4321
 pnpm build            # checks every tool, then builds to dist/
 ```
 
