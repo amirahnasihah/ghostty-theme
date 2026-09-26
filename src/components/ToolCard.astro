@@ -5,7 +5,7 @@ import Terminal from "./Terminal.astro";
 interface Props {
   tool: {
     id: string; name: string; url?: string; desc: string; type: string;
-    install: string | null; outputHtml: string | null; section?: string;
+    install: string | null; outputHtml: string | null; section?: string; image?: string;
   };
 }
 
@@ -22,7 +22,14 @@ const { tool } = Astro.props;
   </header>
   <p class="tool-desc">{tool.desc}</p>
   {tool.install && <code class="tool-install">{tool.install}</code>}
-  {tool.outputHtml
-    ? <Terminal id={tool.id} />
-    : tool.url && <a class="tool-docs" href={tool.url} target="_blank" rel="noopener">GUI app — see screenshots on the official site ↗</a>}
+  {tool.outputHtml && <Terminal id={tool.id} />}
+  {!tool.outputHtml && tool.image && (
+    <figure class="tool-image">
+      <img src={tool.image} alt={`${tool.name} — official preview`} loading="lazy" decoding="async" referrerpolicy="no-referrer">
+      <figcaption>Source: <a href={tool.url} target="_blank" rel="noopener">{new URL(tool.url!).hostname}</a> (official site)</figcaption>
+    </figure>
+  )}
+  {!tool.outputHtml && !tool.image && tool.url && (
+    <a class="tool-docs" href={tool.url} target="_blank" rel="noopener">GUI app — see screenshots on the official site ↗</a>
+  )}
 </article>

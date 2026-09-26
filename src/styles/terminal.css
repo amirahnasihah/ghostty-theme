@@ -66,8 +66,8 @@ a.tool-name:hover { color: var(--green); text-decoration: underline; }
 .tool-more { margin-left: auto; font-size: 11px; color: var(--teal); cursor: pointer; }
 .tool-more:hover { color: var(--green); }
 .tool-desc { color: var(--fg-dim); font-size: 12px; margin-bottom: 8px; }
-.tool-install { display: inline-block; margin-bottom: 12px; }
-.tool-docs { display: inline-block; margin-bottom: 14px; font-size: 12px; color: var(--teal); }
+.tool-install { display: table; margin-bottom: 12px; }
+.tool-docs { display: block; width: fit-content; margin-bottom: 14px; font-size: 12px; color: var(--teal); }
 .tool .term { margin-bottom: 14px; }
 .main a { color: var(--blue); }
 
@@ -75,3 +75,6 @@ a.tool-name:hover { color: var(--green); text-decoration: underline; }
 .shot { margin: 0 0 20px; }
 .shot img { display: block; width: 100%; height: auto; }
 .shot figcaption { font-size: 11px; color: var(--fg-dim); text-align: center; margin-top: -6px; }
+.tool-image { margin: 0 0 14px; max-width: 560px; }
+.tool-image img { display: block; width: 100%; height: auto; max-height: 300px; object-fit: contain; border-radius: 6px; border: 1px solid var(--bg3); background: var(--bg); }
+.tool-image figcaption { font-size: 11px; color: var(--fg-dim); margin-top: 6px; }

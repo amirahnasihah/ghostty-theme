@@ -10,6 +10,8 @@
 // mode  — "cli": run and save coloured stdout
 //         "tui": run inside a detached tmux pane and snapshot the screen
 //         (omit when there is nothing safe to run — the card links to the docs)
+// image — GUI apps with no terminal output: the official site's own preview
+//         image (og:image), hotlinked rather than copied, credited on the card
 // section — featured tools that also have a full section in the sidebar
 
 export const groups = [
@@ -137,14 +139,21 @@ export const tools = [
   { id: "ghostty", group: "apps", section: "ghostty", mode: "cli",
     demo: "ghostty +show-config",
     run: "ghostty +show-config | grep -vE '^(keybind|palette)' | head -30" },
-  { id: "cursor", group: "apps" },
-  { id: "visual-studio-code", group: "apps", section: "vscode" },
-  { id: "docker-desktop", group: "apps" },
+  { id: "cursor", group: "apps",
+    image: "https://ptht05hbb1ssoooe.public.blob.vercel-storage.com/assets/og/opengraph-default.png" },
+  { id: "visual-studio-code", group: "apps", section: "vscode",
+    image: "https://code.visualstudio.com/opengraphimg/opengraph-home.png" },
+  { id: "docker-desktop", group: "apps",
+    image: "https://www.docker.com/app/uploads/2023/06/meta-image-download-docker-desktop-1110x580.png" },
   { id: "dbeaver-community", group: "apps" },
-  { id: "rectangle", group: "apps" },
-  { id: "tailscale-app", group: "apps" },
-  { id: "rustdesk", group: "apps" },
-  { id: "xnapper", group: "apps" },
+  { id: "rectangle", group: "apps",
+    image: "https://rectangleapp.com/assets/images/mac512pts1x.png" },
+  { id: "tailscale-app", group: "apps",
+    image: "https://cdn.sanity.io/images/w77i7m8x/production-v2/8e0455b2d9b33c6151016afdf2ea81d7623c2f04-1200x628.png" },
+  { id: "rustdesk", group: "apps",
+    image: "https://rustdesk.com/_astro/default.BnGe5sEj_Mm9fb.webp" },
+  { id: "xnapper", group: "apps",
+    image: "https://xnapper.com/assets/poster.png" },
   { id: "blackhole-2ch", group: "apps" },
   { id: "microsoft-excel", group: "apps" },
   { id: "font-hack-nerd-font", group: "apps", section: "fonts", url: "https://www.nerdfonts.com/font-downloads",
