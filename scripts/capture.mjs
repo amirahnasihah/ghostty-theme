@@ -59,6 +59,11 @@ const env = {
 const host = hostname().replace(/\.local$/, "");
 const hostRe = new RegExp(host.slice(0, 12).replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "[\\w.-]*", "g");
 
+function isPrivateIp(ip) {
+  const [a, b] = ip.split(".").map(Number);
+  return a === 10 || (a === 192 && b === 168) || (a === 172 && b >= 16 && b <= 31) || (a === 100 && b >= 64 && b <= 127);
+}
+
 // Never publish anything that identifies this machine beyond what's already public.
 function redact(text) {
   return text
@@ -73,7 +78,9 @@ function redact(text) {
     .replaceAll(homedir(), "~")
     .replace(hostRe, "macbook")
     .replace(/\bosbr\b/g, "work")
-    .replace(/\b(?:\d{1,3}\.){3}\d{1,3}\b/g, "x.x.x.x");
+    // Private/Tailscale IPs, also when colour codes sit between the octets (btop).
+    // Public IPs and 4-part version numbers (1.2.707.0) are left alone.
+    .replace(/(?<![\d.])\d{1,3}(?:(?:\x1b\[[0-9;]*m)*\.(?:\x1b\[[0-9;]*m)*\d{1,3}){3}(?![\d.])/g, (m) => (isPrivateIp(m.replace(/\x1b\[[0-9;]*m/g, "")) ? "x.x.x.x" : m));
 }
 
 function captureCli(cmd) {

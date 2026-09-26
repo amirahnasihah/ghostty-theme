@@ -1,6 +1,6 @@
-[libx264 @ 0x74b028a80] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 43% 33% 17%  2%  1%  1%  0%  2%  0%
-[libx264 @ 0x74b028a80] Weighted P-Frames: Y:0.0% UV:0.0%
-[libx264 @ 0x74b028a80] ref P L0: 83.8%  5.7%  8.0%  2.5%
-[libx264 @ 0x74b028a80] ref B L0: 79.3% 20.7%
-[libx264 @ 0x74b028a80] ref B L1: 92.1%  7.9%
-[libx264 @ 0x74b028a80] kb/s:47.47
+[libx264 @ 0xbc1028a80] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 43% 33% 17%  2%  1%  1%  0%  2%  0%
+[libx264 @ 0xbc1028a80] Weighted P-Frames: Y:0.0% UV:0.0%
+[libx264 @ 0xbc1028a80] ref P L0: 83.8%  5.7%  8.0%  2.5%
+[libx264 @ 0xbc1028a80] ref B L0: 79.3% 20.7%
+[libx264 @ 0xbc1028a80] ref B L1: 92.1%  7.9%
+[libx264 @ 0xbc1028a80] kb/s:47.47

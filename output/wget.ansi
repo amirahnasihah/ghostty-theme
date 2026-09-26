@@ -1,5 +1,5 @@
---2026-09-26 21:46:19--  https://example.com/
-Resolving example.com (example.com)... 2606:4700:10::ac42:93f3, 2606:4700:10::6814:179a, x.x.x.x, ...
+--2026-09-26 21:50:45--  https://example.com/
+Resolving example.com (example.com)... 2606:4700:10::ac42:93f3, 2606:4700:10::6814:179a, 172.66.147.243, ...
 Connecting to example.com (example.com)|2606:4700:10::ac42:93f3|:443... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: unspecified [text/html]
@@ -7,4 +7,4 @@ Saving to: ‘/dev/null’
 
 /dev/null               [<=>                 ]       0  --.-KB/s               /dev/null               [ <=>                ]     559  --.-KB/s    in 0s      
 
-2026-09-26 21:46:19 (53.3 MB/s) - ‘/dev/null’ saved [559]
+2026-09-26 21:50:45 (107 MB/s) - ‘/dev/null’ saved [559]

@@ -121,8 +121,8 @@ export const tools = [
 
   // ── system ────────────────────────────────────────────
   { id: "btop", group: "system", section: "btop", mode: "tui", demo: "btop",
-    // process list can leak argv (tokens, paths) — show cpu/mem/net only
-    run: "mkdir -p .cfg/btop && printf 'shown_boxes = \"cpu mem net\"\\n' > .cfg/btop/btop.conf && XDG_CONFIG_HOME=$PWD/.cfg btop" },
+    // process list can leak argv (tokens, paths) — show cpu/mem only (net shows the local IP)
+    run: "mkdir -p .cfg/btop && printf 'shown_boxes = \"cpu mem\"\\n' > .cfg/btop/btop.conf && XDG_CONFIG_HOME=$PWD/.cfg btop" },
   { id: "fastfetch", group: "system", section: "fastfetch", mode: "cli",
     demo: "fastfetch --pipe false -s title:separator:os:kernel:uptime:packages:cpu:gpu:memory:break:colors" },
 
